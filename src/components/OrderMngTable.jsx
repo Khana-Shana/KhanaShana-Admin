@@ -12,7 +12,7 @@ function OrderMngTable(props) {
 
 	const [title,setTitle] = useState("Accept");
 	// const {data,isPrepared} = props
-	const {date,order_id,cust_id,address,delivery_items,qty,total,order_type} = props.data;
+	const {Date,OrderID,CustomerID,Address,DishName,DishQuantity,Subtotal,OrderType} = props.data;
 	
 	// const isAccepted=()=>{
 	// 	return true if ({title}=="Accept");
@@ -23,17 +23,17 @@ function OrderMngTable(props) {
 	 
 	 return(
 	 		<>
-		          <td>{date}</td>
-		          <td>{order_id}</td>
-		          <td>{cust_id}</td>
-		          <td>{address}</td>
-		          <td>{delivery_items}</td>
-		          <td>{qty}</td>
-		          <td>{total}</td>
-		          <td>{order_type}</td>
+		          <td>{Date}</td>
+		          <td>{OrderID}</td>
+		          <td>{CustomerID}</td>
+		          <td>{Address}</td>
+		          <td>{DishName}</td>
+		          <td>{DishQuantity}</td>
+		          <td>{Subtotal}</td>
+		          <td>{OrderType}</td>
 		          <td>
 					<span className="bg-green" onClick={()=>setTitle("ACCEPTED")}>{title}</span><span className="bg-red">Reject</span></td>
-				  <td><span className="bg-gray">Preparing</span><span onClick={()=>props.prepared(order_id)} className="bg-light-silver">Done</span></td>
+				  <td><span className="bg-gray">Preparing</span><span onClick={()=>props.prepared(OrderID)} className="bg-light-silver">Done</span></td>
 	        </>
 // https://react-bootstrap.github.io/components/table/
       	);

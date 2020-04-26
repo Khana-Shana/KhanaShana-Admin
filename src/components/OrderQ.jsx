@@ -6,31 +6,40 @@ import CompletedOrders from './CompletedOrders.jsx'
 import OrderHistory from './OrderHistory.jsx'
 import ReactBootstrap, {Nav, Button, Navbar,NavDropdown,Table} from 'react-bootstrap';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-	
+import firebase_integration from '../Fire.js'
+
 function OrderQ() {
 
 		const [myData,setData] = useState([]);
 		const [myArr,setArr] = useState([]);
 		useEffect(()=>{
-
-			fetch("dummy.json").then(function(resp){
-				return resp.json();
-			})
-			.then(function(data){
-				if(data != myData){
-					// for(let i=0;i<data.length;i++){
-					// 	data[i]["statee"]="Accept"
-					// }
-					setData(...myData,data)
-					setArr(myData.map(
-						() => "Accept/Reject"
-					));
-					console.log("MYArRaYYY",myArr)
-				}
-			})
-			.catch(err => {
-	          // Do something for an error here
-	          console.log("Error Reading data " + err);
+			// ADD DATE FILTER
+			firebase_integration.database.collection("RegularOrder").onSnapshot((snapshot) => {
+				var order_arr = []
+				snapshot.docs.forEach(doc => {
+					order_arr.push(doc.data())
+				});
+				setData(order_arr)
+				console.log(order_arr)
+			// })
+			// fetch("dummy.json").then(function(resp){
+			// 	return resp.json();
+			// })
+			// .then(function(data){
+			// 	if(data != myData){
+			// 		// for(let i=0;i<data.length;i++){
+			// 		// 	data[i]["statee"]="Accept"
+			// 		// }
+			// 		setData(...myData,data)
+			// 		setArr(myData.map(
+			// 			() => "Accept/Reject"
+			// 		));
+			// 		console.log("MYArRaYYY",myArr)
+			// 	}
+			// })
+			// .catch(err => {
+	        //   // Do something for an error here
+	        //   console.log("Error Reading data " + err);
 		})
 		},myData);
 
