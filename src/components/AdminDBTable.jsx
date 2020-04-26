@@ -6,23 +6,6 @@ function AdminDBTable(){
 
 	const [myData,setData] = useState([]);
 
-	// useEffect(()=>{
-
-	// 	fetch("AdminDB.json").then(function(resp){
-	// 		return resp.json();
-	// 	})
-	// 	.then(function(data){
-	// 		if(data != myData){
-	// 			setData(...myData,data)
-	// 			console.log("THIEHFI",myData)
-	// 		}
-	// 	})
-	// 	.catch(err => {
- //          // Do something for an error here
- //          console.log("Error Reading data " + err);
-	// })
-	// },[]);
-
 	useEffect(()=>{
 		firebase_integration.database.collection("AdminDatabase").onSnapshot((snapshot) => {
             var order_arr = []
@@ -33,11 +16,6 @@ function AdminDBTable(){
 			console.log(order_arr)
         })
 	},myData);
-
-
-	const del = (idd) => {
-			setData(myData.filter(user=>user.id!=idd))
-	}
 
 	const deletingRow = (user) => {
 		firebase_integration.database.collection("AdminDatabase").doc(user.AdminID.toString()).delete()
