@@ -41,7 +41,7 @@ class firebase_integration extends Component {
   updateOrderQueueTracking(orderid, to){
     this.database.collection('RegularOrder').doc(orderid.toString()).update({
       Tracking : to
-    })
+    });
   }
   updateOrderQueueAction(orderid, to){
     this.database.collection('RegularOrder').doc(orderid.toString()).update({
