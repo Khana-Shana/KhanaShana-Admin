@@ -18,30 +18,10 @@ function OrderQ() {
 			firebase_integration.database.collection("RegularOrder").onSnapshot((snapshot) => {
 				var order_arr = []
 				snapshot.docs.forEach(doc => {
-					order_arr.push(doc.data())
-				});
+				order_arr.push(doc.data())
+			});
 				setData(order_arr)
-				console.log(order_arr)
-			// })
-			// fetch("dummy.json").then(function(resp){
-			// 	return resp.json();
-			// })
-			// .then(function(data){
-			// 	if(data != myData){
-			// 		// for(let i=0;i<data.length;i++){
-			// 		// 	data[i]["statee"]="Accept"
-			// 		// }
-			// 		setData(...myData,data)
-			// 		setArr(myData.map(
-			// 			() => "Accept/Reject"
-			// 		));
-			// 		console.log("MYArRaYYY",myArr)
-			// 	}
-			// })
-			// .catch(err => {
-	        //   // Do something for an error here
-	        //   console.log("Error Reading data " + err);
-		})
+			})
 		},myData);
 
 
@@ -69,7 +49,9 @@ function OrderQ() {
 				    </tr>
 				  </thead>
 				  <tbody>
+					  {console.log("Doosra",myData)}
 				  	{myData.map(user=> (
+						  
 				  		<tr className="tc">	
 				  			<OrderMngTable data={user} prepared={prepared} />
 				  		</tr>
