@@ -1,17 +1,12 @@
 import React , { useState, useEffect } from 'react';
 import './OrderMng.css';
-import OrderMngNav from './OrderMngNav.jsx';
-import OrderMngTable from './OrderMngTable.jsx'
-import CompletedOrders from './CompletedOrders.jsx'
-import OrderHistory from './OrderHistory.jsx'
-import ReactBootstrap, {Nav, Button, Navbar,NavDropdown,Table} from 'react-bootstrap';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import ReactBootstrap, {Table} from 'react-bootstrap';
 import firebase_integration from '../Fire.js'
 
 function OrderQ() {
 
 		const [myData,setData] = useState([]);
-		const [myArr,setArr] = useState([]);
+		// const [myArr,setArr] = useState([]);
 		useEffect(()=>{
 			// var todaysdate = new Date()
 			// ADD DATE FILTER
@@ -25,10 +20,6 @@ function OrderQ() {
 		},myData);
 
 
-		const prepared = (idd) => {
-			setData(myData.filter(user=>user.order_id!=idd))
-		}
-
 		const temp = (user) => {
 			firebase_integration.updateOrderQueueAction(user.OrderID,"Reject")
 			firebase_integration.updateOrderQueueTracking(user.OrderID,"None")
@@ -38,14 +29,14 @@ function OrderQ() {
 		const returnAction=(user)=>{
 			if (user.Action === "Accept/Reject"){
 				return(
-					<td><span onClick={()=>firebase_integration.updateOrderQueueAction(user.OrderID,"Accept")} className="bg-green pointer grow ba bw1 ma1">Accept</span>
-					<span onClick={()=>temp(user)} className="bg-red pointer grow ba bw1">Reject</span></td>
+					<td><span onClick={()=>firebase_integration.updateOrderQueueAction(user.OrderID,"Accept")} className="bg-green pointer dim ph2 ba bw1 ma1">Accept</span>
+					<span onClick={()=>temp(user)} className="bg-red pointer ph2 dim ba bw1">Reject</span></td>
 			
 				);
 			}
 			else if (user.Action==="Accept"){
 				return (
-					<td><span className="bg-green">Accepted</span></td>
+					<td><span className="bg-green b">Accepted</span></td>
 				);
 			}
 			else if (user.Action === "Cancelled"){
@@ -55,7 +46,7 @@ function OrderQ() {
 			}
 			else{
 				return(
-					<td><span className="bg-red">Rejected</span></td>
+					<td><span className="bg-red b">Rejected</span></td>
 				);
 			}
 		}
@@ -71,12 +62,12 @@ function OrderQ() {
 			}
 			if (user.Action === "Accept/Reject"){
 				return(
-					<td><p>Waiting for Action</p></td>
+					<td><p className="b">Waiting for Action</p></td>
 				);
 			}
 			else if(user.Action === "Accept" && user.Tracking === "Pending"){
 				return(
-					<td><span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Preparing")} className="bg-gray pointer grow ba bw1 ma1">Prepare</span>
+					<td><span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Preparing")} className="bg-gray pointer ph2 dim ba bw1 ma1">Prepare</span>
 					</td>
 				);
 			}
@@ -85,8 +76,8 @@ function OrderQ() {
 				return(
 
 					<td>
-					<span className="bg-gray 6rem">Preparing</span>
-					<span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Done")} className="bg-light-silver pointer grow ba bw1">Done</span>
+					<span className="orange i mr2 f4">Preparing</span>
+					<span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Done")} className="bg-light-silver pointer dim ph2 ba bw1">Done</span>
 					</td>
 	     		);
 			}
@@ -133,8 +124,7 @@ function OrderQ() {
 				    </tr>
 				  </thead>
 				  <tbody>
-					  {console.log("Doosra",myData)}
-				
+			
 						{renderTable()}
 				  	
 				  </tbody>

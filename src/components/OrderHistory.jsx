@@ -1,7 +1,5 @@
 import React , { useState, useEffect } from 'react';
-import 'isomorphic-fetch';
-import 'es6-promise';
-import ReactBootstrap, {InputGroup,FormControl,Nav, Button, Navbar,NavDropdown,Table} from 'react-bootstrap';
+import ReactBootstrap, {Table} from 'react-bootstrap';
 import firebase_integration from '../Fire.js'
 
 function CompletedOrders() {
