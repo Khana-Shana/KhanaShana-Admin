@@ -28,18 +28,29 @@ function OrderQ() {
 		const prepared = (idd) => {
 			setData(myData.filter(user=>user.order_id!=idd))
 		}
+
+		const temp = (user) => {
+			firebase_integration.updateOrderQueueAction(user.OrderID,"Reject")
+			firebase_integration.updateOrderQueueTracking(user.OrderID,"None")
+		}
+
 		
 		const returnAction=(user)=>{
 			if (user.Action === "Accept/Reject"){
 				return(
-					<td><span onClick={firebase_integration.updateOrderQueueAction(user.OrderID,"Accept")} className="bg-green pointer grow ba bw1 ma1">Accept</span>
-					<span onClick={firebase_integration.updateOrderQueueAction(user.OrderID,"Reject")} className="bg-red pointer grow ba bw1">Reject</span></td>
+					<td><span onClick={()=>firebase_integration.updateOrderQueueAction(user.OrderID,"Accept")} className="bg-green pointer grow ba bw1 ma1">Accept</span>
+					<span onClick={()=>temp(user)} className="bg-red pointer grow ba bw1">Reject</span></td>
 			
 				);
 			}
 			else if (user.Action==="Accept"){
 				return (
 					<td><span className="bg-green">Accepted</span></td>
+				);
+			}
+			else if (user.Action === "Cancelled"){
+				return(
+					<td><span>-</span></td>
 				);
 			}
 			else{
@@ -52,7 +63,9 @@ function OrderQ() {
 		const returnPrepare=(user)=>{
 
 			if (user.Tracking === "Cancelled"){
+				firebase_integration.updateOrderQueueAction(user.OrderID,"Cancelled")
 				return(
+					
 					<td><span className="bg-yellow">Cancelled</span></td>
 				);
 			}
@@ -63,12 +76,18 @@ function OrderQ() {
 			}
 			else if(user.Action === "Accept" && user.Tracking === "Pending"){
 				return(
-					<td><span className="bg-gray pointer grow ba bw1 ma1">Prepare</span><span className="bg-light-silver pointer grow ba bw1">Done</span></td>
+					<td><span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Preparing")} className="bg-gray pointer grow ba bw1 ma1">Prepare</span>
+					</td>
 				);
 			}
-			else if(user.Tracking === "Preparing"){
+
+			else if(user.Action === "Accept" && user.Tracking === "Preparing"){
 				return(
-					<td><span className="bg-gray 6rem">Preparing</span><span className="bg-light-silver pointer grow ba bw1">Done</span></td>
+
+					<td>
+					<span className="bg-gray 6rem">Preparing</span>
+					<span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Done")} className="bg-light-silver pointer grow ba bw1">Done</span>
+					</td>
 	     		);
 			}
 			else return(

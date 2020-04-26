@@ -10,7 +10,7 @@ function CompletedOrders() {
 
 	useEffect(()=>{
  
-		firebase_integration.database.collection("RegularOrder").where("Action", "in", ["Accept", "Reject"]).onSnapshot((snapshot) => {
+		firebase_integration.database.collection("RegularOrder").where("Action", "in", ["Accept", "Reject","Cancelled"]).onSnapshot((snapshot) => {
             var order_arr = []
             snapshot.docs.forEach(doc => {
                 order_arr.push(doc.data())
