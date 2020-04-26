@@ -32,7 +32,8 @@ function OrderQ() {
 		const returnAction=(user)=>{
 			if (user.Action === "Accept/Reject"){
 				return(
-					<td><span className="bg-green pointer grow ba bw1 ma1">Accept</span><span className="bg-red pointer grow ba bw1">Reject</span></td>
+					<td><span onClick={firebase_integration.updateOrderQueueAction(user.OrderID,"Accept")} className="bg-green pointer grow ba bw1 ma1">Accept</span>
+					<span onClick={firebase_integration.updateOrderQueueAction(user.OrderID,"Reject")} className="bg-red pointer grow ba bw1">Reject</span></td>
 			
 				);
 			}

@@ -29,6 +29,7 @@ class firebase_integration extends Component {
       firebase.initializeApp(firebaseConfig);
       this.database = firebase.firestore();
       this.storage = firebase.storage();
+      
   }
 
   getImageURL(divID, mainreferencefolder, path, imagename) {
@@ -38,12 +39,12 @@ class firebase_integration extends Component {
   }
 
   updateOrderQueueTracking(orderid, to){
-    this.storage.collection('RegularOrder').doc(OrderID.toString()).update({
+    this.storage.collection('RegularOrder').doc(orderid.toString()).update({
       Tracking : to
     })
   }
   updateOrderQueueAction(orderid, to){
-    this.storage.collection('RegularOrder').doc(OrderID.toString()).update({
+    this.storage.collection('RegularOrder').doc(orderid.toString()).update({
       Action : to
     });
   }
