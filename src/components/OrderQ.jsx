@@ -13,6 +13,7 @@ function OrderQ() {
 		const [myData,setData] = useState([]);
 		const [myArr,setArr] = useState([]);
 		useEffect(()=>{
+			// var todaysdate = new Date()
 			// ADD DATE FILTER
 			firebase_integration.database.collection("RegularOrder").onSnapshot((snapshot) => {
 				var order_arr = []
