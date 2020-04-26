@@ -9,7 +9,7 @@ function CompletedOrders() {
 	const [myData,setData] = useState([]);
 
 	useEffect(()=>{
- 
+		//ADD DATE WALA FILTER 
 		firebase_integration.database.collection("RegularOrder").where("Action", "==", "Accept").onSnapshot((snapshot) => {
             var order_arr = []
             snapshot.docs.forEach(doc => {
