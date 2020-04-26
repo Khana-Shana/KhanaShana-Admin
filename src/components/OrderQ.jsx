@@ -15,7 +15,7 @@ function OrderQ() {
 		useEffect(()=>{
 			// var todaysdate = new Date()
 			// ADD DATE FILTER
-			firebase_integration.database.collection("RegularOrder").onSnapshot((snapshot) => {
+			firebase_integration.database.collection("RegularOrder").where("Tracking", "in", ['Pending', 'None', 'Cancelled', 'Preparing']).onSnapshot((snapshot) => {
 				var order_arr = []
 				snapshot.docs.forEach(doc => {
 				order_arr.push(doc.data())
