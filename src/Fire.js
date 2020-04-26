@@ -36,6 +36,16 @@ class firebase_integration extends Component {
       document.getElementById(divID).src = url;
     });
   }
+
+  updateOrderQueueTracking(orderid, to){
+    this.storage.ref('RegularOrder').where("OrderID", "==", orderid).update({
+      Tracking : to
+    })
+  updateOrderQueueAction(orderid, to){
+    this.storage.ref('RegularOrder').where("OrderID", "==", orderid).update({
+      Action : to
+    })
+  }
 }
 
 export default new firebase_integration();
