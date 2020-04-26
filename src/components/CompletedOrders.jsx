@@ -7,10 +7,9 @@ import firebase_integration from '../Fire.js'
 function CompletedOrders() {
 
 	const [myData,setData] = useState([]);
-
 	useEffect(()=>{
 		//ADD DATE WALA FILTER 
-		firebase_integration.database.collection("RegularOrder").where("Action", "==", "Accept").onSnapshot((snapshot) => {
+		firebase_integration.database.collection("RegularOrder").where("Action", "==", "Accept").where("Tracking", "==", "Done").onSnapshot((snapshot) => {
             var order_arr = []
             snapshot.docs.forEach(doc => {
                 order_arr.push(doc.data())
