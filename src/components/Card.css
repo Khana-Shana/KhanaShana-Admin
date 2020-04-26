@@ -1,0 +1,62 @@
+.cards {
+	display : flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.myGrid{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-auto-rows: auto;
+      grid-gap: 10px;
+      /*justify-items: center;*/
+}
+
+h1 {
+  color: red;
+  padding: 50px;  
+  text-align: center;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-gap: 4px;
+  grid-auto-rows: minmax(100px, auto);
+  grid-auto-flow: dense;
+  padding: 10px;
+
+}
+
+.grid-layout .item {
+  /*padding: 10px;*/
+  color: #fff;
+  /*background-color: #444;*/
+}
+
+
+.span-3 {
+
+	grid-column-end: span 3;
+	grid-row-end: span 2;
+	width: 300px;
+	height:200px;
+	margin-left: 10px;
+	margin-right: 10px;
+	border: double;
+  background-color: #626E60;
+  /*border: 3px solid #73AD21;*/
+  /*padding: 100px;*/
+  /*padding-left: 10px;*/
+
+}
+.fkof{
+  display: flex;
+  flex-flow: row wrap;
+}
+.mera {
+	text-align: center;
+	padding-top: 50px;
+	color: white;
+	cursor: pointer;
+}

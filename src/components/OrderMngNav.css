@@ -1,0 +1,31 @@
+.btn {
+  border: 2px solid black; 
+  color: white; 
+  cursor: pointer; 
+  float: left; 
+}
+.btn:focus{
+  background:#955F61;
+  color:white;
+
+}
+.btn:hover{
+  background:#955F61;
+  color:white;
+}
+
+.btn:active{
+    background:#955F61;
+    color:white;
+}
+
+:target{
+  background:#955F61;
+}
+
+
+
+.bg-dwyl {
+  background: #955F61;
+  color:white;
+}

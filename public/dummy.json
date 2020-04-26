@@ -1,0 +1,112 @@
+[{
+		"date": "10/10/20",
+		"order_id": "001",
+		"cust_id": "2",
+		"address": "idk",
+		"delivery_items": "halwa,naan",
+		"qty": "3,1",
+		"total": 1000,
+		"order_type": "delivery"
+	},
+	{
+		"date": "1/10/20",
+		"order_id": "2",
+		"cust_id": "23",
+		"address": "idk2",
+		"delivery_items": "halwa,narwgbwan",
+		"qty": "3,1",
+		"total": 1000,
+		"order_type": "takeaway"
+	},
+	{
+		"date": "1/10/20",
+		"order_id": "3",
+		"cust_id": "232",
+		"address": "idk3",
+		"delivery_items": "hafdbdflwa,naan",
+		"qty": "3,1",
+		"total": 1000,
+		"order_type": "delivery"
+	},
+	{
+		"date": "1/10/20",
+		"order_id": "4",
+		"cust_id": "09",
+		"address": "idk4",
+		"delivery_items": "halwsbfa,naafdbn",
+		"qty": "3,5",
+		"total": 1000,
+		"order_type": "takeaway"
+	},
+	{
+		"date": "1/10/20",
+		"order_id": "5",
+		"cust_id": "85",
+		"address": "idk",
+		"delivery_items": "halwa,naan",
+		"qty": "4,6",
+		"total": 1000,
+		"order_type": "delivery"
+	},
+	{
+		"date": "0/10/20",
+		"order_id": "6",
+		"cust_id": "64",
+		"address": "idk45",
+		"delivery_items": "hadgbdfveflwa,naan",
+		"qty": "10,11",
+		"total": 1000,
+		"order_type": "delivery"
+	},
+	{
+		"date": "1/10/20",
+		"order_id": "7",
+		"cust_id": "453",
+		"address": "idk978",
+		"delivery_items": "halwa,naan",
+		"qty": "1,1",
+		"total": 1000,
+		"order_type": "delivery"
+	},
+	{
+		"date": "98/10/20",
+		"order_id": "8",
+		"cust_id": "453",
+		"address": "idk978",
+		"delivery_items": "halwa,naan",
+		"qty": "1,1",
+		"total": 1000,
+		"order_type": "delivery"
+	},
+		{
+		"date": "98/10/20",
+		"order_id": "8",
+		"cust_id": "453",
+		"address": "idk978",
+		"delivery_items": "halwa,naan",
+		"qty": "1,1",
+		"total": 1000,
+		"order_type": "delivery"
+	},
+		{
+		"date": "98/10/20",
+		"order_id": "8",
+		"cust_id": "453",
+		"address": "idk978",
+		"delivery_items": "halwa,naan",
+		"qty": "1,1",
+		"total": 1000,
+		"order_type": "delivery"
+	},
+		{
+		"date": "98/10/20",
+		"order_id": "8",
+		"cust_id": "453",
+		"address": "idk978",
+		"delivery_items": "halwa,naan",
+		"qty": "1,1",
+		"total": 1000,
+		"order_type": "delivery"
+	}
+
+]

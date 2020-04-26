@@ -1,0 +1,25 @@
+body {
+    background-color: #FBF4F3;
+}
+
+.box{
+
+  border: 2px solid red;
+  margin: 10px; 
+  border-radius: 5px; 
+  background-color: #3C3C3C;
+  color:white;
+  position: relative;
+  border-color: white;
+}
+
+h3 {
+  
+  padding-right: 20px;
+}
+
+.nav-link{
+    background: #955F61;
+    color: white;
+}
+
