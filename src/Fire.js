@@ -38,13 +38,14 @@ class firebase_integration extends Component {
   }
 
   updateOrderQueueTracking(orderid, to){
-    this.storage.ref('RegularOrder').where("OrderID", "==", orderid).update({
+    this.storage.collection('RegularOrder').doc(OrderID.toString()).update({
       Tracking : to
     })
+  }
   updateOrderQueueAction(orderid, to){
-    this.storage.ref('RegularOrder').where("OrderID", "==", orderid).update({
+    this.storage.collection('RegularOrder').doc(OrderID.toString()).update({
       Action : to
-    })
+    });
   }
 }
 
