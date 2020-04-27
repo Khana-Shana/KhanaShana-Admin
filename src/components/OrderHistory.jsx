@@ -2,12 +2,12 @@ import React , { useState, useEffect } from 'react';
 import ReactBootstrap, {Table} from 'react-bootstrap';
 import firebase_integration from '../Fire.js'
 
-function CompletedOrders() {
+function OrderHistory() {
 
 	const [myData,setData] = useState([]);
 
 	useEffect(()=>{
- 
+ 		//Retireves all Order History
 		firebase_integration.database.collection("RegularOrder").where("Action", "in", ["Accept", "Reject","Cancelled"]).onSnapshot((snapshot) => {
             var order_arr = []
             snapshot.docs.forEach(doc => {
@@ -17,8 +17,7 @@ function CompletedOrders() {
 			console.log(order_arr)
         })
 	},myData);
-
-	// https://stackoverflow.com/questions/56896037/using-react-hooks-axios-to-fetch-data-and-display-in-a-table		
+	
 	const renderTable = () => {
 	    return myData.map(user => {
 	      return (
@@ -32,32 +31,31 @@ function CompletedOrders() {
 	          <td>{user.Subtotal}</td>
 	          <td>{user.OrderType}</td>
 	          <td>{user.Action}</td>
-			  {console.log(user.Date.toDate())}
 	        </tr>
 	      )
 	    })
 	  }
 
 	return(
-// https://react-bootstrap.github.io/components/table/
+			//React table code picked from https://react-bootstrap.github.io/components/table/
 			<Table responsive>
-			  <thead>
-			    <tr className="bg-light-silver">
-			      <th>DATE</th>
-			      <th>ORDER ID</th>
-			      <th>CUST_ID</th>
-			      <th>ADDRESS</th>
-			      <th>DELIVERY ITEMS</th> 	
-			      <th>QTY</th>
-			      <th>TOTAL(PKR)</th>
-			      <th>ORDER TYPE</th>
-			      <th>ACTION</th>
-			    </tr>
-			  </thead>
-			  <tbody>{renderTable()}</tbody>
+				<thead>
+			    	<tr className="bg-light-silver">
+			    		<th>DATE</th>
+				    	<th>ORDER ID</th>
+				    	<th>CUST_ID</th>
+				    	<th>ADDRESS</th>
+				    	<th>DELIVERY ITEMS</th> 	
+				    	<th>QTY</th>
+				    	<th>TOTAL(PKR)</th>
+				    	<th>ORDER TYPE</th>
+				    	<th>ACTION</th>
+			    	</tr>
+			  	</thead>
+			 	<tbody>{renderTable()}</tbody>
 			</Table>	
 		);
 }
 
-export default CompletedOrders;
+export default OrderHistory;
 
