@@ -6,11 +6,11 @@ import firebase_integration from '../Fire.js';
 function RestaurantDetails(){
 
 	const [myData,setData] = useState({"Name":"","Email":"","ContactDetails":"","Address":"","AboutUs":""});
-	let arr=[]
+	
+	let arr=[] //This array will be used to store field manipulations before the Submit Button is clicked and contents of arr copied to State
 		
 	
 	useEffect(()=>{
-		//Retrieves only Accepted/Completed orders from the Database
 		firebase_integration.getImageURL("RestaurantDetails","RestaurantDetails","","RestaurantDetails.svg")
 		firebase_integration.database.collection("RestaurantDetails").onSnapshot((snapshot) => {
             
@@ -24,34 +24,30 @@ function RestaurantDetails(){
 	},myData);
 
 	const changeName = (event) => {
-		console.log("MYARR=",arr)
 		arr["Name"]=event.target.value
-		console.log("ARR@@@@",arr)
+		
 	}
 
 	const changeEmail = (event)=> {
 		arr["Email"]=event.target.value
-		console.log("ABAYA SHER",arr)
+		
 	}
 
 	const changeContact = (event)=> {
 		arr["ContactDetails"]=event.target.value
-		console.log("ABAYA SHER",arr)
+		
 	}
 	
 	const changeAddress = (event) => {
 		arr["Address"]=event.target.value
-		console.log("ABAYA SHER",arr)
+		
 	}
 
 	const changeAboutUs = (event)=>{
 		arr["AboutUs"]=event.target.value
-		console.log("ABAYA SHER",arr)
-	}
-
-	const clickSubmit = ()=>{
 		
 	}
+
 
 	return(
 		<div>
@@ -80,9 +76,9 @@ function RestaurantDetails(){
 						  	<Form.Group controlId="formBasicAboutUt">
 						  		<textarea name="message" rows="10" cols="50" className="mt2 ba b--black" placeholder={myData.AboutUs} onChange={changeAboutUs}></textarea>
 						  	</Form.Group>
-						  	<Button className="bg-green w-50" type="submit">
-						   		Submit
-						  	</Button>
+						  	{/*<Button className="bg-green w-50" type="submit">
+						   		Submit   TO BE IMPLEMENTED IN DELIVERABLE 2
+						  	</Button>*/}
 						</Form>
 					</div>
 				</div>
