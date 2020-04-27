@@ -1,4 +1,4 @@
-import React , { Component } from 'react';
+import React from 'react';
 import Header from './components/Header.jsx';
 import Card from './components/Card.jsx';
 import OrderMng from './components/OrderMng.jsx';

@@ -1,5 +1,4 @@
-import React , { useState, useEffect } from 'react';
-import './OrderMng.css';
+import React from 'react';
 import OrderQ from './OrderQ.jsx';
 import OrderMngNav from './OrderMngNav.jsx';
 import CompletedOrders from './CompletedOrders.jsx';
@@ -11,26 +10,28 @@ function OrderMng() {
 	
 		return(
 			<Router>
-
-			<div className="tc">
+				<div className="tc">
 					
 					<Switch>
-						<Route path="/order">
 
-							<OrderMngNav colr="0"/>
+						<Route path="/order">  {/*Routes to the Order Queue Screen*/}
+							<OrderMngNav colr="0"/>  {/*Order Navbar is called with colr props for conditionally rendering the buttons*/}
 							<OrderQ/>
 						</Route>
-						<Route path="/completedOrders">
+
+						<Route path="/completedOrders"> {/*Routes to the Completed Order Screen*/}
 							<OrderMngNav colr="1"/>
 							<CompletedOrders/>
 						</Route>
-						<Route path="/history">
+					
+						<Route path="/history"> {/*Routes to the Order History Screen*/}
 							<OrderMngNav colr="2"/>
 							<OrderHistory/>
 						</Route>
+					
 					</Switch>
-			
-			</div>
+	
+				</div>
 			</Router>
 		
 		);

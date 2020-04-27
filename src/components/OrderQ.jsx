@@ -1,15 +1,12 @@
 import React , { useState, useEffect } from 'react';
-import './OrderMng.css';
 import ReactBootstrap, {Table} from 'react-bootstrap';
 import firebase_integration from '../Fire.js'
 
 function OrderQ() {
 
 		const [myData,setData] = useState([]);
-		// const [myArr,setArr] = useState([]);
+
 		useEffect(()=>{
-			// var todaysdate = new Date()
-			// ADD DATE FILTER
 			firebase_integration.database.collection("RegularOrder").where("Tracking", "in", ['Pending', 'None', 'Cancelled', 'Preparing']).onSnapshot((snapshot) => {
 				var order_arr = []
 				snapshot.docs.forEach(doc => {
@@ -20,18 +17,20 @@ function OrderQ() {
 		},myData);
 
 
-		const temp = (user) => {
+		const rejectingOrder = (user) => {
+			{/*Changes the Action and Tracking fields in Firebase*/}
 			firebase_integration.updateOrderQueueAction(user.OrderID,"Reject")
 			firebase_integration.updateOrderQueueTracking(user.OrderID,"None")
 		}
 
 		
 		const returnAction=(user)=>{
+			{/*Conditionally renders the Action column of the Table*/}
+			
 			if (user.Action === "Accept/Reject"){
 				return(
 					<td><span onClick={()=>firebase_integration.updateOrderQueueAction(user.OrderID,"Accept")} className="bg-green pointer dim ph2 ba bw1 ma1">Accept</span>
-					<span onClick={()=>temp(user)} className="bg-red pointer ph2 dim ba bw1">Reject</span></td>
-			
+					<span onClick={()=>rejectingOrder(user)} className="bg-red pointer ph2 dim ba bw1">Reject</span></td>
 				);
 			}
 			else if (user.Action==="Accept"){
@@ -51,8 +50,9 @@ function OrderQ() {
 			}
 		}
 
-		const returnPrepare=(user)=>{
-
+		const returnTracking=(user)=>{
+			{/*Conditionally renders the Order Tracking column of the Table*/}
+			
 			if (user.Tracking === "Cancelled"){
 				firebase_integration.updateOrderQueueAction(user.OrderID,"Cancelled")
 				return(
@@ -65,47 +65,47 @@ function OrderQ() {
 					<td><p className="b">Waiting for Action</p></td>
 				);
 			}
-			else if(user.Action === "Accept" && user.Tracking === "Pending"){
+			else if (user.Action === "Accept" && user.Tracking === "Pending"){
 				return(
 					<td><span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Preparing")} className="bg-gray pointer ph2 dim ba bw1 ma1">Prepare</span>
 					</td>
 				);
 			}
-
-			else if(user.Action === "Accept" && user.Tracking === "Preparing"){
+			else if (user.Action === "Accept" && user.Tracking === "Preparing"){
 				return(
-
 					<td>
-					<span className="orange i mr2 f4">Preparing</span>
-					<span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Done")} className="bg-light-silver pointer dim ph2 ba bw1">Done</span>
+						<span className="orange i mr2 f4">Preparing</span>
+						<span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Done")} className="bg-light-silver pointer dim ph2 ba bw1">Done</span>
 					</td>
 	     		);
 			}
-			else return(
-				<td><span>-</span></td>
+			else //Order has been Rejected
+				return(
+					<td><span>-</span></td> 
 			);
 		}
 
 
 		const renderTable = () => {
-	    return myData.map(user => {
-	      return (
-	        <tr>
-	          <td>{user.Date.toDate().getDate()+"-"+(user.Date.toDate().getMonth()+1)+"-"+user.Date.toDate().getFullYear()}</td>
-	          <td>{user.OrderID}</td>
-	          <td>{user.CustomerID}</td>
-	          <td>{user.Address}</td>
-	          <td>{user.DishName.toString()}</td>
-	          <td>{user.DishQuantity.toString()}</td>
-	          <td>{user.Subtotal}</td>
-	          <td>{user.OrderType}</td>
-	          {returnAction(user)}
-	          {returnPrepare(user)}
-	        </tr>
-	      )
-	    })
-	  }
-		
+		    return myData.map(user => {
+		      return (
+		        <tr>
+		          <td>{user.Date.toDate().getDate()+"-"+(user.Date.toDate().getMonth()+1)+"-"+user.Date.toDate().getFullYear()}</td>
+		          <td>{user.OrderID}</td>
+		          <td>{user.CustomerID}</td>
+		          <td>{user.Address}</td>
+		          <td>{user.DishName.toString()}</td>
+		          <td>{user.DishQuantity.toString()}</td>
+		          <td>{user.Subtotal}</td>
+		          <td>{user.OrderType}</td>
+		          {returnAction(user)}
+		          {returnTracking(user)}
+		        </tr>
+		      )
+		    })
+		  }
+	
+	//returns the Table headings and calls the renderTable function to fill in the table body
 		return(
 			<div>
 				<Table responsive>
@@ -123,21 +123,14 @@ function OrderQ() {
 				      <th>ORDER TRACKING</th>
 				    </tr>
 				  </thead>
-				  <tbody>
 			
-						{renderTable()}
-				  	
-				  </tbody>
+				  <tbody>{renderTable()}</tbody>
+				
 				</Table>
 			</div>
-		)
+		);
 		
 }
-
-// class OrderMng extends Component{
-// 	render(){
-// 	}
-// }
 
 
 export default OrderQ;
