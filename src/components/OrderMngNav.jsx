@@ -3,7 +3,9 @@ import './OrderMngNav.css';
 import {Link} from "react-router-dom";
 
 function OrderMngNav(props) {
-
+		//if props==0:Queue button remains highlighted;
+		//if props==1:Completed Orders button remains highlighted
+		//if props==2:History button remains highlighted;
 		return(
 
 			<div>
