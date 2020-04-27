@@ -1,5 +1,4 @@
 import React , { Component } from 'react';
-import './App.css';
 import Header from './components/Header.jsx';
 import Card from './components/Card.jsx';
 import OrderMng from './components/OrderMng.jsx';
@@ -9,9 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
-class App extends Component{
-	render(){
-		return(
+
+function App(){
+	return(
 			<Router>
 				<div>
 
@@ -39,10 +38,11 @@ class App extends Component{
 						
 				</div>
 			</Router>
-			);
+			
+		);
 	}
 
-}
+
 
 export default App;
 
