@@ -50,10 +50,6 @@ function CompletedOrders() {
 			  	</thead>
 				<tbody>{renderTable()}</tbody>
 			</Table>
-			
-        
-      
-    
 				
 		);
 
