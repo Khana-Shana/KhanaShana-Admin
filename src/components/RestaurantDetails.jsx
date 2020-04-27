@@ -5,46 +5,62 @@ import firebase_integration from '../Fire.js';
 
 function RestaurantDetails(){
 
-	firebase_integration.getImageURL("RestaurantDetails","RestaurantDetails","","RestaurantDetails.svg")
+	const [myData,setData] = useState({"Name":"","Email":"","ContactDetails":"","Address":"","AboutUs":""});
+	
+		// 
+	
+	useEffect(()=>{
+		//Retrieves only Accepted/Completed orders from the Database
+		firebase_integration.getImageURL("RestaurantDetails","RestaurantDetails","","RestaurantDetails.svg")
+		firebase_integration.database.collection("RestaurantDetails").onSnapshot((snapshot) => {
+            
+            snapshot.docs.forEach(doc => {
+                setData(doc.data())
+  
+            });
+			
+        })
+	},myData);
 
+	const clicking=()=>{
+		console.log()
+	}
 	return(
 		<div>
-			<h2 className="tc pa2 ma2">Restaurant Details</h2>
+			<h2 className="tc pa3 ma2">Restaurant Details</h2>
 			<div className="row no-gutters">
 				<div className="col-md-6 no-gutters">
 					<div className="leftside d-flex justify-content-center align-items center">
 						<Form>
 							<Form.Group controlId="formBasicName">
-							<Form.Label>Name</Form.Label>
-							<Form.Control type="name" placeholder="Enter Name" />
+							<Form.Label className="b">Name</Form.Label>
+							<Form.Control className="ba b--black" type="name" placeholder={myData.Name}/>
 							</Form.Group>
-						  <Form.Group controlId="formBasicEmail">
-						    <Form.Label>Email address</Form.Label>
-						    <Form.Control type="email" placeholder="Enter email" />
-						    <Form.Text className="text-muted">
-						      We'll never share your email with anyone else.
-						    </Form.Text>
+						  	<Form.Group controlId="formBasicEmail">
+						    <Form.Label className="b">Email</Form.Label>
+						    <Form.Control className="ba b--black" type="email" placeholder={myData.Email} />
 						  </Form.Group>
-
-						  <Form.Group controlId="formBasicPassword">
-						    <Form.Label>Password</Form.Label>
-						    <Form.Control type="password" placeholder="Password" />
+						  <Form.Group controlId="formBasicContact">
+						    <Form.Label className="b">Contact</Form.Label>
+						    <Form.Control className="ba b--black" type="contact" placeholder={myData.ContactDetails} />
+						  </Form.Group>  
+						  <Form.Group controlId="formBasicContact">
+						    <Form.Label className="b">Address</Form.Label>
+						    <Form.Control className="ba b--black" type="address" placeholder={myData.Address} />
 						  </Form.Group>
-						  <Form.Group controlId="formBasicCheckbox">
-						    <Form.Check type="checkbox" label="Check me out" />
+						  <span className="b">About Us</span>
+						  <Form.Group controlId="formBasicAboutUt">
+						  	<textarea name="message" rows="10" cols="50" className="mt2 ba b--black" placeholder={myData.AboutUs}></textarea>
 						  </Form.Group>
-						  <Button variant="primary" type="submit">
-						    Submit
+						  <Button className="bg-green w-50" type="submit" onClick={()=>clicking()}>
+						   	Submit
 						  </Button>
 						</Form>
 					</div>
-
 				</div>
-
-				<div className="col-md-3 no-gutters tr">
+				<div className="col-md-5 no-gutters tr">
 					<div className="rightside d-flex justify-content-center align-items center">
-
-						<img id="RestaurantDetails" className="tr ml5" />
+						<img id="RestaurantDetails" className="tr ml5"/>
 					</div>
 				</div>
 			
