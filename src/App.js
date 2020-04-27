@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
-
 class App extends Component{
 	render(){
 		return(
@@ -20,22 +19,24 @@ class App extends Component{
 
 					<Switch>
 
-					  <Route path="/adminDB">
+					  <Route path="/adminDB"> {/* Routes to the Admin Database Screen*/}
 					  	<AdminDB/>
 					  </Route>
-			          <Route path="/order">
+			          
+			          <Route path="/order"> {/*Routes to the Order Management Screen*/}
 			            <OrderMng/>
 			          </Route>		
-			          <Route path="/restDetails">
+			          
+			          <Route path="/restDetails"> {/*Routes to the Restaurant Details Screen*/}
 			          	<RestaurantDetails/>
 			          </Route>     
-			          <Route path="/">
+			          
+			          <Route path="/"> {/*Homepage*/}
 			            <Card/>
 			          </Route>
 			        
 			        </Switch>
 						
-					
 				</div>
 			</Router>
 			);
