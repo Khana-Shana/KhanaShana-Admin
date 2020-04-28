@@ -8,9 +8,10 @@ function CustomerDatabase() {
 
 	useEffect(()=>{
  		//Retireves all Order History
-		firebase_integration.database.collection("RegularOrder").where("Action", "in", ["Accept", "Reject","Cancelled"]).onSnapshot((snapshot) => {
+		firebase_integration.database.collection("CustomerDatabase").onSnapshot((snapshot) => {
             var order_arr = []
             snapshot.docs.forEach(doc => {
+            	console.log("DOCC",doc.data())
                 order_arr.push(doc.data())
             });
 			setData(order_arr)
@@ -24,17 +25,17 @@ function CustomerDatabase() {
 	        <tr>
 			  <td>{user.CustomerID}</td>
 	          <td>{user.Name}</td>
-	          <td>{user.Email_ID}</td>
-			  <td>{user.DOB}</td>
+	          <td>{user.Email}</td>
+			  <td>{user.DOB.toDate().getDate()+"-"+(parseInt(user.DOB.toDate().getMonth())+1)+"-"+user.DOB.toDate().getFullYear()}</td>
 	          <td>{user.Gender}</td>
-	          <td>{user.Contact}</td>
+	          <td>{user.ContactNo}</td>
 	        </tr>
 	      )
 	    })
 	  }
 
 	return(
-			//React table code picked from https://react-bootstrap.github.io/components/table/
+
 			<Table responsive className="mt4">
 				<thead>
 			    	<tr className="bg-light-silver">
