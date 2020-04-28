@@ -23,7 +23,7 @@ function CompletedOrders() {
 	        <tr>
 	          <td>{user.Date.toDate().getDate()+"-"+(user.Date.toDate().getMonth()+1)+"-"+user.Date.toDate().getFullYear()}</td>
 	          <td>{user.OrderID}</td>
-	          <td>{user.CustomerID}</td>
+	          <td>{user.CustomerID}</td>	
 	          <td>{user.Address}</td>
 	          <td>{user.DishName.toString()}</td>
 	          <td>{user.DishQuantity.toString()}</td>
