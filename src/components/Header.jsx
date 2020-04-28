@@ -20,7 +20,7 @@ function Header(){
 						  <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd"/>
 						</svg>
 					</a>
-			    	<Nav.Link href="/newAcc" className="box grow" style={{backgroundColor:"#3C3C3C",color:"white"}}>Create Account</Nav.Link>
+			    	
 			     </Nav>
 			     
 			    <Nav className="ml-auto">  {/* for the right side of navbar*/}
