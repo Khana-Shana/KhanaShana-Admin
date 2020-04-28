@@ -20,7 +20,6 @@ function Header(){
 						  <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd"/>
 						</svg>
 					</a>
-			    	<Nav.Link href="/adminDB" className="box grow" style={{backgroundColor:"#3C3C3C", color:"white"}}>Admin Database</Nav.Link>
 			    	<Nav.Link href="/newAcc" className="box grow" style={{backgroundColor:"#3C3C3C",color:"white"}}>Create Account</Nav.Link>
 			     </Nav>
 			     
@@ -29,7 +28,7 @@ function Header(){
 					<path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
 					</svg>	
 			    	<NavDropdown className="mt2 grow" id="basic-nav-dropdown" id ="dw">
-			   	    	<NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
+			   	    	<NavDropdown.Item href="/adminProfile">Profile</NavDropdown.Item>
 			        	<NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
 			      	</NavDropdown>
 					<h3 className="mt1">Uzma</h3>
