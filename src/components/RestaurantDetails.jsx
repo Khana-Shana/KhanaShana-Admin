@@ -5,9 +5,9 @@ import firebase_integration from '../Fire.js';
 
 function RestaurantDetails(){
 
-	const [myData,setData] = useState({"Name":"","Email":"","ContactDetails":"","Address":"","AboutUs":""});
+	const [myData,setData] = useState({});
 	
-	let arr=[] //This array will be used to store field manipulations before the Submit Button is clicked and contents of arr copied to State
+	let arr={} //This array will be used to store field manipulations before the Submit Button is clicked and contents of arr copied to State
 		
 	
 	useEffect(()=>{
@@ -15,39 +15,67 @@ function RestaurantDetails(){
 		firebase_integration.database.collection("RestaurantDetails").onSnapshot((snapshot) => {
             
             snapshot.docs.forEach(doc => {
-                arr.push(doc.data())
+                // arr.push(doc.data())
+                // console.log("Doci",doc.data()["Name"])
+                arr["Name"]=doc.data()["Name"]
+                arr["ContactDetails"]=doc.data()["ContactDetails"]
+                arr["Email"]=doc.data()["Email"]
+                arr["Address"]=doc.data()["Address"]
+                arr["AboutUs"]=doc.data()["AboutUs"]
                 setData(doc.data()) 	
-  				console.log("ARARA",arr)
+                
+  				console.log("start wala array",arr)
             });
-			
+			// console.log("THIS MY SETDAT",myData)
         })
 	},myData);
 
 	const changeName = (event) => {
-		arr["Name"]=event.target.value
+		arr.Name=event.target.value
+		console.log(arr)
 		
 	}
 
 	const changeEmail = (event)=> {
-		arr["Email"]=event.target.value
-		
+		arr.Email=event.target.value
+		console.log(arr)
 	}
 
 	const changeContact = (event)=> {
-		arr["ContactDetails"]=event.target.value
-		
+		arr.ContactDetails=event.target.value
+		console.log(arr)
 	}
 	
 	const changeAddress = (event) => {
-		arr["Address"]=event.target.value
-		
+		arr.Address=event.target.value
+		console.log(arr)
 	}
 
 	const changeAboutUs = (event)=>{
-		arr["AboutUs"]=event.target.value
-		
+		arr.AboutUs=event.target.value
+		console.log(arr)
 	}
 
+	const submit = ()=>{
+
+	    if(!("Name" in arr)){
+	    	arr["Name"]=myData.Name	
+	    }
+	    if(!("Email" in arr)){
+	    	arr["Email"]=myData.Email	
+	    }
+	    if(!("ContactDetails" in arr)){
+	    	arr["ContactDetails"]=myData.ContactDetails	
+	    }
+	    if(!("Address" in arr)){
+	    	arr["Address"]=myData.Address
+	    }
+	    if(!("AboutUs" in arr)){
+	    	arr["AboutUs"]=myData.AboutUs
+	    }
+
+			firebase_integration.updateRestaurantDetails(arr,myData)
+	}
 
 	return(
 		<div>
@@ -76,9 +104,9 @@ function RestaurantDetails(){
 						  	<Form.Group controlId="formBasicAboutUt">
 						  		<textarea name="message" rows="10" cols="50" className="mt2 ba b--black" placeholder={myData.AboutUs} onChange={changeAboutUs}></textarea>
 						  	</Form.Group>
-						  	{/*<Button className="bg-green w-50" type="submit">
-						   		Submit   TO BE IMPLEMENTED IN DELIVERABLE 2
-						  	</Button>*/}
+						  	<Button className="bg-green w-50" onClick={()=>submit()}>
+						   		Apply Changes
+						  	</Button>
 						</Form>
 					</div>
 				</div>

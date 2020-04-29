@@ -48,6 +48,15 @@ class firebase_integration extends Component {
       Action : to
     });
   }
+  updateRestaurantDetails(arr,myData){
+     this.database.collection('RestaurantDetails').doc("jOzlK1WWsNPdRrjcYLGv").update({
+       AboutUs : arr.AboutUs,
+       Address : arr.Address,
+       ContactDetails : arr.ContactDetails,
+       Email : arr.Email,
+       Name : arr.Name
+     });
+  }
 }
 
 export default new firebase_integration();
