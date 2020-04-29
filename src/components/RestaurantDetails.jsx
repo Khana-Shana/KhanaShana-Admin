@@ -16,7 +16,7 @@ function RestaurantDetails(){
             
             snapshot.docs.forEach(doc => {
                 arr.push(doc.data())
-                setData(doc.data())
+                setData(doc.data()) 	
   				console.log("ARARA",arr)
             });
 			
