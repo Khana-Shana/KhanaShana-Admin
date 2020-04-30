@@ -7,7 +7,7 @@ function OrderQ() {
 		const [myData,setData] = useState([]);
 
 		useEffect(()=>{
-			firebase_integration.database.collection("RegularOrder").where("Tracking", "in", ['Pending', 'None', 'Cancelled', 'Preparing']).onSnapshot((snapshot) => {
+			firebase_integration.database.collection("RegularOrder").where("Tracking", "in", ['Pending', 'Rejected', 'Cancelled', 'Preparing']).onSnapshot((snapshot) => {
 				var order_arr = []
 				snapshot.docs.forEach(doc => {
 				order_arr.push(doc.data())
@@ -20,7 +20,7 @@ function OrderQ() {
 		const rejectingOrder = (user) => {
 			{/*Changes the Action and Tracking fields in Firebase*/}
 			firebase_integration.updateOrderQueueAction(user.OrderID,"Reject")
-			firebase_integration.updateOrderQueueTracking(user.OrderID,"None")
+			firebase_integration.updateOrderQueueTracking(user.OrderID,"Rejected")
 		}
 
 		
@@ -81,7 +81,7 @@ function OrderQ() {
 			}
 			else //Order has been Rejected
 				return(
-					<td><span>-</span></td> 
+					<td><span>Rejected</span></td> 
 			);
 		}
 
