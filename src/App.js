@@ -6,6 +6,7 @@ import AdminDB from './components/AdminDB.jsx';
 import CustomerDB from './components/CustomerDatabase.jsx';
 import RestaurantDetails from './components/RestaurantDetails.jsx';
 import AdminProfile from './components/AdminProfile.jsx';
+import AdminMenu from './components/AdminMenu.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -40,6 +41,11 @@ function App(){
 			          	<AdminProfile />
 			          </Route>
 			          
+			          <Route path="/adminMenu"> {/*Routes to the Menu Screen*/}
+			          	<AdminMenu />
+			          </Route>
+			          
+
 			          <Route path="/"> {/*Homepage*/}
 			            <Card/>
 			          </Route>
