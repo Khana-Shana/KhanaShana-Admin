@@ -1,0 +1,11 @@
+/* #wholepage {
+    background-color: "#FBF4F3";
+    min-height: 100vh;
+} */
+body {
+    background-color: "#FBF4F3";
+}
+#menubox{
+    width: 80%;
+    margin-top: 5%;
+}
