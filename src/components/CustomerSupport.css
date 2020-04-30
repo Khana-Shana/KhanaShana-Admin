@@ -1,0 +1,10 @@
+ .text-example {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 300px;
+        text-align: center;
+        margin: 0 40%;
+        align-items: center;
+    }
