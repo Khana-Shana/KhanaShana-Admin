@@ -4,7 +4,6 @@ import firebase_integration from '../Fire.js'
 
 function AdminMenu(){
 	const [menu, setmenu] = useState([])
-	// const [edit, setedit] = useState([])
 	const [editmode, seteditmode] = useState(false)
 	const [filteredmenu, setfilteredmenu] = useState([])
 	useEffect(() => {
@@ -16,7 +15,7 @@ function AdminMenu(){
 					setmenu(menu_items)
 					setfilteredmenu(menu_items)
 				})
-
+				console.log("Hellloooo")
 	}, menu)
 	function handling_editmode() {
 		var editstates = [];
@@ -33,8 +32,6 @@ function AdminMenu(){
 	}
 	return(
 		<div>
-			{/* {console.log(filteredmenu)} */}
-			{/* <input type="text" placeholder="Name"/> */}
 			<div id="menubox" className="container">
 				<div className="row">
 					<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
@@ -50,7 +47,7 @@ function AdminMenu(){
 							<thead>
 								{editmode === true?
 									<tr>
-										<th style = {{color: ""}} scope="col">ID</th>
+										<th style = {{color: "3C3C3C"}} scope="col">ID</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Name</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Category</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Price</th>
@@ -61,7 +58,7 @@ function AdminMenu(){
 									</tr>:
 									<tr>
 										<th/>
-										<th style = {{color: ""}} scope="col">ID</th>
+										<th style = {{color: "3C3C3C"}} scope="col">ID</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Name</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Category</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Price</th>
@@ -71,20 +68,57 @@ function AdminMenu(){
 									</tr>
 								}
 							</thead>
+							{console.log(filteredmenu)}
 							{
-								[...filteredmenu.keys()].map(
+								filteredmenu.map(
 									(x, i) => {
 										return (
 											<tbody>
 												{editmode === true
 													?<tr key = {x.ID}>
-														<td style = {{color: "3C3C3C"}}>{menu[i].DishID}</td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Name" value/></td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Category"/></td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Price"/></td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Description"/></td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Portion Size"/></td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Prep Time"/></td>
+														<td style = {{color: "3C3C3C"}}>{filteredmenu[i].DishID}</td>
+														<td><input class="form-control form-control-sm" type="text" placeholder="Name" value = {filteredmenu[i].Name} onChange = {
+															e => {
+																var changeditem = filteredmenu[i]
+																changeditem.Name = e.target.value
+																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+															}
+														}/></td>
+														<td><input class="form-control form-control-sm" type="text" placeholder="Category" value = {filteredmenu[i].Category} onChange = {
+															e => {
+																var changeditem = filteredmenu[i]
+																changeditem.Category = e.target.value
+																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+															}
+														}/></td>
+														<td><input class="form-control form-control-sm" type="text" placeholder="Price" value = {filteredmenu[i].SalePrice} onChange = {
+															e => {
+																var changeditem = filteredmenu[i]
+																changeditem.SalePrice = e.target.value
+																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+															}
+														}/></td>
+														<td><input class="form-control form-control-sm" type="text" placeholder="Description" value = {filteredmenu[i].Description} onChange = {
+															e => {
+																var changeditem = filteredmenu[i]
+																changeditem.Description = e.target.value
+																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+															}
+														}/></td>
+														<td><input class="form-control form-control-sm" type="text" placeholder="Portion Size"value = {filteredmenu[i].PortionSize} onChange = {
+															e => {
+																var changeditem = filteredmenu[i]
+																changeditem.PortionSize = e.target.value
+																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+															}
+														}/></td>
+														<td><input class="form-control form-control-sm" type="text" placeholder="Prep Time"value = {filteredmenu[i].PrepTime} onChange = {
+															e => {
+																var changeditem = filteredmenu[i]
+																changeditem.PrepTime = e.target.value
+																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+															}
+														}/></td>
 														<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input type="file"/></button></td>
 													</tr>
 													:<tr key = {x.ID}>
