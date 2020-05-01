@@ -32,17 +32,28 @@ function AdminMenu(){
 					<div class="table-responsive">
 						<table id="items" className="table table-hover">
 							<thead>
-								<tr>
-									<th/>
-									<th style = {{color: ""}} scope="col">ID</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Name</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Category</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Price</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Description</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
-								</tr>
+								{editmode === true?
+									<tr>
+										<th style = {{color: ""}} scope="col">ID</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Name</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Category</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Price</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Description</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
+									</tr>:
+									<tr>
+										<th/>
+										<th style = {{color: ""}} scope="col">ID</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Name</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Category</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Price</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Description</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
+									</tr>
+								}
 							</thead>
 							{
 								[...menu.keys()].map(
@@ -52,7 +63,13 @@ function AdminMenu(){
 												{editmode === true && edit[i] === true?
 												<tr key = {x.ID}>
 													<td style = {{color: "3C3C3C"}}>{menu[i].DishID}</td>
-													<td style = {{color: "3C3C3C"}}>{menu[i].Name}</td>
+													<td><input class="form-control form-control-sm" type="text" placeholder="Name"/></td>
+													<td><input class="form-control form-control-sm" type="text" placeholder="Category"/></td>
+													<td><input class="form-control form-control-sm" type="text" placeholder="Price"/></td>
+													<td><input class="form-control form-control-sm" type="text" placeholder="Description"/></td>
+													<td><input class="form-control form-control-sm" type="text" placeholder="Portion Size"/></td>
+													<td><input class="form-control form-control-sm" type="text" placeholder="Prep Time"/></td>
+													<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input type="file"/></button></td>
 												</tr>:
 												<tr key = {x.ID}>
 													<td><input id = {i} type="checkbox" class="form-check-input" onClick = {() => setedit(x => {
@@ -68,7 +85,6 @@ function AdminMenu(){
 													<td style = {{color: "3C3C3C"}}>{menu[i].Description}</td>
 													<td style = {{color: "3C3C3C"}}>{menu[i].PortionSize}</td>
 													<td style = {{color: "#576271"}}>{menu[i].PrepTime}</td>
-													<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input type="file"/></button></td>
 												</tr>														
 											}
 											</tbody>
