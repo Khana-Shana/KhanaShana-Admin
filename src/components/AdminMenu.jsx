@@ -1,41 +1,27 @@
 import React , { useState, useEffect } from 'react';
 import './AdminMenu.css';
 // import EdiText from 'react-editext'
+import firebase_integration from '../Fire.js'
 
 function AdminMenu(){
 	const [menu, setmenu] = useState([])
-	var data = [
-		{
-			ID: 1,
-			Name: "Handi",
-			Category: "Desi",
-			Price: 100,
-			Description: "Very Delicious Food",
-			PortionSize: 100,
-			PrepTime: 20
-		},
-		{
-			ID: 2,
-			Name: "Kebab",
-			Category: "Desi",
-			Price: 100,
-			Description: "Chef Special",
-			PortionSize: 100,
-			PrepTime: 20
-		},
-		{
-			ID: 3,
-			Name: "Chicken Fajita",
-			Category: "Pizza",
-			Price: 100,
-			Description: "Yummyyyyy",
-			PortionSize: 100,
-			PrepTime: 20
-		},
 
-	]
+	useEffect(() => {
+		firebase_integration.database.collection('Menu').onSnapshot((snapshot) => {
+			var menu_items = []
+					snapshot.docs.forEach(doc => {
+					menu_items.push(doc.data())
+				});
+					setmenu(menu_items)
+				})
+	}, menu)
+
+	// uploadImage()
+	//updateDatabase()
+
 	return(
 		<div>
+			{console.log(menu)}
 			<div id="menubox" className="container">
 				<div className="row">
 					<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
@@ -62,18 +48,18 @@ function AdminMenu(){
 							</thead>
 							<tbody>
 								{
-									data.map(
+									menu.map(
 										(x, i) => {
 											return (
 												<tr key = {x.ID}>
 													<td><input type="checkbox" class="form-check-input"/></td>
-													<td style = {{color: "3C3C3C"}}>{data[i].ID}</td>
-													<td style = {{color: "3C3C3C"}}>{data[i].Name}</td>
-													<td style = {{color: "3C3C3C"}}>{data[i].Category}</td>
-													<td style = {{color: "3C3C3C"}}>{data[i].Price}</td>
-													<td style = {{color: "3C3C3C"}}>{data[i].Description}</td>
-													<td style = {{color: "3C3C3C"}}>{data[i].PortionSize}</td>
-													<td style = {{color: "#576271"}}>{data[i].PrepTime}</td>
+													<td style = {{color: "3C3C3C"}}>{menu[i].DishID}</td>
+													<td style = {{color: "3C3C3C"}}>{menu[i].Name}</td>
+													<td style = {{color: "3C3C3C"}}>{menu[i].Category}</td>
+													<td style = {{color: "3C3C3C"}}>{menu[i].SalePrice}</td>
+													<td style = {{color: "3C3C3C"}}>{menu[i].Description}</td>
+													<td style = {{color: "3C3C3C"}}>{menu[i].PortionSize}</td>
+													<td style = {{color: "#576271"}}>{menu[i].PrepTime}</td>
 													{/* <td style = {{color: "#576271"}}><textarea ref="newText" defaultValue="Edit me"/></td> */}
 													<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image</button></td>
 												</tr>
