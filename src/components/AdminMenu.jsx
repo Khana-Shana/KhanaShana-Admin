@@ -30,6 +30,45 @@ function AdminMenu(){
 		setfilteredmenu(newmenu)
 		seteditmode(true)
 	}
+	function uploadMenuImage(image){
+		var file = '/media/muji/Local Disk/University/1902/Software_Engineering/SE Project/Development/KhanaShana-Admin/src/dummy.jpg'
+		var uploadTask = firebase_integration.storage.ref().child('Menu/'+'lol.jpg').put(file);
+
+		uploadTask.on(firebase_integration.storage.TaskEvent.STATE_CHANGED, 
+		function(snapshot) {
+			var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+			console.log('Upload is ' + progress + '% done');
+			switch (snapshot.state) {
+			case firebase_integration.storage.TaskState.PAUSED: 
+				console.log('Upload is paused');
+				break;
+			case firebase_integration.storage.TaskState.RUNNING: 
+				console.log('Upload is running');
+				break;
+			}
+		}, function(error) {
+			alert(error.message)
+		}, function() {
+			uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+				console.log(downloadURL)
+				firebase_integration.database.collection('Menu').doc("25").set({
+					URL: downloadURL
+				})
+			});
+		});
+	}
+
+	// function updateDatabase() {
+	// 	firebase_integration.database.collection('Menu').doc(DishID.toString()).set({
+	// 		DishID: DishID,
+	// 		Category: Category,
+	// 		Description: Description,
+	// 		Name: Name,
+	// 		PortionSize: PortionSize,
+	// 		PrepTime: PrepTime,
+	// 		SalePrice: SalePrice,
+	// 	  });
+	// }
 	return(
 		<div>
 			<div id="menubox" className="container">
