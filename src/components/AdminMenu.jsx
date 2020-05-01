@@ -6,6 +6,7 @@ import firebase_integration from '../Fire.js'
 function AdminMenu(){
 	const [menu, setmenu] = useState([])
 	const [edit, setedit] = useState([])
+	const [editmode, seteditmode] = useState(false)
 	useEffect(() => {
 		firebase_integration.database.collection('Menu').onSnapshot((snapshot) => {
 			var menu_items = []
@@ -17,15 +18,14 @@ function AdminMenu(){
 					setmenu(menu_items)
 					setedit(edit_status)
 				})
-				console.log("Hellooo")
-	}, menu)
 
+	}, menu)
 	return(
 		<div>
 			<div id="menubox" className="container">
 				<div className="row">
 					<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
-					<button type="button" class="btn btn-primary btn-sm menubutton">Edit</button>
+					<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => seteditmode(x => !x)}>Edit</button>
 					<button type="button" class="btn btn-primary btn-sm menubutton">Remove</button>
 				</div>
 				<div className="row">
@@ -44,15 +44,21 @@ function AdminMenu(){
 									<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
 								</tr>
 							</thead>
-							<tbody>
-								{
-									menu.map(
-										(x, i) => {
-											return (
+							{
+								[...menu.keys()].map(
+									(x, i) => {
+										return (
+											<tbody>
+												{editmode === true && edit[i] === true?
 												<tr key = {x.ID}>
-													<td><input type="checkbox" class="form-check-input" onChange = {() => setedit(x => {
-														x.splice(i,1,!edit[i])
-														console.log(x)
+													<td style = {{color: "3C3C3C"}}>{menu[i].DishID}</td>
+													<td style = {{color: "3C3C3C"}}>{menu[i].Name}</td>
+												</tr>:
+												<tr key = {x.ID}>
+													<td><input id = {i} type="checkbox" class="form-check-input" onClick = {() => setedit(x => {
+														document.getElementById(i).checked = !edit[i]
+														x.splice(i,1,!x[i])
+														console.log(edit)
 														return x
 													})}/></td>
 													<td style = {{color: "3C3C3C"}}>{menu[i].DishID}</td>
@@ -62,14 +68,14 @@ function AdminMenu(){
 													<td style = {{color: "3C3C3C"}}>{menu[i].Description}</td>
 													<td style = {{color: "3C3C3C"}}>{menu[i].PortionSize}</td>
 													<td style = {{color: "#576271"}}>{menu[i].PrepTime}</td>
-													{/* <td style = {{color: "#576271"}}><textarea ref="newText" defaultValue="Edit me"/></td> */}
 													<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input type="file"/></button></td>
-												</tr>
-											);
-										}
-									)
-								}
-								</tbody>
+												</tr>														
+											}
+											</tbody>
+										);
+									}
+								)
+							}
 						</table>
 					</div>
 				</div>
