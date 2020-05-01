@@ -14,8 +14,10 @@ body {
     background-color: #626E60;
     border: None;
 }
-/* .td {
-    overflow-wrap: normal;
-    min-width: 160px;
-    max-width: 160px;
-} */
+.imagebutton {
+    margin: 0% 1% 1% 0%;
+    background-color: #3C3C3C;
+    color: white;
+    border: None;
+    border-radius: 1rem;
+}

@@ -18,7 +18,7 @@ function AdminMenu(){
 			Name: "Kebab",
 			Category: "Desi",
 			Price: 100,
-			Description: "Very Delicious Food",
+			Description: "Chef Special",
 			PortionSize: 100,
 			PrepTime: 20
 		},
@@ -27,14 +27,14 @@ function AdminMenu(){
 			Name: "Chicken Fajita",
 			Category: "Pizza",
 			Price: 100,
-			Description: "Very Delicious Food",
+			Description: "Yummyyyyy",
 			PortionSize: 100,
 			PrepTime: 20
 		},
 
 	]
 	return(
-		<div id>
+		<div>
 			<div id="menubox" className="container">
 				<div className="row">
 					<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
@@ -46,14 +46,16 @@ function AdminMenu(){
 						<table id="items" className="table table-hover">
 							<thead>
 								<tr>
-								<th style = {{color: "#576271"}} scope="col">ID</th>
-								<th style = {{color: "#576271"}} scope="col">Name</th>
-								<th style = {{color: "#576271"}} scope="col">Category</th>
-								<th style = {{color: "#576271"}} scope="col">Price</th>
-								<th style = {{color: "#576271"}} scope="col">Description</th>
-								<th style = {{color: "#576271"}} scope="col">Portion Size</th>
-								<th style = {{color: "#576271"}} scope="col">Prep Time</th>
-								<th style = {{color: "#576271"}} scope="col">Picture</th>
+								<th style = {{color: ""}} scope="col">ID</th>
+								<th style = {{color: "3C3C3C"}} scope="col">Name</th>
+								<th style = {{color: "3C3C3C"}} scope="col">Category</th>
+								<th style = {{color: "3C3C3C"}} scope="col">Price</th>
+								<th style = {{color: "3C3C3C"}} scope="col">Description</th>
+								<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
+								<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
+								<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
+								
+
 								</tr>
 							</thead>
 							<tbody>
@@ -62,13 +64,14 @@ function AdminMenu(){
 										(x, i) => {
 											return (
 												<tr key = {x.ID}>
-													<td style = {{color: "#576271"}}>{data[i].ID}</td>
-													<td style = {{color: "#576271"}}>{data[i].Name}</td>
-													<td style = {{color: "#576271"}}>{data[i].Category}</td>
-													<td style = {{color: "#576271"}}>{data[i].Price}</td>
-													<td style = {{color: "#576271"}}>{data[i].Description}</td>
-													<td style = {{color: "#576271"}}>{data[i].PortionSize}</td>
+													<td style = {{color: "3C3C3C"}}>{data[i].ID}</td>
+													<td style = {{color: "3C3C3C"}}>{data[i].Name}</td>
+													<td style = {{color: "3C3C3C"}}>{data[i].Category}</td>
+													<td style = {{color: "3C3C3C"}}>{data[i].Price}</td>
+													<td style = {{color: "3C3C3C"}}>{data[i].Description}</td>
+													<td style = {{color: "3C3C3C"}}>{data[i].PortionSize}</td>
 													<td style = {{color: "#576271"}}>{data[i].PrepTime}</td>
+													<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image</button></td>
 												</tr>
 											);
 										}
