@@ -61,7 +61,7 @@ function AdminMenu(){
 													<td style = {{color: "3C3C3C"}}>{menu[i].PortionSize}</td>
 													<td style = {{color: "#576271"}}>{menu[i].PrepTime}</td>
 													{/* <td style = {{color: "#576271"}}><textarea ref="newText" defaultValue="Edit me"/></td> */}
-													<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image</button></td>
+													<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input type="file"/></button></td>
 												</tr>
 											);
 										}
