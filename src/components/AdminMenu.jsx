@@ -5,23 +5,23 @@ import firebase_integration from '../Fire.js'
 
 function AdminMenu(){
 	const [menu, setmenu] = useState([])
-
+	const [edit, setedit] = useState([])
 	useEffect(() => {
 		firebase_integration.database.collection('Menu').onSnapshot((snapshot) => {
 			var menu_items = []
+			var edit_status = []
 					snapshot.docs.forEach(doc => {
 					menu_items.push(doc.data())
+					edit_status.push(false)
 				});
 					setmenu(menu_items)
+					setedit(edit_status)
 				})
+				console.log("Hellooo")
 	}, menu)
-
-	// uploadImage()
-	//updateDatabase()
 
 	return(
 		<div>
-			{console.log(menu)}
 			<div id="menubox" className="container">
 				<div className="row">
 					<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
@@ -33,17 +33,15 @@ function AdminMenu(){
 						<table id="items" className="table table-hover">
 							<thead>
 								<tr>
-								<th/>
-								<th style = {{color: ""}} scope="col">ID</th>
-								<th style = {{color: "3C3C3C"}} scope="col">Name</th>
-								<th style = {{color: "3C3C3C"}} scope="col">Category</th>
-								<th style = {{color: "3C3C3C"}} scope="col">Price</th>
-								<th style = {{color: "3C3C3C"}} scope="col">Description</th>
-								<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
-								<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
-								<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
-								
-
+									<th/>
+									<th style = {{color: ""}} scope="col">ID</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Name</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Category</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Price</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Description</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -52,7 +50,11 @@ function AdminMenu(){
 										(x, i) => {
 											return (
 												<tr key = {x.ID}>
-													<td><input type="checkbox" class="form-check-input"/></td>
+													<td><input type="checkbox" class="form-check-input" onChange = {() => setedit(x => {
+														x.splice(i,1,!edit[i])
+														console.log(x)
+														return x
+													})}/></td>
 													<td style = {{color: "3C3C3C"}}>{menu[i].DishID}</td>
 													<td style = {{color: "3C3C3C"}}>{menu[i].Name}</td>
 													<td style = {{color: "3C3C3C"}}>{menu[i].Category}</td>
