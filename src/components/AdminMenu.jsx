@@ -1,6 +1,5 @@
 import React , { useState, useEffect } from 'react';
 import './AdminMenu.css';
-// import EdiText from 'react-editext'
 import firebase_integration from '../Fire.js'
 
 function AdminMenu(){
@@ -10,22 +9,33 @@ function AdminMenu(){
 	useEffect(() => {
 		firebase_integration.database.collection('Menu').onSnapshot((snapshot) => {
 			var menu_items = []
-			var edit_status = []
+			// var edit_status = []
 					snapshot.docs.forEach(doc => {
 					menu_items.push(doc.data())
-					edit_status.push(false)
+					// edit_status.push(false)
 				});
 					setmenu(menu_items)
-					setedit(edit_status)
+					// setedit(edit_status)
 				})
 
 	}, menu)
+	function handling_editmode() {
+		var editstates = [];
+		[...menu.keys()].map((_,i) => {
+			editstates.push(document.getElementsByClassName("form-check-input")[i].checked)
+			// edit[i] === true
+			// 	?editstates[i].push(true)
+			// 	:editstates.push(document.getElementsByClassName("form-check-input")[i].checked)
+		})
+		setedit(editstates)
+		seteditmode(true)
+	}
 	return(
 		<div>
 			<div id="menubox" className="container">
 				<div className="row">
 					<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
-					<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => seteditmode(x => !x)}>Edit</button>
+					<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => handling_editmode()}>Edit</button>
 					<button type="button" class="btn btn-primary btn-sm menubutton">Remove</button>
 				</div>
 				<div className="row">
@@ -72,12 +82,7 @@ function AdminMenu(){
 													<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input type="file"/></button></td>
 												</tr>:
 												<tr key = {x.ID}>
-													<td><input id = {i} type="checkbox" class="form-check-input" onClick = {() => setedit(x => {
-														document.getElementById(i).checked = !edit[i]
-														x.splice(i,1,!x[i])
-														console.log(edit)
-														return x
-													})}/></td>
+													<td><input type="checkbox" class="form-check-input"/></td>
 													<td style = {{color: "3C3C3C"}}>{menu[i].DishID}</td>
 													<td style = {{color: "3C3C3C"}}>{menu[i].Name}</td>
 													<td style = {{color: "3C3C3C"}}>{menu[i].Category}</td>
