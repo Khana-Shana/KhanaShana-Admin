@@ -1,0 +1,19 @@
+body {
+    background-color: "#FBF4F3";
+}
+#menubox{
+    width: 80%;
+    margin-top: 5%;
+}
+.menubutton {
+    margin: 0% 1% 1% 0%;
+    background-color: #626E60;
+    border: None;
+}
+.imagebutton {
+    margin: 0% 1% 1% 0%;
+    background-color: #3C3C3C;
+    color: white;
+    border: None;
+    border-radius: 1rem;
+}
