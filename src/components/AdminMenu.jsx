@@ -15,8 +15,8 @@ function AdminMenu(){
 					setmenu(menu_items)
 					setfilteredmenu(menu_items)
 				})
-				console.log("Hellloooo")
 	}, menu)
+	
 	function handling_editmode() {
 		var editstates = [];
 		var newmenu = []
@@ -30,45 +30,57 @@ function AdminMenu(){
 		setfilteredmenu(newmenu)
 		seteditmode(true)
 	}
-	function uploadMenuImage(image){
-		var file = '/media/muji/Local Disk/University/1902/Software_Engineering/SE Project/Development/KhanaShana-Admin/src/dummy.jpg'
-		var uploadTask = firebase_integration.storage.ref().child('Menu/'+'lol.jpg').put(file);
-
-		uploadTask.on(firebase_integration.storage.TaskEvent.STATE_CHANGED, 
-		function(snapshot) {
-			var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-			console.log('Upload is ' + progress + '% done');
-			switch (snapshot.state) {
-			case firebase_integration.storage.TaskState.PAUSED: 
-				console.log('Upload is paused');
-				break;
-			case firebase_integration.storage.TaskState.RUNNING: 
-				console.log('Upload is running');
-				break;
-			}
-		}, function(error) {
-			alert(error.message)
-		}, function() {
-			uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-				console.log(downloadURL)
-				firebase_integration.database.collection('Menu').doc("25").set({
-					URL: downloadURL
-				})
-			});
-		});
+	function uploadMenuImage(image, id){
+		console.log('Chala gya')
+		var file = image
+		var filesplit = file.split("\\")
+		console.log(filesplit[filesplit.length - 1]) 
+		var uploadTask = firebase_integration.storage.ref().child('Menu/'+filesplit).put(file);
+		console.log('Phas gya 1')
+		// uploadTask.on(firebase_integration.storage.TaskEvent.STATE_CHANGED, 
+		// function(snapshot) {
+		// 	console.log('Phas gya 2')
+		// 	var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+		// 	console.log('Upload is ' + progress + '% done');
+		// 	switch (snapshot.state) {
+		// 	case firebase_integration.storage.TaskState.PAUSED: 
+		// 		console.log('Upload is paused');
+		// 		break;
+		// 	case firebase_integration.storage.TaskState.RUNNING: 
+		// 		console.log('Upload is running');
+		// 		break;
+		// 	}
+		// }, function(error) {
+		// 	alert(error.message)
+		// }, function() {
+		// 	uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+		// 		console.log(downloadURL)
+		// 		firebase_integration.database.collection('Menu').doc(id).set({
+		// 			URL: downloadURL
+		// 		})
+		// 	});
+		// });
 	}
 
-	// function updateDatabase() {
-	// 	firebase_integration.database.collection('Menu').doc(DishID.toString()).set({
-	// 		DishID: DishID,
-	// 		Category: Category,
-	// 		Description: Description,
-	// 		Name: Name,
-	// 		PortionSize: PortionSize,
-	// 		PrepTime: PrepTime,
-	// 		SalePrice: SalePrice,
-	// 	  });
-	// }
+	function updateDatabase() {
+		filteredmenu.map((item) => {
+			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).set({
+				DishID: item.DishID,
+				Category: item.Category,
+				Description: item.Description,
+				Name: item.Name,
+				PortionSize: item.PortionSize,
+				PrepTime: item.PrepTime,
+				SalePrice: item.SalePrice,
+			  });
+		})
+		filteredmenu.map(x => {
+			uploadMenuImage(document.getElementById(x.DishID).value, x.DishID.toString())
+		})
+		seteditmode(false)
+		setmenu([])
+	}
+
 	return(
 		<div>
 			<div id="menubox" className="container">
@@ -76,7 +88,7 @@ function AdminMenu(){
 					<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
 					<button type="button" class="btn btn-primary btn-sm menubutton">Remove</button>
 					{editmode
-						?<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton">Save</button>
+						?<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick={() => updateDatabase()}>Save</button>
 						:<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => handling_editmode()}>Edit</button>
 					}
 				</div>
@@ -107,7 +119,7 @@ function AdminMenu(){
 									</tr>
 								}
 							</thead>
-							{console.log(filteredmenu)}
+							{/* {console.log(filteredmenu)} */}
 							{
 								filteredmenu.map(
 									(x, i) => {
@@ -158,7 +170,8 @@ function AdminMenu(){
 																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
 															}
 														}/></td>
-														<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input type="file"/></button></td>
+														{/* <td><input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg"/></td> */}
+														<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg"/></button></td>
 													</tr>
 													:<tr key = {x.ID}>
 														<td><input type="checkbox" class="form-check-input"/></td>
