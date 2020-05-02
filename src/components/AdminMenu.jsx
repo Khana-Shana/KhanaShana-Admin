@@ -84,14 +84,6 @@ function AdminMenu(){
 	return(
 		<div>
 			<div id="menubox" className="container">
-				{/* <div className="row">
-					<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
-					<button type="button" class="btn btn-primary btn-sm menubutton">Remove</button>
-					{editmode
-						?<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick={() => updateDatabase()}>Save</button>
-						:<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => handling_editmode()}>Edit</button>
-					}
-				</div> */}
 				{editmode
 					?<div className="row">
 						<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick={() => updateDatabase()}>Save</button>
@@ -106,6 +98,7 @@ function AdminMenu(){
 				<div className="row">
 					<div className="table-responsive">
 						<table id="items" className="table table-hover">
+						{/* <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%"> */}
 							<thead>
 								{editmode === true?
 									<tr>
@@ -130,7 +123,6 @@ function AdminMenu(){
 									</tr>
 								}
 							</thead>
-							{/* {console.log(filteredmenu)} */}
 							{
 								filteredmenu.map(
 									(x, i) => {
