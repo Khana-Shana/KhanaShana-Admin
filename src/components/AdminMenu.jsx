@@ -15,7 +15,7 @@ function AdminMenu(){
 					setmenu(menu_items)
 					setfilteredmenu(menu_items)
 				})
-	}, menu)
+	},filteredmenu)
 	
 	function handling_editmode() {
 		var editstates = [];
@@ -74,11 +74,12 @@ function AdminMenu(){
 				SalePrice: item.SalePrice,
 			  });
 		})
-		filteredmenu.map(x => {
-			uploadMenuImage(document.getElementById(x.DishID).value, x.DishID.toString())
-		})
+		// filteredmenu.map(x => {
+		// 	uploadMenuImage(document.getElementById(x.DishID).value, x.DishID.toString())
+		// })
 		seteditmode(false)
-		setmenu([])
+		setfilteredmenu(menu)
+		// setmenu(men)
 	}
 
 	return(
