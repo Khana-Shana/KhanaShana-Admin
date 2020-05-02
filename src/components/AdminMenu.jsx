@@ -79,20 +79,30 @@ function AdminMenu(){
 		// })
 		seteditmode(false)
 		setfilteredmenu(menu)
-		// setmenu(men)
 	}
 
 	return(
 		<div>
 			<div id="menubox" className="container">
-				<div className="row">
+				{/* <div className="row">
 					<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
 					<button type="button" class="btn btn-primary btn-sm menubutton">Remove</button>
 					{editmode
 						?<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick={() => updateDatabase()}>Save</button>
 						:<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => handling_editmode()}>Edit</button>
 					}
-				</div>
+				</div> */}
+				{editmode
+					?<div className="row">
+						<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick={() => updateDatabase()}>Save</button>
+					</div>
+					:<div className="row">
+						<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
+						<button type="button" class="btn btn-primary btn-sm menubutton">Remove</button>
+						<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => handling_editmode()}>Edit</button>
+					</div>
+
+				}
 				<div className="row">
 					<div className="table-responsive">
 						<table id="items" className="table table-hover">
