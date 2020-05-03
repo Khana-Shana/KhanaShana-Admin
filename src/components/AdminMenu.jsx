@@ -1,7 +1,7 @@
 import React , { useState, useEffect } from 'react';
 import './AdminMenu.css';
 import firebase_integration from '../Fire.js'
-
+import { MDBDataTable } from 'mdbreact';
 function AdminMenu(){
 	const [menu, setmenu] = useState([])
 	const [editmode, seteditmode] = useState(false)
@@ -84,6 +84,39 @@ function AdminMenu(){
 	return(
 		<div>
 			<div id="menubox" className="container">
+			{/* <MDBDataTable
+			striped
+			bordered
+			small
+			data={
+					{
+						columns: [
+							{
+							label: 'Name',
+							field: 'name',
+							sort: 'asc',
+							width: 150
+							},
+							{
+								label: 'Email',
+								field: 'email',
+								sort: 'asc',
+								width: 150
+							},
+						],
+						rows: [
+							{
+							name: 'Name',
+							email: 'name',
+							},
+							{
+								name: 'hello',
+								email: 'helloo'
+							},
+						]
+					}
+			}
+			/> */}
 				{editmode
 					?<div className="row">
 						<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick={() => updateDatabase()}>Save</button>
@@ -96,9 +129,8 @@ function AdminMenu(){
 
 				}
 				<div className="row">
-					<div className="table-responsive">
+					<div className="table-responsive random">
 						<table id="items" className="table table-hover">
-						{/* <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%"> */}
 							<thead>
 								{editmode === true?
 									<tr>
