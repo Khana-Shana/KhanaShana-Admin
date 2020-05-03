@@ -31,12 +31,15 @@ function AdminMenu(){
 		seteditmode(true)
 	}
 	function uploadMenuImage(image, id){
-		console.log('Chala gya')
-		var file = image
-		var filesplit = file.split("\\")
-		console.log(filesplit[filesplit.length - 1]) 
-		var uploadTask = firebase_integration.storage.ref().child('Menu/'+filesplit).put(file);
-		console.log('Phas gya 1')
+		var image = document.getElementById(id).files[0]
+		var imageName = image.name
+		console.log(imageName)
+		// console.log('Chala gya')
+		// var file = image
+		// var filesplit = file.split("\\")
+		// console.log(filesplit[filesplit.length - 1]) 
+		// var uploadTask = firebase_integration.storage.ref().child('Menu/'+filesplit).put(file);
+		// console.log('Phas gya 1')
 		// uploadTask.on(firebase_integration.storage.TaskEvent.STATE_CHANGED, 
 		// function(snapshot) {
 		// 	console.log('Phas gya 2')
@@ -74,9 +77,9 @@ function AdminMenu(){
 				SalePrice: item.SalePrice,
 			  });
 		})
-		// filteredmenu.map(x => {
-		// 	uploadMenuImage(document.getElementById(x.DishID).value, x.DishID.toString())
-		// })
+		filteredmenu.map(x => {
+			uploadMenuImage(id)
+		})
 		seteditmode(false)
 		setfilteredmenu(menu)
 	}
