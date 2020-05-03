@@ -2,6 +2,7 @@ import React , { useState, useEffect } from 'react';
 import './AdminMenu.css';
 import firebase_integration from '../Fire.js'
 import { MDBDataTable } from 'mdbreact';
+
 function AdminMenu(){
 	const [menu, setmenu] = useState([])
 	const [editmode, seteditmode] = useState(false)
@@ -60,7 +61,7 @@ function AdminMenu(){
 				Name: item.Name,
 				PortionSize: item.PortionSize,
 				PrepTime: item.PrepTime,
-				SalePrice: item.SalePrice,
+				SalePrice: parseInt(item.SalePrice),
 			  });
 		})
 		seteditmode(false)
@@ -75,6 +76,7 @@ function AdminMenu(){
 			}
 			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
 		})
+		setfilteredmenu([])
 	}
 
 	return(
@@ -137,7 +139,6 @@ function AdminMenu(){
 										<th style = {{color: "3C3C3C"}} scope="col">Description</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
 									</tr>:
 									<tr>
 										<th/>
@@ -148,6 +149,7 @@ function AdminMenu(){
 										<th style = {{color: "3C3C3C"}} scope="col">Description</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
 									</tr>
 								}
 							</thead>
@@ -201,8 +203,6 @@ function AdminMenu(){
 																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
 															}
 														}/></td>
-														{/* <td><input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg"/></td> */}
-														<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID)}/></button></td>
 													</tr>
 													:<tr key = {x.ID}>
 														<td><input type="checkbox" class="form-check-input"/></td>
@@ -213,6 +213,7 @@ function AdminMenu(){
 														<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Description}</td>
 														<td style = {{color: "3C3C3C"}}>{filteredmenu[i].PortionSize}</td>
 														<td style = {{color: "#576271"}}>{filteredmenu[i].PrepTime}</td>
+														<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID)}/></button></td>
 													</tr>														
 												}
 											</tbody>
