@@ -30,44 +30,30 @@ function AdminMenu(){
 		setfilteredmenu(newmenu)
 		seteditmode(true)
 	}
-	function uploadMenuImage(image, id){
+	function uploadMenuImage(id){
 		var image = document.getElementById(id).files[0]
 		var imageName = image.name
 		console.log(imageName)
-		// console.log('Chala gya')
-		// var file = image
-		// var filesplit = file.split("\\")
-		// console.log(filesplit[filesplit.length - 1]) 
-		// var uploadTask = firebase_integration.storage.ref().child('Menu/'+filesplit).put(file);
-		// console.log('Phas gya 1')
-		// uploadTask.on(firebase_integration.storage.TaskEvent.STATE_CHANGED, 
-		// function(snapshot) {
-		// 	console.log('Phas gya 2')
-		// 	var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-		// 	console.log('Upload is ' + progress + '% done');
-		// 	switch (snapshot.state) {
-		// 	case firebase_integration.storage.TaskState.PAUSED: 
-		// 		console.log('Upload is paused');
-		// 		break;
-		// 	case firebase_integration.storage.TaskState.RUNNING: 
-		// 		console.log('Upload is running');
-		// 		break;
-		// 	}
-		// }, function(error) {
-		// 	alert(error.message)
-		// }, function() {
-		// 	uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-		// 		console.log(downloadURL)
-		// 		firebase_integration.database.collection('Menu').doc(id).set({
-		// 			URL: downloadURL
-		// 		})
-		// 	});
-		// });
+		var uploadTask = firebase_integration.storage.ref().child('Menu/'+imageName).put(image);
+		uploadTask.on('state_changed', 
+		function(snapshot) {
+			var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+			console.log('Upload is ' + progress + '% done');
+		}, function(error) {
+			alert(error.message)
+		}, function() {
+			firebase_integration.storage.ref().child('Menu/'+imageName).getDownloadURL().then(function(downloadURL) {
+			firebase_integration.database.collection('Menu').doc(id.toString()).update({
+					ImageName: imageName,
+					URL: downloadURL
+				})
+			});
+		});
 	}
 
 	function updateDatabase() {
 		filteredmenu.map((item) => {
-			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).set({
+			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).update({
 				DishID: item.DishID,
 				Category: item.Category,
 				Description: item.Description,
@@ -77,11 +63,18 @@ function AdminMenu(){
 				SalePrice: item.SalePrice,
 			  });
 		})
-		filteredmenu.map(x => {
-			uploadMenuImage(id)
-		})
 		seteditmode(false)
 		setfilteredmenu(menu)
+	}
+
+	function removeItems(){
+		filteredmenu.map((item) => {
+			async function deleteImage(){
+				var docs = await firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().
+				firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete()
+			}
+			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
+		})
 	}
 
 	return(
@@ -126,7 +119,7 @@ function AdminMenu(){
 					</div>
 					:<div className="row">
 						<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
-						<button type="button" class="btn btn-primary btn-sm menubutton">Remove</button>
+						<button type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => removeItems()}>Remove</button>
 						<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => handling_editmode()}>Edit</button>
 					</div>
 
@@ -209,7 +202,7 @@ function AdminMenu(){
 															}
 														}/></td>
 														{/* <td><input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg"/></td> */}
-														<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg"/></button></td>
+														<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID)}/></button></td>
 													</tr>
 													:<tr key = {x.ID}>
 														<td><input type="checkbox" class="form-check-input"/></td>
