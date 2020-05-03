@@ -8,7 +8,7 @@ function AdminMenu(){
 	const [editmode, seteditmode] = useState(false)
 	const [filteredmenu, setfilteredmenu] = useState([])
 	useEffect(() => {
-		firebase_integration.database.collection('Menu').onSnapshot((snapshot) => {
+		firebase_integration.database.collection('Menu').orderBy("DishID").onSnapshot((snapshot) => {
 			var menu_items = []
 					snapshot.docs.forEach(doc => {
 					menu_items.push(doc.data())
@@ -19,10 +19,8 @@ function AdminMenu(){
 	},filteredmenu)
 	
 	function handling_editmode() {
-		var editstates = [];
 		var newmenu = []
 		menu.map((_,i) => {
-			editstates.push(document.getElementsByClassName("form-check-input")[i].checked)
 			if(document.getElementsByClassName("form-check-input")[i].checked)
 			{
 				newmenu.push(menu[i])
@@ -69,12 +67,53 @@ function AdminMenu(){
 	}
 
 	function removeItems(){
-		filteredmenu.map((item) => {
+		var items_removed = []
+		menu.map((_,i) => {
+			if(document.getElementsByClassName("form-check-input")[i].checked)
+			{
+				items_removed.push(menu[i])
+			}
+		})
+		console.log(items_removed)
+		items_removed.map((item) => {
 			async function deleteImage(){
 				var docs = await firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().
 				firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete()
 			}
 			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
+		})
+		items_removed.length === 0
+			?setfilteredmenu(menu)
+			:setfilteredmenu([])
+	}
+	function AddItem() {
+		var newDishID = 0
+		menu.map((x) => {
+			if(x.DishID > newDishID)
+			{
+				newDishID = x.DishID
+			} 
+		})
+		menu.length === 0
+		? newDishID = 0
+		: newDishID += 1
+		var newitem = {
+			DishID: newDishID,
+			Category: "Lorem Ipsum", 
+			Name: "Lorem Ipsum",
+			Description: "Lorem Ipsum",
+			PortionSize: "Lorem Ipsum",
+			PrepTime: "Lorem Ipsum",
+			SalePrice: 0
+		}
+		firebase_integration.database.collection("Menu").doc(newDishID.toString()).set({
+			DishID: newDishID,
+			Category: "Lorem Ipsum", 
+			Name: "Lorem Ipsum",
+			Description: "Lorem Ipsum",
+			PortionSize: "Lorem Ipsum",
+			PrepTime: "Lorem Ipsum",
+			SalePrice: 0
 		})
 		setfilteredmenu([])
 	}
@@ -120,7 +159,7 @@ function AdminMenu(){
 						<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick={() => updateDatabase()}>Save</button>
 					</div>
 					:<div className="row">
-						<button type="button" class="btn btn-primary btn-sm menubutton">Add</button>
+						<button type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => AddItem()}>Add</button>
 						<button type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => removeItems()}>Remove</button>
 						<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => handling_editmode()}>Edit</button>
 					</div>
