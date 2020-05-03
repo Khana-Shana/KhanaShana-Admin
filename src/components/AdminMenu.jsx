@@ -8,7 +8,7 @@ function AdminMenu(){
 	const [editmode, seteditmode] = useState(false)
 	const [filteredmenu, setfilteredmenu] = useState([])
 	useEffect(() => {
-		firebase_integration.database.collection('Menu').orderBy("DishID").onSnapshot((snapshot) => {
+		firebase_integration.database.collection('Menu').onSnapshot((snapshot) => {
 			var menu_items = []
 					snapshot.docs.forEach(doc => {
 					menu_items.push(doc.data())
