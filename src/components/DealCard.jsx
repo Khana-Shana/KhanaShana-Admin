@@ -3,11 +3,11 @@ import './AdminDeals.css';
 
 function DealCard(props) {
     return (
-        <div className = "container dealcard">
+        <div className = "dealcard">
             <form>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label"><b>{props.dealtype}</b></label>
-                    <div className="col-sm-10">
+                    <label className="col-sm-9 col-form-label"><b>{props.dealtype}</b></label>
+                    <div className="col-sm-3">
                         <button type="button" className="btn btn-primary btn-sm dealbutton">Remove Deal</button>
                     </div>
                 </div>
