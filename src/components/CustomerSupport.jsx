@@ -1,7 +1,9 @@
 import React , { useState, useEffect } from 'react';
+import CustomerSupportHelper from "./CustomerSupportHelper.jsx" 
 import ReactBootstrap, {InputGroup,Form,FormControl,Nav, Button, Navbar,NavDropdown,Table} from 'react-bootstrap';
 import pic from './2479554.png';
 import './CustomerSupport.css'
+import {FaStar} from 'react-icons/fa';
 import firebase_integration from '../Fire.js';
 
 function CustomerSupport(){
@@ -18,15 +20,45 @@ function CustomerSupport(){
 		})
 	}, myData);
 
+	const printingStar =(n)=>{
+		let arr=new Array(n).fill(0);
+		return arr.map(x=>{
+			return(
+			 
+					<FaStar 
+                        class = "star" 
+                        color="red"
+                        size = {20}/>
+                       
+	          );
+			}
+		)
+	} 	
+	
+	const viewFullMessage = (msg)=>{
+		alert(msg)
+	}
+
 	const renderTable = () => {
 	    return myData.map(feedback => {
 	      return (
 	        <tr>
 	          <td>{feedback.CustomerID}</td>
 			  <td>{feedback.Date.toDate().getDate()+"-"+(feedback.Date.toDate().getMonth()+1)+"-"+feedback.Date.toDate().getFullYear()}</td>
-	          <td>{feedback.Rating}</td>
+	          <td>{printingStar(feedback.Rating)}</td>
 	          <td>{feedback.Subject}</td>
-	          <td>{feedback.Message}</td>
+                        
+	          {
+	          	feedback.Message.length<50?
+		          	<td>{feedback.Message}</td>
+	
+		          	:
+		          	<div>
+		          	<div><td>{feedback.Message.slice(0,50) + "..."}</td></div>
+		          	<div><td><span onClick={()=>viewFullMessage(feedback.Message)} className="bg-mid-gray pointer dim ph2 bw1 ml2 mb2 br3 tabbing">ViewMessage</span></td></div>
+	          		</div>
+	          }
+	      
 	        </tr>
 	      )
 	    })
@@ -34,21 +66,25 @@ function CustomerSupport(){
 
 	return(
 		<div>
-			<div>
-				<img className="text-example" src={pic}/>
+			<div className="text-example">
+				<img src={pic}/>
 			</div>
-			<Table responsive>
-			<thead>
-				<tr className="bg-light-silver">
-					<th>CUSTOMER ID</th>
-					<th>DATE</th>
-					<th>RATING</th>
-					<th>SUBJECT</th>
-					<th>MESSAGE</th> 	
-				</tr>
-			</thead>
-			<tbody>{renderTable()}</tbody>
-			</Table>	
+			
+			<div className="yo">
+				<Table responsive>
+				<thead>
+					<tr className="bg-light-silver">
+						<th>CUSTOMER ID</th>
+						<th>DATE</th>
+						<th>RATING</th>
+						<th>SUBJECT</th>
+						<th>MESSAGE</th> 	
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>{renderTable()}</tbody>
+				</Table>	
+			</div>
 		</div>
 	);
 
