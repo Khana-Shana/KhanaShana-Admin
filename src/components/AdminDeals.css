@@ -1,13 +1,21 @@
+.mainbox {
+    margin-top: 5%;
+}
 .dealcard {
-    margin-top: 10%;
     background-color: #99AA93;
     border-radius: 1rem;
+    padding: 5%;
+    margin-bottom: 5%;
 }
-.dealbutton .imagebutton{
+.imgbutton, .dealbutton{
     color: white;
     background-color: #3C3C3C;
-    border-color: white;
 }
 .dealbutton {
+    border-color: white;
+    border-width: thin;
     border-radius: 1rem;
+}
+.imgbutton {
+    border: none;
 }

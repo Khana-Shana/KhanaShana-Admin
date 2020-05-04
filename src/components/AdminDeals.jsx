@@ -4,17 +4,22 @@ import DealCard from './DealCard';
 
 function AdminDeals() {
     return (
-        // Helloooooooo
-        // <div className = "container mainbox">
-        //     <div className = "row">
-        //         <div className = "col">Discount Wheel</div>
-        //         <div className = "col"></div>    
-        //     </div>
-        // </div>
         <div>
-            <DealCard
-                dealtype = "Daily"
-            />
+            <div className = "container mainbox">
+                <div className = "row">
+                    <div className = "col">
+                        
+                    </div>
+                    <div className = "col">
+                            <DealCard
+                                dealtype = "Daily Deal"
+                            />
+                            <DealCard
+                                dealtype = "Weekly Deal"
+                            />
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
