@@ -4,7 +4,6 @@ import ReactBootstrap, {InputGroup,Form,FormControl,Nav, Button, Navbar,NavDropd
 import pic from './2479554.png';
 import './CustomerSupport.css'
 import {FaStar} from 'react-icons/fa';
-import {BrowserRouter as Router, Switch, Route,Link} from 'react-router-dom';
 import firebase_integration from '../Fire.js';
 
 function CustomerSupport(){
@@ -53,7 +52,7 @@ function CustomerSupport(){
 		          	
 		          	:
 		          	<td>{feedback.Message.slice(0,50) + "..."}
-		          	<span className="bg-mid-gray pointer dim ph2 bw1 ml2 mb2 br3 tabbing"><Link to="/custSupportHelper">View Full Message</Link></span></td>
+		          	<span className="bg-mid-gray pointer dim ph2 bw1 ml2 mb2 br3 tabbing">View Full Message</span></td>
 	          }
 	      
 	        </tr>
