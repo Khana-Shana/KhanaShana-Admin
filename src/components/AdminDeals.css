@@ -1,0 +1,13 @@
+.dealcard {
+    margin-top: 10%;
+    background-color: #99AA93;
+    border-radius: 1rem;
+}
+.dealbutton .imagebutton{
+    color: white;
+    background-color: #3C3C3C;
+    border-color: white;
+}
+.dealbutton {
+    border-radius: 1rem;
+}
