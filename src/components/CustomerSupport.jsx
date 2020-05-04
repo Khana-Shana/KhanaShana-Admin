@@ -28,7 +28,6 @@ function CustomerSupport(){
 					<FaStar 
                         class = "star" 
                         color="red"
-                        // color="#ffc107" 
                         size = {20}/>
                        
 	          );
@@ -37,7 +36,7 @@ function CustomerSupport(){
 	} 	
 	
 	const viewFullMessage = (msg)=>{
-		console.log("SUP")
+		alert(msg)
 	}
 
 	const renderTable = () => {
@@ -52,10 +51,12 @@ function CustomerSupport(){
 	          {
 	          	feedback.Message.length<50?
 		          	<td>{feedback.Message}</td>
-		          	
+	
 		          	:
-		          	<td>{feedback.Message.slice(0,50) + "..."}
-		          	<span onClick={()=>viewFullMessage(feedback.Message)} className="bg-mid-gray pointer dim ph2 bw1 ml2 mb2 br3 tabbing">View Full Message</span></td>
+		          	<div>
+		          	<div><td>{feedback.Message.slice(0,50) + "..."}</td></div>
+		          	<div><td><span onClick={()=>viewFullMessage(feedback.Message)} className="bg-mid-gray pointer dim ph2 bw1 ml2 mb2 br3 tabbing">ViewMessage</span></td></div>
+	          		</div>
 	          }
 	      
 	        </tr>
