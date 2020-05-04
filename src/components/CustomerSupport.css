@@ -1,4 +1,11 @@
- .text-example {
+.viewFullMessage {
+  border: 2px solid black; 
+  color: white; 
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.imageOnTop {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -8,19 +15,19 @@
         margin: 0% 40% ;
         align-items: center;
         padding-bottom: 20px;
-        padding-top: 10px; 	
+        padding-top: 10px;  
         position: relative;
         top: -20px;
 }
 
 
-.yo
+.alignTable
 {
     position: relative;
-    top: -30px;	
+    top: -30px; 
 }
 
 .tabbing{
-	padding-right: 40px;
-	color: white
+    padding-right: 40px;
+    color: white
 }
