@@ -36,6 +36,9 @@ function CustomerSupport(){
 		)
 	} 	
 	
+	const viewFullMessage = (msg)=>{
+		console.log("SUP")
+	}
 
 	const renderTable = () => {
 	    return myData.map(feedback => {
@@ -52,7 +55,7 @@ function CustomerSupport(){
 		          	
 		          	:
 		          	<td>{feedback.Message.slice(0,50) + "..."}
-		          	<span className="bg-mid-gray pointer dim ph2 bw1 ml2 mb2 br3 tabbing">View Full Message</span></td>
+		          	<span onClick={()=>viewFullMessage(feedback.Message)} className="bg-mid-gray pointer dim ph2 bw1 ml2 mb2 br3 tabbing">View Full Message</span></td>
 	          }
 	      
 	        </tr>
