@@ -2,6 +2,7 @@ import React , { useState, useEffect } from 'react';
 import './AdminMenu.css';
 import firebase_integration from '../Fire.js'
 import { MDBDataTable } from 'mdbreact';
+import ReactBootstrap, {Table} from 'react-bootstrap';
 
 function AdminMenu(){
 	const [menu, setmenu] = useState([])
@@ -117,43 +118,79 @@ function AdminMenu(){
 		})
 		setfilteredmenu([])
 	}
+	function renderTable() {
+		return (
+			filteredmenu.map((x,i) => {
+				return (
+					<tbody>
+					{editmode === true
+						?<tr key = {x.ID}>
+							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].DishID}</td>
+							<td><input class="form-control form-control-sm" type="text" placeholder="Name" value = {filteredmenu[i].Name} onChange = {
+								e => {
+									var changeditem = filteredmenu[i]
+									changeditem.Name = e.target.value
+									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+								}
+							}/></td>
+							<td><input class="form-control form-control-sm" type="text" placeholder="Category" value = {filteredmenu[i].Category} onChange = {
+								e => {
+									var changeditem = filteredmenu[i]
+									changeditem.Category = e.target.value
+									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+								}
+							}/></td>
+							<td><input class="form-control form-control-sm" type="text" placeholder="Price" value = {filteredmenu[i].SalePrice} onChange = {
+								e => {
+									var changeditem = filteredmenu[i]
+									changeditem.SalePrice = e.target.value
+									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+								}
+							}/></td>
+							<td><input class="form-control form-control-sm" type="text" placeholder="Description" value = {filteredmenu[i].Description} onChange = {
+								e => {
+									var changeditem = filteredmenu[i]
+									changeditem.Description = e.target.value
+									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+								}
+							}/></td>
+							<td><input class="form-control form-control-sm" type="text" placeholder="Portion Size"value = {filteredmenu[i].PortionSize} onChange = {
+								e => {
+									var changeditem = filteredmenu[i]
+									changeditem.PortionSize = e.target.value
+									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+								}
+							}/></td>
+							<td><input class="form-control form-control-sm" type="text" placeholder="Prep Time"value = {filteredmenu[i].PrepTime} onChange = {
+								e => {
+									var changeditem = filteredmenu[i]
+									changeditem.PrepTime = e.target.value
+									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
+								}
+							}/></td>
+						</tr>
+						:<tr>
+							<td><input type="checkbox" class="form-check-input"/></td>
+							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].DishID}</td>
+							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Name}</td>
+							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Category}</td>
+							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].SalePrice}</td>
+							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Description}</td>
+							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].PortionSize}</td>
+							<td style = {{color: "#576271"}}>{filteredmenu[i].PrepTime}</td>
+							<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID)}/></button></td>
+						</tr>
+					}
+						
+				</tbody>
+				);
+			})
+		);
+	}
 
 	return(
 		<div>
 			<div id="menubox" className="container">
-			{/* <MDBDataTable
-			striped
-			bordered
-			small
-			data={
-					{
-						columns: [
-							{
-							label: 'Name',
-							field: 'name',
-							sort: 'asc',
-							width: 150
-							},
-							{
-								label: 'Email',
-								field: 'email',
-								sort: 'asc',
-								width: 150
-							},
-						],
-						rows: [
-							{
-							name: 'Name',
-							email: 'name',
-							},
-							{
-								name: 'hello',
-								email: 'helloo'
-							},
-						]
-					}
-			}
-			/> */}
 				{editmode
 					?<div className="row">
 						<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick={() => updateDatabase()}>Save</button>
@@ -166,106 +203,36 @@ function AdminMenu(){
 
 				}
 				<div className="row">
-					<div className="table-responsive random">
-						<table id="items" className="table table-hover">
-							<thead>
-								{editmode === true?
-									<tr>
-										<th style = {{color: "3C3C3C"}} scope="col">ID</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Name</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Category</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Price</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Description</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
-									</tr>:
-									<tr>
-										<th/>
-										<th style = {{color: "3C3C3C"}} scope="col">ID</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Name</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Category</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Price</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Description</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
-										<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
-									</tr>
-								}
-							</thead>
-							{
-								filteredmenu.map(
-									(x, i) => {
-										return (
-											<tbody>
-												{editmode === true
-													?<tr key = {x.ID}>
-														<td style = {{color: "3C3C3C"}}>{filteredmenu[i].DishID}</td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Name" value = {filteredmenu[i].Name} onChange = {
-															e => {
-																var changeditem = filteredmenu[i]
-																changeditem.Name = e.target.value
-																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
-															}
-														}/></td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Category" value = {filteredmenu[i].Category} onChange = {
-															e => {
-																var changeditem = filteredmenu[i]
-																changeditem.Category = e.target.value
-																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
-															}
-														}/></td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Price" value = {filteredmenu[i].SalePrice} onChange = {
-															e => {
-																var changeditem = filteredmenu[i]
-																changeditem.SalePrice = e.target.value
-																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
-															}
-														}/></td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Description" value = {filteredmenu[i].Description} onChange = {
-															e => {
-																var changeditem = filteredmenu[i]
-																changeditem.Description = e.target.value
-																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
-															}
-														}/></td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Portion Size"value = {filteredmenu[i].PortionSize} onChange = {
-															e => {
-																var changeditem = filteredmenu[i]
-																changeditem.PortionSize = e.target.value
-																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
-															}
-														}/></td>
-														<td><input class="form-control form-control-sm" type="text" placeholder="Prep Time"value = {filteredmenu[i].PrepTime} onChange = {
-															e => {
-																var changeditem = filteredmenu[i]
-																changeditem.PrepTime = e.target.value
-																setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
-															}
-														}/></td>
-													</tr>
-													:<tr key = {x.ID}>
-														<td><input type="checkbox" class="form-check-input"/></td>
-														<td style = {{color: "3C3C3C"}}>{filteredmenu[i].DishID}</td>
-														<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Name}</td>
-														<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Category}</td>
-														<td style = {{color: "3C3C3C"}}>{filteredmenu[i].SalePrice}</td>
-														<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Description}</td>
-														<td style = {{color: "3C3C3C"}}>{filteredmenu[i].PortionSize}</td>
-														<td style = {{color: "#576271"}}>{filteredmenu[i].PrepTime}</td>
-														<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID)}/></button></td>
-													</tr>														
-												}
-											</tbody>
-										);
-									}
-								)
+					<Table responsive>
+						<thead>
+							{editmode === true?
+								<tr>
+									<th style = {{color: "3C3C3C"}} scope="col">ID</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Name</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Category</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Price</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Description</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
+								</tr>:
+								<tr>
+									<th/>
+									<th style = {{color: "3C3C3C"}} scope="col">ID</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Name</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Category</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Price</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Description</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
+								</tr>
 							}
-						</table>
-					</div>
+						</thead>
+						{renderTable()}
+					</Table>
 				</div>
 			</div>
 		</div>
 	);
 }
-
 export default AdminMenu;
