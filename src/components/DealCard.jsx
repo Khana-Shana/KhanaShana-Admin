@@ -3,7 +3,7 @@ import './AdminDeals.css';
 
 function DealCard(props) {
     const [name,setname] = React.useState()
-    const [price,setprice] = React.usetate()
+    const [price,setprice] = React.useState()
     const [menuid,setmenuid] = React.useState()
     return (
         <div className = "dealcard">
