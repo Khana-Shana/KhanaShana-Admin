@@ -6,14 +6,9 @@ import firebase_integration from '../Fire.js';
 function RestaurantDetails(){
 
 	const [myData,setData] = useState({});
-	
 	let arr={} //This array will be used to store field manipulations before the Submit Button is clicked and contents of arr copied to State
-		
-	
 	useEffect(()=>{
-		firebase_integration.getImageURL("RestaurantDetails","RestaurantDetails","","RestaurantDetails.svg")
 		firebase_integration.database.collection("RestaurantDetails").onSnapshot((snapshot) => {
-            
             snapshot.docs.forEach(doc => {
                 // arr.push(doc.data())
                 // console.log("Doci",doc.data()["Name"])
@@ -112,7 +107,7 @@ function RestaurantDetails(){
 				</div>
 				<div className="col-md-5 no-gutters tr">
 					<div className="rightside d-flex justify-content-center align-items center">
-						<img id="RestaurantDetails" className="tr ml5"/>
+						<img id="RestaurantDetails" className="tr ml5" src="https://firebasestorage.googleapis.com/v0/b/khana-shana-2020.appspot.com/o/RestaurantDetails%2FRestaurantDetails.svg?alt=media&token=3549ac3c-408d-463f-8680-78d74c09a026"/>
 					</div>
 				</div>
 			
