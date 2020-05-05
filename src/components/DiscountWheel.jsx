@@ -15,22 +15,28 @@ function DiscountWheel() {
                 <div className="row">
                     <div className="col wheel">
                         <form>
+                            <div className = "form-label d-flex justify-content-center title"><b>Discount Wheel</b></div>
                              <div className="form-group row">
-                                <label className="col-sm-2 col-form-label">Discount 1</label>
-                                <div className="col-sm-10">
-                                    <input type="text" className="form-control form-control-sm" placeholder="Name" ></input>
+                                <label className="col-lg-2 col-form-label">Discount 1</label>
+                                <div className="col-lg-10">
+                                    <input type="text" className="form-control form-control-sm" placeholder="Enter Discount Percentage" ></input>
                                 </div>
                             </div>
                             <div className="form-group row">
-                                <label className="col-sm-2 col-form-label">Discount 2</label>
-                                <div className="col-sm-10">
-                                    <input type="text" className="form-control form-control-sm" placeholder="Price" ></input>
+                                <label className="col-lg-2 col-form-label">Discount 2</label>
+                                <div className="col-lg-10">
+                                    <input type="text" className="form-control form-control-sm" placeholder="Enter Discount Percentage" ></input>
                                 </div>
                             </div>
                             <div className="form-group row">
-                                <label className="col-sm-2 col-form-label">Discount 3</label>
-                                <div className="col-sm-10">
-                                    <input type="text" className="form-control form-control-sm" placeholder="Menu ID" ></input>
+                                <label className="col-lg-2 col-form-label">Discount 3</label>
+                                <div className="col-lg-10">
+                                    <input type="text" className="form-control form-control-sm" placeholder="Enter Discount Percentage" ></input>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className = "col d-flex justify-content-center">
+                                    <button type="button" className="btn btn-primary btn-sm updatebutton">Update Discount Wheel</button>
                                 </div>
                             </div>
                         </form>

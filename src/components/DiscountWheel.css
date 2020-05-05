@@ -1,7 +1,10 @@
 .discount{
 	width: 50%;
 }
-
+.title {
+    font-size: 2vw;
+    margin-bottom: 4%;
+}
 .wheel{
     background-color: #99AA93;
     border-radius: 1rem;
@@ -12,4 +15,11 @@
 .inBox{
 
 	width: 50%
+}
+.updatebutton{
+    color: white;
+    background-color: #3C3C3C;
+    border-color: white;
+    border-width: thin;
+    border-radius: 1rem;
 }

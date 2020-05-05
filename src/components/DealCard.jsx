@@ -8,7 +8,7 @@ function DealCard(props) {
     const [menuid, setmenuid] = React.useState("")
     React.useEffect(() => {
         var deals = []
-        firebase_integration.database.collection("Deals").orderBy("DealType", "desc").onSnapshot((snapshot) => {
+        firebase_integration.database.collection("Deals").orderBy("DealType", "asc").onSnapshot((snapshot) => {
             snapshot.forEach((doc) => {
                 deals.push(doc.data())
             })
@@ -17,6 +17,7 @@ function DealCard(props) {
                     setname(deals[0].Name)
                     setprice(deals[0].Price)
                     setmenuid(deals[0].MenuID)
+                    console.log(deals)
                 }
                 else {
                     setname(deals[1].Name)
@@ -42,42 +43,99 @@ function DealCard(props) {
             }
         })
     }, [])
+    function addDailyDeal() {
+        firebase_integration.database.collection("Deals").doc("Daily").set({
+            DealType: "Daily",
+            Name: name,
+            Price: parseInt(price),
+            MenuID: menuid,
+            ImageName: "",
+            ImageURL: ""
+        })
+        alert("Daily Deal successfully added!")
+    }
+
+    function addWeeklyDeal() {
+        firebase_integration.database.collection("Deals").doc("Weekly").set({
+            DealType: "Weekly",
+            Name: name,
+            Price: parseInt(price),
+            MenuID: menuid,
+            ImageName: "",
+            ImageURL: ""
+        })
+        alert("Weekly Deal successfully added!")
+    }
+     // function uploadDealImage(id, dealtype){
+	// 	var image = document.getElementById(id).files[0]
+	// 	var imageName = image.name
+	// 	console.log(imageName)
+	// 	var uploadTask = firebase_integration.storage.ref().child('Deals/'+imageName).put(image);
+	// 	uploadTask.on('state_changed', 
+	// 	function(snapshot) {
+	// 		var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+	// 		console.log('Upload is ' + progress + '% done');
+	// 	}, function(error) {
+	// 		alert(error.message)
+	// 	}, function() {
+	// 		firebase_integration.storage.ref().child('Deals/'+imageName).getDownloadURL().then(function(downloadURL) {
+	// 		firebase_integration.database.collection('Deals').doc(dealtype()).update({
+	// 				ImageName: imageName,
+	// 				ImageURL: downloadURL
+	// 			})
+	// 		});
+	// 	});
+    // }
+    
+    // function removeDeal(dealtype){
+    //     firebase_integration.database.collection('Deals').doc(dealtype).get().then((docs) => {
+    //         firebase_integration.storage.ref().child('Deals/'+docs.data().ImageName).delete()
+    //         firebase_integration.database.collection('Deals').doc(dealtype).set({
+        //         DealType: dealtype,
+        //         Name: "",
+        //         Price: "",
+        //         MenuID: "",
+        //         ImageName: "",
+        //         ImageURL: ""
+    //           })
+    //     })
+    // }
     return (
         <div className = "dealcard">
             <form>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label"><b>{props.dealtype}</b></label>
-                    <div className="col-sm-10">
+                    <label className="col-lg-2 col-form-label"><b>{props.dealtype}</b></label>
+                    <div className="col-lg-10">
                         <button type="button" className="btn btn-primary btn-sm dealbutton">Remove Deal</button>
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">Name</label>
-                    <div className="col-sm-10">
+                    <label className="col-lg-2 col-form-label">Name</label>
+                    <div className="col-lg-10">
                         <input type="text" className="form-control form-control-sm" placeholder="Name" value = {name} onChange = {(e) => setname(e.target.value)}></input>
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">Price</label>
-                    <div className="col-sm-10">
+                    <label className="col-lg-2 col-form-label">Price</label>
+                    <div className="col-lg-10">
                         <input type="text" className="form-control form-control-sm" placeholder="Price" value = {price} onChange = {(e) => setprice(e.target.value)}></input>
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">Menu ID</label>
-                    <div className="col-sm-10">
+                    <label className="col-lg-2 col-form-label">Menu ID</label>
+                    <div className="col-lg-10">
                         <input type="text" className="form-control form-control-sm" placeholder="Menu ID" value = {menuid} onChange = {(e) => setmenuid(e.target.value)}></input>
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">Image</label>
-                    <div className="col-sm-10">
-                        <button type="button" className="btn btn-primary btn-sm imgbutton">Upload Image</button>
+                    <label className="col-lg-2 col-form-label">Image</label>
+                    <div className="col-lg-10">
+                        <button type="button" className="btn btn-primary btn-sm imgbutton">Upload Image<input type="file" accept="image/png, image/jpeg"/></button>
                     </div>
                 </div>
                 <div className="form-group row">
-                    <div className="col-sm-10">
-                        <button type="button" className="btn btn-primary btn-sm dealbutton">Add Deal</button>
+                    <div className="col-lg-10">
+                        <button type="button" className="btn btn-primary btn-sm dealbutton" onClick = {() => props.dealtype ==="Daily Deal"?addDailyDeal():addWeeklyDeal()}>Add Deal</button>
                     </div>
                 </div>     
             </form>
