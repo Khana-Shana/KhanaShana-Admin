@@ -2,6 +2,7 @@ import React from 'react';
 import './DiscountWheel.css';
 
 function DiscountWheel() {
+    //effe
     return (
         <div>
             
