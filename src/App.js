@@ -9,6 +9,7 @@ import AdminProfile from './components/AdminProfile.jsx';
 import CustomerSupport from './components/CustomerSupport.jsx';
 import AdminMenu from './components/AdminMenu.jsx';
 import AdminDeals from './components/AdminDeals.jsx';
+import AdminCreateAccount from './components/AdminCreateAccount.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -23,13 +24,13 @@ function App(){
 
 					<Switch>
 
-					  <Route path="/adminDB"> {/* Routes to the Admin Database Screen*/}
-					  	<AdminDB/>
-					  </Route>
+						<Route path="/adminDB"> {/* Routes to the Admin Database Screen*/}
+							<AdminDB/>
+						</Route>
 			          
-			          <Route path="/order"> {/*Routes to the Order Management Screen*/}
-			            <OrderMng/>
-			          </Route>		
+			        	<Route path="/order"> {/*Routes to the Order Management Screen*/}
+			        		<OrderMng/>
+			        	</Route>		
 			          
 			          <Route path="/customerDB"> {/*Routes to the Customer Database Screen*/}
 			            <CustomerDB/>
@@ -50,8 +51,13 @@ function App(){
 			          <Route path="/adminMenu"> {/*Routes to the Menu Screen*/}
 			          	<AdminMenu />
 			          </Route>
+					  
 					  <Route path="/deals"> {/*Routes to the Deals Screen*/}
 			          	<AdminDeals/>
+			          </Route>
+			          
+			          <Route path="/createAccount"> {/*Routes to the Deals Screen*/}
+			          	<AdminCreateAccount/>
 			          </Route>
 			          
 
