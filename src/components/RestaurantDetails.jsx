@@ -10,45 +10,34 @@ function RestaurantDetails(){
 	useEffect(()=>{
 		firebase_integration.database.collection("RestaurantDetails").onSnapshot((snapshot) => {
             snapshot.docs.forEach(doc => {
-                // arr.push(doc.data())
-                // console.log("Doci",doc.data()["Name"])
                 arr["Name"]=doc.data()["Name"]
                 arr["ContactDetails"]=doc.data()["ContactDetails"]
                 arr["Email"]=doc.data()["Email"]
                 arr["Address"]=doc.data()["Address"]
                 arr["AboutUs"]=doc.data()["AboutUs"]
                 setData(doc.data()) 	
-                
-  				console.log("start wala array",arr)
             });
-			// console.log("THIS MY SETDAT",myData)
         })
 	},myData);
 
 	const changeName = (event) => {
 		arr.Name=event.target.value
-		console.log(arr)
-		
 	}
 
 	const changeEmail = (event)=> {
 		arr.Email=event.target.value
-		console.log(arr)
 	}
 
 	const changeContact = (event)=> {
 		arr.ContactDetails=event.target.value
-		console.log(arr)
 	}
 	
 	const changeAddress = (event) => {
 		arr.Address=event.target.value
-		console.log(arr)
 	}
 
 	const changeAboutUs = (event)=>{
 		arr.AboutUs=event.target.value
-		console.log(arr)
 	}
 
 	const submit = ()=>{

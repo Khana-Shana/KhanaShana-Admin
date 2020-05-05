@@ -16,7 +16,6 @@ function OrderHistory() {
 				}
             });
 			setData(order_arr)
-			console.log(order_arr)
         })
 	},myData);
 	

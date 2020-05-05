@@ -22,14 +22,12 @@ function OrderQ() {
 			})
 		},myData);
 
-
 		const rejectingOrder = (user) => {
 			{/*Changes the Action and Tracking fields in Firebase*/}
 			firebase_integration.updateOrderQueueAction(user.OrderID,"Reject")
 			firebase_integration.updateOrderQueueTracking(user.OrderID,"Rejected")
 		}
 
-		
 		const returnAction=(user)=>{
 			{/*Conditionally renders the Action column of the Table*/}
 			
@@ -90,7 +88,6 @@ function OrderQ() {
 					<td><span>Rejected</span></td> 
 			);
 		}
-
 
 		const renderTable = () => {
 		    return myData.map(user => {

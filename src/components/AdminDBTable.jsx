@@ -13,7 +13,6 @@ function AdminDBTable(){
                 order_arr.push(doc.data())
             });
 			setData(order_arr)
-			console.log(order_arr)
         })
 	},myData);
 

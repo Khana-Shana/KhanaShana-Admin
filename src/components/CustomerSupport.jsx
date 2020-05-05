@@ -1,6 +1,5 @@
 import React , { useState, useEffect } from 'react';
 import ReactBootstrap, {InputGroup,Form,FormControl,Nav, Button, Navbar,NavDropdown,Table} from 'react-bootstrap';
-import pic from './2479554.png';
 import './CustomerSupport.css'
 import {FaStar} from 'react-icons/fa';
 import firebase_integration from '../Fire.js';
@@ -24,12 +23,10 @@ function CustomerSupport(){
 		let arr=new Array(n).fill(0);
 		return arr.map(x=>{
 			return(
-			 
 					<FaStar 
                         class = "star" 
                         color="red"
                         size = {20}/>
-                       
 	          );
 			}
 		)
@@ -52,9 +49,7 @@ function CustomerSupport(){
 	          	feedback.Message.length<50?
 	          	//if length of message is below length of 50 chars, it will be displayed as it is
 		          	<td>{feedback.Message}</td> 
-	
 		          	:
-		        
 		        //otherwise show only a part of the message. On clicking the View Full Message button, the browser alerts with the full message
 		        	<td>{feedback.Message.slice(0,50) + "..."} 
 		        	<button onClick={()=>viewFullMessage(feedback.Message)} className="dim ml2 bg-mid-gray viewFullMessage">View Full Message</button></td>
@@ -69,7 +64,7 @@ function CustomerSupport(){
 	return(
 		<div>
 			<div className="imageOnTop">
-				<img src={pic}/>
+				<img src="https://firebasestorage.googleapis.com/v0/b/khana-shana-2020.appspot.com/o/CustomerSupport%2F2479554.png?alt=media&token=db373e75-558b-4f16-89bc-6eab99fab33a"/>
 			</div>
 			
 			<div className="alignTable">

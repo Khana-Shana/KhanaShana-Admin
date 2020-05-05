@@ -33,12 +33,11 @@ function AdminMenu(){
 	function uploadMenuImage(id){
 		var image = document.getElementById(id).files[0]
 		var imageName = image.name
-		console.log(imageName)
 		var uploadTask = firebase_integration.storage.ref().child('Menu/'+imageName).put(image);
 		uploadTask.on('state_changed', 
 		function(snapshot) {
 			var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-			console.log('Upload is ' + progress + '% done');
+			// console.log('Upload is ' + progress + '% done');
 		}, function(error) {
 			alert(error.message)
 		}, function() {
@@ -75,7 +74,6 @@ function AdminMenu(){
 				items_removed.push(menu[i])
 			}
 		})
-		console.log(items_removed)
 		items_removed.map((item) => {
 			async function deleteImage(){
 				var docs = await firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().
