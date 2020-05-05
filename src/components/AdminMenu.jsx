@@ -65,8 +65,12 @@ function AdminMenu(){
 		seteditmode(false)
 		setfilteredmenu(menu)
 	}
-
-	function removeItems(){
+	function deleteImage(itemid){
+		let promise = firebase_integration.database.collection('Menu').doc(itemid.DishID.toString()).get().then((docs) => firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete())
+		let result = await promise
+	}
+	
+	async function removeItems(){
 		var items_removed = []
 		menu.map((_,i) => {
 			if(document.getElementsByClassName("form-check-input")[i].checked)
@@ -74,13 +78,11 @@ function AdminMenu(){
 				items_removed.push(menu[i])
 			}
 		})
-		console.log(items_removed)
 		items_removed.map((item) => {
-			async function deleteImage(){
-				var docs = await firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().
-				firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete()
-			}
+			console.log(item)
+			await deleteImage(item)
 			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
+			
 		})
 		items_removed.length === 0
 			?setfilteredmenu(menu)
