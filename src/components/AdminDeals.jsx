@@ -1,6 +1,7 @@
 import React from 'react';
 import './AdminMenu.css';
 import DealCard from './DealCard';
+import DiscountWheel from './DiscountWheel'
 import firebase_integration from '../Fire.js'
 
 function AdminDeals() {
@@ -95,6 +96,11 @@ function AdminDeals() {
                         <DealCard
                             dealtype = "Weekly Deal"
                         />
+                    </div>
+                </div>
+                <div className = "row">
+                    <div className = "col">
+                        <DiscountWheel/>
                     </div>
                 </div>
             </div>
