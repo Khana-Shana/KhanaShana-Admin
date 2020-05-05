@@ -81,6 +81,8 @@ function AdminDeals() {
 
     return (
         <div>
+            {console.log(dailydeal)}
+            {console.log(weeklydeal)}
             <div className = "container mainbox">
                 <div className = "col d-flex justify-content-end" style = {{marginBottom: "1%"}}>
                     <a href="/wheel"><button type="button" className="btn btn-primary btn-sm dealbutton"> Discount Wheel >></button></a>
