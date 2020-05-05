@@ -1,6 +1,7 @@
 import React from 'react';
 import './AdminMenu.css';
 import DealCard from './DealCard';
+import DiscountWheel from './DiscountWheel'
 import firebase_integration from '../Fire.js'
 
 function AdminDeals() {
@@ -97,6 +98,7 @@ function AdminDeals() {
                         />
                     </div>
                 </div>
+             
             </div>
         </div>
     );

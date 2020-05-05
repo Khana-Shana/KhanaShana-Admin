@@ -1,18 +1,20 @@
 import React from 'react';
 import './DiscountWheel.css';
+import pic from './adminwheel.svg'
 
 function DiscountWheel() {
     return (
         <div>
             
-            <div className="container pa5 inBox"> {/*yg*/}
-                <div className="row">
+            <div className="container inBox">
+                 <div className="row">
                     <div className ="col d-flex justify-content-start">
                         <a href="/deals"><button type="button" className="btn btn-primary dealbutton mb2">{"<<"} Deals </button></a>
                     </div>
-                </div>
+                </div> 
                 <div className="row">
                     <div className="col wheel">
+                        <img src = {pic}/>
                         <form>
                              <div className="form-group row">
                                 <label className="col-sm-2 col-form-label">Discount 1</label>
