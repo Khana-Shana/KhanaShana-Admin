@@ -9,6 +9,7 @@ import AdminProfile from './components/AdminProfile.jsx';
 import CustomerSupport from './components/CustomerSupport.jsx';
 import AdminMenu from './components/AdminMenu.jsx';
 import AdminDeals from './components/AdminDeals.jsx';
+import DiscountWheel from './components/DiscountWheel.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -50,10 +51,14 @@ function App(){
 			          <Route path="/adminMenu"> {/*Routes to the Menu Screen*/}
 			          	<AdminMenu />
 			          </Route>
+
 					  <Route path="/deals"> {/*Routes to the Deals Screen*/}
 			          	<AdminDeals/>
 			          </Route>
 			          
+			          <Route path="/wheel"> {/* Routes to the Wheel Screen*/}
+			          	<DiscountWheel/>
+			          </Route>
 
 			          <Route path="/"> {/*Homepage*/}
 			            <Card/>
