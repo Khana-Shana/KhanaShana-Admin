@@ -98,11 +98,7 @@ function AdminDeals() {
                         />
                     </div>
                 </div>
-                <div className = "row">
-                    <div className = "col">
-                        <DiscountWheel/>
-                    </div>
-                </div>
+             
             </div>
         </div>
     );

@@ -7,11 +7,11 @@ function DiscountWheel() {
         <div>
             
             <div className="container inBox">
-                {/* <div className="row">
+                 <div className="row">
                     <div className ="col d-flex justify-content-start">
                         <a href="/deals"><button type="button" className="btn btn-primary dealbutton mb2">{"<<"} Deals </button></a>
                     </div>
-                </div> */}
+                </div> 
                 <div className="row">
                     <div className="col wheel">
                         <img src = {pic}/>
