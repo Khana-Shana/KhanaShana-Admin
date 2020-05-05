@@ -1,12 +1,15 @@
 .discount{
-	width: 100%;
+	width: 50%;
 }
+
+
+
 .wheel{
     background-color: #99AA93;
     border-radius: 1rem;
     padding: 5%;
     /*margin-bottom: 5%;*/
-    /* margin-top: 0.8%; */
+    margin-top: 0.8%;
 
 }
 
