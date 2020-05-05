@@ -2,32 +2,31 @@ import React from 'react';
 import './AdminMenu.css';
 import DealCard from './DealCard';
 import DiscountWheel from './DiscountWheel'
-import firebase_integration from '../Fire.js'
 
 function AdminDeals() {
-    const [dailydeal, setdailydeal] = React.useState("")
-    const [weeklydeal, setweeklydeal] = React.useState("")
-    React.useEffect( ()=> {
-        var deals = []
-        firebase_integration.database.collection("Deals").orderBy("DealType", "desc").onSnapshot((snapshot) => {
-            snapshot.forEach((doc) => {
-                console.log(doc.data())
-                deals.push(doc.data())
-            })
-            if(deals.length === 2){
-                setweeklydeal(deals[1])
-                setdailydeal(deals[0])  
-            }
-            else if(deals.length === 1){
-                if(deals[0].DealType === "Daily") {
-                    setdailydeal(deals[0])
-                }
-                else {
-                    setweeklydeal(deals[0])
-                }
-            }
-        })
-    }, [])
+    // const [dailydeal, setdailydeal] = React.useState("")
+    // const [weeklydeal, setweeklydeal] = React.useState("")
+    // React.useEffect( ()=> {
+    //     var deals = []
+    //     firebase_integration.database.collection("Deals").orderBy("DealType", "desc").onSnapshot((snapshot) => {
+    //         snapshot.forEach((doc) => {
+    //             console.log(doc.data())
+    //             deals.push(doc.data())
+    //         })
+    //         if(deals.length === 2){
+    //             setweeklydeal(deals[1])
+    //             setdailydeal(deals[0])  
+    //         }
+    //         else if(deals.length === 1){
+    //             if(deals[0].DealType === "Daily") {
+    //                 setdailydeal(deals[0])
+    //             }
+    //             else {
+    //                 setweeklydeal(deals[0])
+    //             }
+    //         }
+    //     })
+    // }, [])
     
     // function addDailyDeal() {
     //     firebase_integration.collection("Deals").doc("Daily").set({
@@ -88,8 +87,6 @@ function AdminDeals() {
 
     return (
         <div>
-            {console.log(dailydeal)}
-            {console.log(weeklydeal)}
             <div className = "container mainbox">
                 <div className = "col d-flex justify-content-end" style = {{marginBottom: "1%"}}>
                     <a href="/wheel"><button type="button" className="btn btn-primary btn-sm dealbutton"> Discount Wheel >></button></a>
