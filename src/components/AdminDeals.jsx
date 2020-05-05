@@ -8,16 +8,16 @@ function AdminDeals() {
         <div>
             <div className = "container mainbox">
                 <div className = "row">
-                    <div className = "col d-flex justify-content-center">
-                        <DiscountWheel/>
+                    <div className = "col">
+                        {/* <DiscountWheel/> */}
+                        <DealCard
+                            dealtype = "Daily Deal"
+                        />
                     </div>
                     <div className = "col">
-                            <DealCard
-                                dealtype = "Daily Deal"
-                            />
-                            <DealCard
-                                dealtype = "Weekly Deal"
-                            />
+                        <DealCard
+                            dealtype = "Weekly Deal"
+                        />
                     </div>
                 </div>
             </div>
