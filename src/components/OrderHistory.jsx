@@ -8,10 +8,12 @@ function OrderHistory() {
 
 	useEffect(()=>{
  		//Retireves all Order History
-		firebase_integration.database.collection("RegularOrder").where("Action", "in", ["Accept", "Reject","Cancelled"]).onSnapshot((snapshot) => {
+		firebase_integration.database.collection("RegularOrder").orderBy("Date", "desc").onSnapshot((snapshot) => {
             var order_arr = []
             snapshot.docs.forEach(doc => {
-                order_arr.push(doc.data())
+				if(doc.data().Action === "Accept" || doc.data().Action === "Reject" || doc.data().Action === "Cancelled"){
+					order_arr.push(doc.data())
+				}
             });
 			setData(order_arr)
 			console.log(order_arr)

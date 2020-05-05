@@ -5,14 +5,19 @@ import firebase_integration from '../Fire.js'
 function CompletedOrders() {
 
 	const [myData,setData] = useState([]);
-
 	useEffect(()=>{
 		//Retrieves only Accepted/Completed orders from the Database
-		firebase_integration.database.collection("RegularOrder").where("Action", "==", "Accept").where("Tracking", "==", "Done").onSnapshot((snapshot) => {
-            var order_arr = []
+		var todaysDate = new Date().setHours(0,0,0,0)
+		firebase_integration.database.collection("RegularOrder").orderBy("Date", "desc").onSnapshot((snapshot) => {
+			var order_arr = []
             snapshot.docs.forEach(doc => {
-                order_arr.push(doc.data())
-            });
+				var incomingDate = new Date(doc.data().Date.seconds*1000).setHours(0,0,0,0)
+				if(doc.data().Tracking === "Done"){
+					if(incomingDate === todaysDate){
+						order_arr.push(doc.data())
+					}
+				}
+			});
 			setData(order_arr)
         })
 	},myData);

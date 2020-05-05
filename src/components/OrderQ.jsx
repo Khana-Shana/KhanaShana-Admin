@@ -7,10 +7,16 @@ function OrderQ() {
 		const [myData,setData] = useState([]);
 
 		useEffect(()=>{
-			firebase_integration.database.collection("RegularOrder").where("Tracking", "in", ['Pending', 'Rejected', 'Cancelled', 'Preparing']).onSnapshot((snapshot) => {
+			var todaysDate = new Date().setHours(0,0,0,0)
+			firebase_integration.database.collection("RegularOrder").orderBy("Date", "desc").onSnapshot((snapshot) => {
 				var order_arr = []
 				snapshot.docs.forEach(doc => {
-				order_arr.push(doc.data())
+				var incomingDate = new Date(doc.data().Date.seconds*1000).setHours(0,0,0,0)
+				if(doc.data().Tracking === "Pending" || doc.data().Tracking === "Rejected" || doc.data().Tracking === "Cancelled" || doc.data().Tracking === "Preparing"){
+					if(incomingDate === todaysDate){
+						order_arr.push(doc.data())
+					}
+				}
 			});
 				setData(order_arr)
 			})
