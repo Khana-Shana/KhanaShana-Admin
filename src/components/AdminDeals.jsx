@@ -1,9 +1,16 @@
 import React from 'react';
 import './AdminMenu.css';
 import DealCard from './DealCard';
-import DiscountWheel from './DiscountWheel';
+import firebase_integration from '../Fire.js'
 
 function AdminDeals() {
+    const [dailydeal, setdailydeal] = React.useState()
+    const [weeklydeal, setweeklydeal] = React.useState()
+    React.useEffect( ()=> {
+        firebase_integration.collection("Deals").onSnapshot((snapshot) => {
+            
+        })
+    })
     return (
         <div>
             <div className = "container mainbox">
