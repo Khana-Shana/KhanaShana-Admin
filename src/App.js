@@ -8,6 +8,7 @@ import RestaurantDetails from './components/RestaurantDetails.jsx';
 import AdminProfile from './components/AdminProfile.jsx';
 import CustomerSupport from './components/CustomerSupport.jsx';
 import AdminMenu from './components/AdminMenu.jsx';
+import CreateAccount from './components/CreateAccount.jsx';
 import AdminDeals from './components/AdminDeals.jsx';
 import DiscountWheel from './components/DiscountWheel.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -51,6 +52,10 @@ function App(){
 			          <Route path="/adminMenu"> {/*Routes to the Menu Screen*/}
 			          	<AdminMenu />
 			          </Route>
+
+					<Route path="/createAccount">
+						<createAccount/>
+					</Route>
 
 					  <Route path="/deals"> {/*Routes to the Deals Screen*/}
 			          	<AdminDeals/>

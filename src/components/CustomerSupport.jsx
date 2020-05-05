@@ -1,5 +1,4 @@
 import React , { useState, useEffect } from 'react';
-import CustomerSupportHelper from "./CustomerSupportHelper.jsx" 
 import ReactBootstrap, {InputGroup,Form,FormControl,Nav, Button, Navbar,NavDropdown,Table} from 'react-bootstrap';
 import pic from './2479554.png';
 import './CustomerSupport.css'
@@ -21,6 +20,7 @@ function CustomerSupport(){
 	}, myData);
 
 	const printingStar =(n)=>{
+		//takes as parameter the rating, and prints the respective number of stars
 		let arr=new Array(n).fill(0);
 		return arr.map(x=>{
 			return(
@@ -43,43 +43,45 @@ function CustomerSupport(){
 	    return myData.map(feedback => {
 	      return (
 	        <tr>
-	          <td>{feedback.CustomerID}</td>
-			  <td>{feedback.Date.toDate().getDate()+"-"+(feedback.Date.toDate().getMonth()+1)+"-"+feedback.Date.toDate().getFullYear()}</td>
-	          <td>{printingStar(feedback.Rating)}</td>
-	          <td>{feedback.Subject}</td>
+	        	<td>{feedback.CustomerID}</td>
+				<td>{feedback.Date.toDate().getDate()+"-"+(feedback.Date.toDate().getMonth()+1)+"-"+feedback.Date.toDate().getFullYear()}</td>
+	        	<td>{printingStar(feedback.Rating)}</td>
+	        	<td>{feedback.Subject}</td>
                         
 	          {
 	          	feedback.Message.length<50?
-		          	<td>{feedback.Message}</td>
+	          	//if length of message is below length of 50 chars, it will be displayed as it is
+		          	<td>{feedback.Message}</td> 
 	
 		          	:
-		          	<div>
-		          	<div><td>{feedback.Message.slice(0,50) + "..."}</td></div>
-		          	<div><td><span onClick={()=>viewFullMessage(feedback.Message)} className="bg-mid-gray pointer dim ph2 bw1 ml2 mb2 br3 tabbing">ViewMessage</span></td></div>
-	          		</div>
+		        
+		        //otherwise show only a part of the message. On clicking the View Full Message button, the browser alerts with the full message
+		        	<td>{feedback.Message.slice(0,50) + "..."} 
+		        	<button onClick={()=>viewFullMessage(feedback.Message)} className="dim ml2 bg-mid-gray viewFullMessage">View Full Message</button></td>
+		        
 	          }
 	      
 	        </tr>
 	      )
 	    })
-	  }
+	}
 
 	return(
 		<div>
-			<div className="text-example">
+			<div className="imageOnTop">
 				<img src={pic}/>
 			</div>
 			
-			<div className="yo">
+			<div className="alignTable">
 				<Table responsive>
 				<thead>
 					<tr className="bg-light-silver">
-						<th>CUSTOMER ID</th>
-						<th>DATE</th>
-						<th>RATING</th>
-						<th>SUBJECT</th>
-						<th>MESSAGE</th> 	
-						<th></th>
+						<th className="tc">CUSTOMER ID</th>
+						<th className="tc">DATE</th>
+						<th className="tc">RATING</th>
+						<th className="tc">SUBJECT</th>
+						<th className="tc">MESSAGE</th> 	
+				
 					</tr>
 				</thead>
 				<tbody>{renderTable()}</tbody>
@@ -91,3 +93,5 @@ function CustomerSupport(){
 }
 
 export default CustomerSupport;
+
+// <div><td><span onClick={()=>viewFullMessage(feedback.Message)} className="bg-mid-gray pointer dim ph2 bw1 ml2 mb2 br3 tabbing">ViewMessage</span></td></div>
