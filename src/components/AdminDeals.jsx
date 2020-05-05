@@ -82,9 +82,8 @@ function AdminDeals() {
     return (
         <div>
             <div className = "container mainbox">
-                
-                    <div className = "col d-flex justify-content-end" style = {{marginBottom: "1%"}}>
-                        <a href="/wheel"><button type="button" className="btn btn-primary btn-sm dealbutton"> Discount Wheel >></button></a>
+                <div className = "col d-flex justify-content-end" style = {{marginBottom: "1%"}}>
+                    <a href="/wheel"><button type="button" className="btn btn-primary btn-sm dealbutton"> Discount Wheel >></button></a>
                 </div>
                 <div className = "row">
                     <div className = "col">

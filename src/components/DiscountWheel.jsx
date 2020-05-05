@@ -1,20 +1,23 @@
 import React from 'react';
 import './DiscountWheel.css';
-import pic from './adminwheel.svg'
 
 function DiscountWheel() {
     return (
         <div>
             
-            <div className="container inBox">
+            <div className="container inBox wheel">
                  <div className="row">
                     <div className ="col d-flex justify-content-start">
                         <a href="/deals"><button type="button" className="btn btn-primary dealbutton mb2">{"<<"} Deals </button></a>
                     </div>
-                </div> 
-                <div className="row">
-                    <div className="col wheel">
-                        <img src = {pic}/>
+                </div>
+                <div className = "row">
+                    <div className = "col">
+                        <img className="img-fluid wheelpic" src = "https://firebasestorage.googleapis.com/v0/b/khana-shana-2020.appspot.com/o/Deals%2Fadminwheel.png?alt=media&token=172ff6fe-49b6-4c6b-ad88-3867c1e2ff95"/>
+                    </div>
+                </div>
+                {/* <div className="row">
+                    <div className="col">
                         <form>
                              <div className="form-group row">
                                 <label className="col-sm-2 col-form-label">Discount 1</label>
@@ -36,7 +39,7 @@ function DiscountWheel() {
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );
