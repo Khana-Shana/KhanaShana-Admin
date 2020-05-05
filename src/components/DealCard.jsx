@@ -2,9 +2,9 @@ import React from 'react';
 import './AdminDeals.css';
 
 function DealCard(props) {
-    const [name,setname] = useState()
-    const [price,setprice] = useState()
-    const [menuid,setmenuid] = useState()
+    const [name,setname] = React.useState()
+    const [price,setprice] = React.usetate()
+    const [menuid,setmenuid] = React.useState()
     return (
         <div className = "dealcard">
             <form>

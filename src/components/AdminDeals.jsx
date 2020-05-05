@@ -9,7 +9,6 @@ function AdminDeals() {
             <div className = "container mainbox">
                 <div className = "row">
                     <div className = "col">
-                        {/* <DiscountWheel/> */}
                         <DealCard
                             dealtype = "Daily Deal"
                         />

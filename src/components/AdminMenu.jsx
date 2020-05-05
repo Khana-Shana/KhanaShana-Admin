@@ -1,7 +1,6 @@
 import React , { useState, useEffect } from 'react';
 import './AdminMenu.css';
 import firebase_integration from '../Fire.js'
-import { MDBDataTable } from 'mdbreact';
 import ReactBootstrap, {Table} from 'react-bootstrap';
 
 function AdminMenu(){
@@ -98,15 +97,6 @@ function AdminMenu(){
 		menu.length === 0
 		? newDishID = 0
 		: newDishID += 1
-		var newitem = {
-			DishID: newDishID,
-			Category: "Lorem Ipsum", 
-			Name: "Lorem Ipsum",
-			Description: "Lorem Ipsum",
-			PortionSize: "Lorem Ipsum",
-			PrepTime: "Lorem Ipsum",
-			SalePrice: 0
-		}
 		firebase_integration.database.collection("Menu").doc(newDishID.toString()).set({
 			DishID: newDishID,
 			Category: "Lorem Ipsum", 
