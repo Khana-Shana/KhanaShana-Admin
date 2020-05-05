@@ -2,6 +2,7 @@ import React , { useState, useEffect } from 'react';
 import './AdminMenu.css';
 import firebase_integration from '../Fire.js'
 import ReactBootstrap, {Table} from 'react-bootstrap';
+import { wait } from '@testing-library/react';
 
 function AdminMenu(){
 	const [menu, setmenu] = useState([])
@@ -65,10 +66,6 @@ function AdminMenu(){
 		seteditmode(false)
 		setfilteredmenu(menu)
 	}
-	function deleteImage(itemid){
-		let promise = firebase_integration.database.collection('Menu').doc(itemid.DishID.toString()).get().then((docs) => firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete())
-		let result = await promise
-	}
 	
 	async function removeItems(){
 		var items_removed = []
@@ -79,10 +76,10 @@ function AdminMenu(){
 			}
 		})
 		items_removed.map((item) => {
-			console.log(item)
-			await deleteImage(item)
-			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
-			
+			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().then((docs) => {
+				firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete()
+				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
+			})
 		})
 		items_removed.length === 0
 			?setfilteredmenu(menu)
