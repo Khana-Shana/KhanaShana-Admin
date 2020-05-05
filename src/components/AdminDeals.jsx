@@ -75,7 +75,14 @@ function AdminDeals() {
     // function removeDeal(dealtype){
     //     firebase_integration.database.collection('Deals').doc(dealtype).get().then((docs) => {
     //         firebase_integration.storage.ref().child('Deals/'+docs.data().ImageName).delete()
-    //         firebase_integration.database.collection('Deals').doc(dealtype).delete()
+    //         firebase_integration.database.collection('Deals').doc(dealtype).set({
+        //         DealType: dealtype,
+        //         Name: "",
+        //         Price: "",
+        //         MenuID: "",
+        //         ImageName: "",
+        //         ImageURL: ""
+    //           })
     //     })
     // }
 
