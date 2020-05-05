@@ -10,6 +10,9 @@ import CustomerSupport from './components/CustomerSupport.jsx';
 import AdminMenu from './components/AdminMenu.jsx';
 import AdminDeals from './components/AdminDeals.jsx';
 import AdminCreateAccount from './components/AdminCreateAccount.jsx'
+import Login from "./components/login";
+import Signup from "./components/signup";
+import ForgotPassword from "./components/forgotpassword";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -57,10 +60,13 @@ function App(){
 			          </Route>
 			          
 			          <Route path="/createAccount"> {/*Routes to the Deals Screen*/}
-			          	<AdminCreateAccount/>
+			          	<Signup/>
+			          </Route>
+
+					  <Route path="/resetpassword"> {/*Routes to the Deals Screen*/}
+			          	<ForgotPassword/>
 			          </Route>
 			          
-
 			          <Route path="/"> {/*Homepage*/}
 			            <Card/>
 			          </Route>

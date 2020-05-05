@@ -29,6 +29,8 @@ class firebase_integration extends Component {
       firebase.initializeApp(firebaseConfig);
       this.database = firebase.firestore();
       this.storage = firebase.storage();
+      this.facebookProvider = new firebase.auth.FacebookAuthProvider().addScope('user_birthday').addScope('user_gender');
+      this.auth = firebase.auth()
       
   }
 
@@ -57,6 +59,56 @@ class firebase_integration extends Component {
        Name : arr.Name
      });
   }
+
+  login(email, password) {
+    return this.auth.signInWithEmailAndPassword(email, password)
+}
+
+logout() {
+    return this.auth.signOut();
+}
+
+async register(name, email, password) {
+    await this.auth.createUserWithEmailAndPassword(email, password)
+    console.log("fire.js mein agay chala gya 1")
+    this.auth.currentUser.sendEmailVerification();
+    console.log("fire.js mein agay chala gya 2")
+    return this.auth.currentUser.updateProfile({
+        displayName: name,
+        // email: email,
+        // password: password
+    })
+}
+passwordreset(email) {
+  return this.auth.sendPasswordResetEmail(email).then(function () {
+      alert("Email Sent!")
+  }).catch(function(error) {
+      alert(error.message)
+  });
+}
+
+getCurrentUsername() {
+  // alert(this.auth.currentUser.displayName)
+  return this.auth.currentUser && this.auth.currentUser.displayName
+}
+
+getDisplayName() {
+
+  var name = this.auth.currentUser.displayName;
+  console.log(name);
+  var nameArr = name.split(' ');
+  console.log(nameArr);
+  return nameArr[0];
+}
+
+
+doSendEmailVerification = () =>
+  this.auth.currentUser.sendEmailVerification({
+      url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT,
+  });
+
+
+
 }
 
 export default new firebase_integration();
