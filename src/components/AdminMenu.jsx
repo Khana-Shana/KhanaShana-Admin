@@ -8,6 +8,7 @@ function AdminMenu(){
 	const [menu, setmenu] = useState([])
 	const [editmode, seteditmode] = useState(false)
 	const [filteredmenu, setfilteredmenu] = useState([])
+	const [selectall, setselectall] = useState(false)
 	useEffect(() => {
 		firebase_integration.database.collection('Menu').onSnapshot((snapshot) => {
 			var menu_items = []
@@ -204,7 +205,7 @@ function AdminMenu(){
 									<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
 								</tr>:
 								<tr>
-									<th/>
+									<th><input type="checkbox" className="form-check-input"/></th>
 									<th style = {{color: "3C3C3C"}} scope="col">ID</th>
 									<th style = {{color: "3C3C3C"}} scope="col">Name</th>
 									<th style = {{color: "3C3C3C"}} scope="col">Category</th>

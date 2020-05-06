@@ -1,5 +1,5 @@
 import React from 'react';
-import './AdminMenu.css';
+import './AdminDeals.css';
 import DealCard from './DealCard';
 import DiscountWheel from './DiscountWheel'
 
