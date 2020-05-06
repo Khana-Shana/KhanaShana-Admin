@@ -10,11 +10,11 @@
   .tile-container {
     display: flex;
     position: relative;
-    width: calc(100% + 30px);
+    width: calc(100% + 40px);
     flex-wrap: wrap;
   }
   .tile {
-    display: inline-block;
+    display: flex;
     margin-right: 30px;
     /* margin-left: ; */
     margin-bottom: 30px;
@@ -27,7 +27,7 @@
   }
  
   .sixth {
-    flex: 0 0 calc(25% - 30px);
+    flex: 0 0 calc(25% - 40px);
   }
 
   h1 {
@@ -36,4 +36,12 @@
     padding-top: 50px;
     color: white;
     cursor: pointer;
+  }
+
+  .boxes {
+    display: grid;
+    grid-auto-rows: minmax(125px, auto);
+    grid-gap: .5rem;
+    border: 1px solid black;
+    background-color: #626E60;
   }
