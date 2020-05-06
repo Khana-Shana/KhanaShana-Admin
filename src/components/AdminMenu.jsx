@@ -23,13 +23,25 @@ function AdminMenu(){
 	function handling_editmode() {
 		var newmenu = []
 		menu.map((_,i) => {
-			if(document.getElementsByClassName("form-check-input")[i].checked)
+			if(document.getElementsByClassName("itemcheckbox")[i].checked)
 			{
 				newmenu.push(menu[i])
 			}
 		})
 		setfilteredmenu(newmenu)
 		seteditmode(true)
+	}
+	function handleselect() {
+		if(selectall === false)
+		{
+			setselectall(true)
+			menu.map((_,i) => document.getElementsByClassName("itemcheckbox")[i].checked = true)
+		}
+		else
+		{
+			setselectall(false)
+			menu.map((_,i) => document.getElementsByClassName("itemcheckbox")[i].checked = false)
+		}
 	}
 	function uploadMenuImage(id){
 		var image = document.getElementById(id).files[0]
@@ -64,6 +76,7 @@ function AdminMenu(){
 			  });
 		})
 		seteditmode(false)
+		setselectall(false)
 		setfilteredmenu(menu)
 	}
 	
@@ -84,6 +97,7 @@ function AdminMenu(){
 		items_removed.length === 0
 			?setfilteredmenu(menu)
 			:setfilteredmenu([])
+		setselectall(false)
 	}
 	function AddItem() {
 		var newDishID = 0
@@ -159,7 +173,7 @@ function AdminMenu(){
 							}/></td>
 						</tr>
 						:<tr>
-							<td><input type="checkbox" class="form-check-input"/></td>
+							<td style = {{color: "3C3C3C"}}><input type="checkbox" className="form-check-input itemcheckbox"/></td>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].DishID}</td>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Name}</td>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Category}</td>
@@ -205,7 +219,7 @@ function AdminMenu(){
 									<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
 								</tr>:
 								<tr>
-									<th><input type="checkbox" className="form-check-input"/></th>
+									<td><input type="checkbox" className="form-check-input" checked = {selectall} onClick = {() => handleselect()}/></td>
 									<th style = {{color: "3C3C3C"}} scope="col">ID</th>
 									<th style = {{color: "3C3C3C"}} scope="col">Name</th>
 									<th style = {{color: "3C3C3C"}} scope="col">Category</th>
