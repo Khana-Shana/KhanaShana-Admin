@@ -1,8 +1,6 @@
 import React , { useState, useEffect } from 'react';
 import './AdminMenu.css';
 import firebase_integration from '../Fire.js'
-import ReactBootstrap, {Table} from 'react-bootstrap';
-import { wait } from '@testing-library/react';
 
 function AdminMenu(){
 	const [menu, setmenu] = useState([])
@@ -123,6 +121,7 @@ function AdminMenu(){
 		setfilteredmenu([])
 	}
 	function renderTable() {
+		var categories = ["All", "Desi", "Dessert", "Italian", "Burger", "Chinese", "Sandwich"]
 		return (
 			filteredmenu.map((x,i) => {
 				return (
@@ -130,7 +129,7 @@ function AdminMenu(){
 					{editmode === true
 						?<tr key = {x.ID}>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].DishID}</td>
-							<td><input class="form-control form-control-sm" type="text" placeholder="Name" value = {filteredmenu[i].Name} onChange = {
+							<td><input className="form-control form-control-sm" type="text" placeholder="Name" value = {filteredmenu[i].Name} onChange = {
 								e => {
 									var changeditem = filteredmenu[i]
 									changeditem.Name = e.target.value
@@ -139,37 +138,38 @@ function AdminMenu(){
 							}/></td>
 							<td>
 								<select className="form-control categorydropdown">
-									<option value="All">All</option>
-									<option value="Desi">Desi</option>
-									<option value="Dessert">Dessert</option>
-									<option value="Italian">Italian</option>
-									<option value="Burger">Burger</option>
-									<option value="Chinese">Chinese</option>
-									<option value="Sandwich">Sandwich</option>
+									<option value ={categories.filter(y => y === x.Category)}>{categories.filter(y => y === x.Category)}</option>
+									{categories.filter(y => y != x.Category).map(z => {
+										return (
+											<option value = {z}>
+												{z}
+											</option>
+										);
+									})}
 								</select>
 							</td>
-							<td><input class="form-control form-control-sm" type="text" placeholder="Price" value = {filteredmenu[i].SalePrice} onChange = {
+							<td><input className="form-control form-control-sm" type="text" placeholder="Price" value = {filteredmenu[i].SalePrice} onChange = {
 								e => {
 									var changeditem = filteredmenu[i]
 									changeditem.SalePrice = e.target.value
 									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
 								}
 							}/></td>
-							<td><input class="form-control form-control-sm" type="text" placeholder="Description" value = {filteredmenu[i].Description} onChange = {
+							<td><input className="form-control form-control-sm" type="text" placeholder="Description" value = {filteredmenu[i].Description} onChange = {
 								e => {
 									var changeditem = filteredmenu[i]
 									changeditem.Description = e.target.value
 									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
 								}
 							}/></td>
-							<td><input class="form-control form-control-sm" type="text" placeholder="Portion Size"value = {filteredmenu[i].PortionSize} onChange = {
+							<td><input className="form-control form-control-sm" type="text" placeholder="Portion Size"value = {filteredmenu[i].PortionSize} onChange = {
 								e => {
 									var changeditem = filteredmenu[i]
 									changeditem.PortionSize = e.target.value
 									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
 								}
 							}/></td>
-							<td><input class="form-control form-control-sm" type="text" placeholder="Prep Time"value = {filteredmenu[i].PrepTime} onChange = {
+							<td><input className="form-control form-control-sm" type="text" placeholder="Prep Time"value = {filteredmenu[i].PrepTime} onChange = {
 								e => {
 									var changeditem = filteredmenu[i]
 									changeditem.PrepTime = e.target.value
@@ -179,9 +179,9 @@ function AdminMenu(){
 						</tr>
 						:<tr>
 							<th scope="row">
-								<div class="custom-control custom-checkbox">
+								<div className="custom-control custom-checkbox">
 									<input type="checkbox" className="custom-control-input itemcheckbox" id={i+1}/>
-									<label class="custom-control-label" for={i+1}/>
+									<label className="custom-control-label" for={i+1}/>
 								</div>
 							</th>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].DishID}</td>
@@ -191,7 +191,7 @@ function AdminMenu(){
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Description}</td>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].PortionSize}</td>
 							<td style = {{color: "#576271"}}>{filteredmenu[i].PrepTime}</td>
-							<td><button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect imagebutton">Upload Image<input id={filteredmenu[i].DishID+" img"} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID+" img")}/></button></td>
+							<td><button type="button" className="btn btn-outline-primary btn-sm m-0 waves-effect imagebutton">Upload Image<input id={filteredmenu[i].DishID+" img"} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID+" img")}/></button></td>
 						</tr>
 					}
 						
@@ -206,12 +206,12 @@ function AdminMenu(){
 			<div id="menubox" className="container">
 				{editmode
 					?<div className="row">
-						<button id = "edit" type="button" class="btn menubutton" onClick={() => updateDatabase()}>Save</button>
+						<button id = "edit" type="button" className="btn menubutton" onClick={() => updateDatabase()}>Save</button>
 					</div>
 					:<div className="row">
-						<button type="button" class="btn btn-sm menubutton" onClick = {() => AddItem()}>Add</button>
-						<button type="button" class="btn btn-sm menubutton" onClick = {() => removeItems()}>Remove</button>
-						<button id = "edit" type="button" class="btn btn-sm menubutton" onClick = {() => handling_editmode()}>Edit</button>
+						<button type="button" className="btn btn-sm menubutton" onClick = {() => AddItem()}>Add</button>
+						<button type="button" className="btn btn-sm menubutton" onClick = {() => removeItems()}>Remove</button>
+						<button id = "edit" type="button" className="btn btn-sm menubutton" onClick = {() => handling_editmode()}>Edit</button>
 					</div>
 
 				}
@@ -231,9 +231,9 @@ function AdminMenu(){
 									</tr>:
 									<tr>
 										<th>
-											<div class="custom-control custom-checkbox">
+											<div className="custom-control custom-checkbox">
 												<input type="checkbox" className="custom-control-input" id={0} checked = {selectall} onClick = {() => handleselect()}/>
-												<label class="custom-control-label" for={0}/>
+												<label className="custom-control-label" for={0}/>
 											</div>
 										</th>
 										<th style = {{color: "3C3C3C"}} scope="col">ID</th>
