@@ -64,10 +64,10 @@ function AdminMenu(){
 	}
 
 	function updateDatabase() {
-		filteredmenu.map((item) => {
+		filteredmenu.map((item,i) => {
 			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).update({
 				DishID: item.DishID,
-				Category: item.Category,
+				Category: document.getElementsByClassName("categorydropdown")[i].value,
 				Description: item.Description,
 				Name: item.Name,
 				PortionSize: item.PortionSize,
@@ -113,7 +113,7 @@ function AdminMenu(){
 		: newDishID += 1
 		firebase_integration.database.collection("Menu").doc(newDishID.toString()).set({
 			DishID: newDishID,
-			Category: "Lorem Ipsum", 
+			Category: "All", 
 			Name: "Lorem Ipsum",
 			Description: "Lorem Ipsum",
 			PortionSize: "Lorem Ipsum",
@@ -137,13 +137,17 @@ function AdminMenu(){
 									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
 								}
 							}/></td>
-							<td><input class="form-control form-control-sm" type="text" placeholder="Category" value = {filteredmenu[i].Category} onChange = {
-								e => {
-									var changeditem = filteredmenu[i]
-									changeditem.Category = e.target.value
-									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
-								}
-							}/></td>
+							<td>
+								<select className="form-control categorydropdown">
+									<option value="All">All</option>
+									<option value="Desi">Desi</option>
+									<option value="Dessert">Dessert</option>
+									<option value="Italian">Italian</option>
+									<option value="Burger">Burger</option>
+									<option value="Chinese">Chinese</option>
+									<option value="Sandwich">Sandwich</option>
+								</select>
+							</td>
 							<td><input class="form-control form-control-sm" type="text" placeholder="Price" value = {filteredmenu[i].SalePrice} onChange = {
 								e => {
 									var changeditem = filteredmenu[i]
@@ -218,7 +222,7 @@ function AdminMenu(){
 								<tr>
 									<th style = {{color: "3C3C3C"}} scope="col">ID</th>
 									<th style = {{color: "3C3C3C"}} scope="col">Name</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Category</th>
+									<th style = {{color: "3C3C3C"}} scope="col">Description</th>
 									<th style = {{color: "3C3C3C"}} scope="col">Price</th>
 									<th style = {{color: "3C3C3C"}} scope="col">Description</th>
 									<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
