@@ -20,6 +20,7 @@ function DiscountWheel() {
     },[])
 
     function updateDB(){
+        
         firebase_integration.database.collection("DiscountWheel").doc("1").set({
             value: mydata1+"%"
         })
