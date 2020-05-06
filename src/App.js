@@ -8,11 +8,13 @@ import RestaurantDetails from './components/RestaurantDetails.jsx';
 import AdminProfile from './components/AdminProfile.jsx';
 import CustomerSupport from './components/CustomerSupport.jsx';
 import AdminMenu from './components/AdminMenu.jsx';
+import CreateAccount from './components/CreateAccount.jsx';
 import AdminDeals from './components/AdminDeals.jsx';
 import AdminCreateAccount from './components/AdminCreateAccount.jsx'
 import Login from "./components/login";
 import Signup from "./components/signup";
 import ForgotPassword from "./components/forgotpassword";
+import DiscountWheel from './components/DiscountWheel.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -54,13 +56,26 @@ function App(){
 			          <Route path="/adminMenu"> {/*Routes to the Menu Screen*/}
 			          	<AdminMenu />
 			          </Route>
+<<<<<<< HEAD
 					  
+=======
+
+					<Route path="/createAccount">
+						<createAccount/>
+					</Route>
+
+>>>>>>> dnd2
 					  <Route path="/deals"> {/*Routes to the Deals Screen*/}
 			          	<AdminDeals/>
 			          </Route>
 			          
+<<<<<<< HEAD
 			          <Route path="/createAccount"> {/*Routes to the Deals Screen*/}
 			          	<Signup/>
+=======
+			          <Route path="/wheel"> {/* Routes to the Wheel Screen*/}
+			          	<DiscountWheel/>
+>>>>>>> dnd2
 			          </Route>
 
 					  <Route path="/resetpassword"> {/*Routes to the Deals Screen*/}

@@ -1,8 +1,8 @@
 import React , { useState, useEffect } from 'react';
 import './AdminMenu.css';
 import firebase_integration from '../Fire.js'
-import { MDBDataTable } from 'mdbreact';
 import ReactBootstrap, {Table} from 'react-bootstrap';
+import { wait } from '@testing-library/react';
 
 function AdminMenu(){
 	const [menu, setmenu] = useState([])
@@ -65,8 +65,8 @@ function AdminMenu(){
 		seteditmode(false)
 		setfilteredmenu(menu)
 	}
-
-	function removeItems(){
+	
+	async function removeItems(){
 		var items_removed = []
 		menu.map((_,i) => {
 			if(document.getElementsByClassName("form-check-input")[i].checked)
@@ -75,11 +75,10 @@ function AdminMenu(){
 			}
 		})
 		items_removed.map((item) => {
-			async function deleteImage(){
-				var docs = await firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().
+			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().then((docs) => {
 				firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete()
-			}
-			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
+				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
+			})
 		})
 		items_removed.length === 0
 			?setfilteredmenu(menu)
@@ -96,15 +95,6 @@ function AdminMenu(){
 		menu.length === 0
 		? newDishID = 0
 		: newDishID += 1
-		var newitem = {
-			DishID: newDishID,
-			Category: "Lorem Ipsum", 
-			Name: "Lorem Ipsum",
-			Description: "Lorem Ipsum",
-			PortionSize: "Lorem Ipsum",
-			PrepTime: "Lorem Ipsum",
-			SalePrice: 0
-		}
 		firebase_integration.database.collection("Menu").doc(newDishID.toString()).set({
 			DishID: newDishID,
 			Category: "Lorem Ipsum", 

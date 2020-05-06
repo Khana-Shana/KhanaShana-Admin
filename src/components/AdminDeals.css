@@ -1,13 +1,43 @@
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-image: url("https://firebasestorage.googleapis.com/v0/b/khana-shana-2020.appspot.com/o/Deals%2Fdealbackground.svg?alt=media&token=7fe871aa-7f4b-4e96-9dbb-fde592747119"); */
+
+}
+.mainbox {
+    margin-top: 5%;
+}
 .dealcard {
-    margin-top: 10%;
     background-color: #99AA93;
     border-radius: 1rem;
+    padding: 5%;
+    margin-bottom: 5%;
 }
-.dealbutton .imagebutton{
+.imgbutton, .dealbutton{
     color: white;
     background-color: #3C3C3C;
-    border-color: white;
 }
 .dealbutton {
+    border-color: white;
+    border-width: thin;
     border-radius: 1rem;
+}
+.imgbutton {
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+.imgbutton input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;   
+    cursor: inherit;
+    display: block;
 }
