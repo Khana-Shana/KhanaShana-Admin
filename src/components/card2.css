@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+  }
+  .tile-wrapper {
+    display: block;
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .tile-container {
+    display: flex;
+    position: relative;
+    width: calc(100% + 30px);
+    flex-wrap: wrap;
+  }
+  .tile {
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    min-height: 200px;
+    line-height: 199px;
+    text-align: center;
+    border: 1px solid black;
+  }
+ 
+  .sixth {
+    flex: 0 0 calc(30% - 30px);
+  }

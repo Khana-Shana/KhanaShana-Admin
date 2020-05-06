@@ -17,7 +17,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
-
 function App(){
 	return(
 			<Router>
@@ -75,7 +74,7 @@ function App(){
 					</Route>
 					
 					<Route path="/"> {/*Homepage*/}
-					<Card/>
+						<Card/>
 					</Route>
 			        
 			        </Switch>
