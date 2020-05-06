@@ -174,7 +174,12 @@ function AdminMenu(){
 							}/></td>
 						</tr>
 						:<tr>
-							<td style = {{color: "3C3C3C"}}><input type="checkbox" className="form-check-input itemcheckbox"/></td>
+							<th scope="row">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" className="custom-control-input itemcheckbox" id={i+1}/>
+									<label class="custom-control-label" for={i+1}/>
+								</div>
+							</th>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].DishID}</td>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Name}</td>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Category}</td>
@@ -182,7 +187,7 @@ function AdminMenu(){
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Description}</td>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].PortionSize}</td>
 							<td style = {{color: "#576271"}}>{filteredmenu[i].PrepTime}</td>
-							<td><button type="button" class="btn btn-sm imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID)}/></button></td>
+							<td><button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID)}/></button></td>
 						</tr>
 					}
 						
@@ -220,7 +225,12 @@ function AdminMenu(){
 									<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
 								</tr>:
 								<tr>
-									<td><input type="checkbox" className="form-check-input" checked = {selectall} onClick = {() => handleselect()}/></td>
+									<th>
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" className="custom-control-input" id={0} checked = {selectall} onClick = {() => handleselect()}/>
+											<label class="custom-control-label" for={0}/>
+										</div>
+									</th>
 									<th style = {{color: "3C3C3C"}} scope="col">ID</th>
 									<th style = {{color: "3C3C3C"}} scope="col">Name</th>
 									<th style = {{color: "3C3C3C"}} scope="col">Category</th>
