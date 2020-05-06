@@ -15,13 +15,25 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import ForgotPassword from "./components/forgotpassword";
 import DiscountWheel from './components/DiscountWheel.jsx'
+import { CircularProgress } from "@material-ui/core";
+import { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
-
+import firebase_integration from './Fire.js'
 
 function App(){
-	return(
+	
+	const [firebaseInitialized, setFirebaseInitialized] = useState(false);
+
+	useEffect(() => {
+		firebase_integration.isInitialized().then((val) => {
+		  setFirebaseInitialized(val);
+		});
+		
+	  });
+
+	
+	return firebaseInitialized !== false ? (
 			<Router>
 				<div>
 
@@ -86,7 +98,12 @@ function App(){
 				</div>
 			</Router>
 			
-		);
+		) : (
+			<div id="loader">
+			  <CircularProgress />
+			</div>
+			
+		  );
 	}
 
 

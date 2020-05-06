@@ -34,6 +34,12 @@ class firebase_integration extends Component {
       
   }
 
+  isInitialized() {
+    return new Promise(resolve => {
+        this.auth.onAuthStateChanged(resolve)
+    })
+}
+
   getImageURL(divID, mainreferencefolder, path, imagename) {
     this.storage.ref(mainreferencefolder).child(path+'/'+imagename).getDownloadURL().then(function(url) {
       document.getElementById(divID).src = url;
@@ -56,7 +62,8 @@ class firebase_integration extends Component {
        Address : arr.Address,
        ContactDetails : arr.ContactDetails,
        Email : arr.Email,
-       Name : arr.Name
+       Name : arr.Name,
+       Root: false
      });
   }
 
@@ -73,16 +80,17 @@ logout() {
     return this.auth.signOut();
 }
 
-async register(name, email, password) {
+async register(name, email, password, position) {
     await this.auth.createUserWithEmailAndPassword(email, password)
-    console.log("fire.js mein agay chala gya 1")
     this.auth.currentUser.sendEmailVerification();
-    console.log("fire.js mein agay chala gya 2")
-    return this.auth.currentUser.updateProfile({
-        displayName: name,
-        // email: email,
-        // password: password
+    alert("Account Formed")
+    this.database.collection("AdminDatabase").doc(this.auth.currentUser.uid.toString()).set({
+      AdminID: this.auth.currentUser.uid,
+      EmailID: email,
+      Name: name,
+      Position: position
     })
+    return true
 }
 passwordreset(email) {
   return this.auth.sendPasswordResetEmail(email).then(function () {

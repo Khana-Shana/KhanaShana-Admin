@@ -13,7 +13,7 @@ function AdminDBTable(){
                 order_arr.push(doc.data())
             });
 			setData(order_arr)
-        }).catch()
+        })
 	},myData);
 
 	const deletingRow = (user) => {

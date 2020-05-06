@@ -102,11 +102,12 @@ function Signup(props){
                       type="submit"
                       className="btn btn-primary btn-block btn-lg"
                       value="Sign Up"
-                      onClick={() => {if(checkInputField)
-                        {onRegister()}
-                        else{
-                            alert("hey")
-                        }
+                      onClick={() => {if (checkInputField){
+                                        onRegister()
+                                      }
+                                      else {
+                                        alert("Incorrect input fields")
+                                      }
                     }}
                     />
                   </div>
@@ -119,14 +120,12 @@ function Signup(props){
     );
 
     
-    async function onRegister() {
+    async function onRegister() {       
         try {
-          await firebase_integration.register(name, email, password);
-          // await firebase.addQuote(quote)
-          props.history.replace('./')
-        //   continuefwd();
+          await firebase_integration.register(name, email, password, position);
+          props.history.replace("/");
         } catch (error) {
-          alert("An error occured while signing up. Please Try Again!");
+          alert("You may have entered an Invalid Email/Password or a network error occured");
           console.log(error.message)
         }
       }
