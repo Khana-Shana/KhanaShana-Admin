@@ -17,10 +17,13 @@
 .btn:active{
     background:#955F61;
     color:white;
+    
 }
+
 
 :target{
   background:#955F61;
+  
 }
 
 
