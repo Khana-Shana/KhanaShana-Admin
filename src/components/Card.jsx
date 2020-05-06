@@ -16,7 +16,7 @@ const Card = () => {
 				<Link to="/adminDB" type="button" className="item grow span-3"><h1>Admin Database</h1></Link>
 				<Link to="/customerDB" type="button" className="item grow span-3"><h1>Customer Database</h1></Link>
 				<Link to="/createAccount" type="button" className="item grow span-3"><h1 >Create Account</h1></Link>
-				<Link to="/order" type="button" className="item grow span-3"><h1 >Restaurant Details</h1></Link>
+				<Link to="/restDetails" type="button" className="item grow span-3"><h1 >Restaurant Details</h1></Link>
 
 			</div>
 		 	   
