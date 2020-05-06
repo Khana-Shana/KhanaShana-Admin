@@ -83,11 +83,12 @@ function AdminMenu(){
 	async function removeItems(){
 		var items_removed = []
 		menu.map((_,i) => {
-			if(document.getElementsByClassName("form-check-input")[i].checked)
+			if(document.getElementsByClassName("itemcheckbox")[i].checked)
 			{
 				items_removed.push(menu[i])
 			}
 		})
+		console.log(items_removed)
 		items_removed.map((item) => {
 			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().then((docs) => {
 				firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete()
