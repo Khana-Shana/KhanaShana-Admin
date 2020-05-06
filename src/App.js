@@ -38,6 +38,12 @@ function App(){
 
 					<Switch>
 
+											
+					<Route exact path="/"> {/*Homepage*/}
+						<Card/>
+					</Route>
+			        
+
 					<Route path="/adminDB"> {/* Routes to the Admin Database Screen*/}
 						<AdminDB/>
 					</Route>
@@ -85,11 +91,7 @@ function App(){
 					<Route path="/resetpassword"> {/*Routes to the Deals Screen*/}
 					<ForgotPassword/>
 					</Route>
-					
-					<Route path="/"> {/*Homepage*/}
-						<Card/>
-					</Route>
-			        
+
 			        </Switch>
 						
 				</div>

@@ -83,16 +83,11 @@ logout() {
 async register(name, email, password, position) {
     await this.auth.createUserWithEmailAndPassword(email, password)
     this.auth.currentUser.sendEmailVerification();
-    alert("Account Formed")
-    this.database.collection("AdminDatabase").doc(this.auth.currentUser.uid.toString()).set({
-      AdminID: this.auth.currentUser.uid,
-      EmailID: email,
-      Name: name,
-      Position: position,
-      Root: false
+    return this.auth.currentUser.updateProfile({
+      displayName: name
     })
-    return true
 }
+
 passwordreset(email) {
   return this.auth.sendPasswordResetEmail(email).then(function () {
       alert("Email Sent!")
@@ -108,10 +103,9 @@ getCurrentUsername() {
 
 getDisplayName() {
 
+  
   var name = this.auth.currentUser.displayName;
-  console.log(name);
   var nameArr = name.split(' ');
-  console.log(nameArr);
   return nameArr[0];
 }
 

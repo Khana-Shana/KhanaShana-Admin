@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactBootstrap, {Nav, Navbar,NavDropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import './Header.css';
+import firebase_integration from '../Fire';
 
 
 
-function Header(){
+function Header(props){
 
 	return(
 		
@@ -30,19 +31,26 @@ function Header(){
 					</svg>	
 			    	<NavDropdown className="mt2 grow" id="basic-nav-dropdown" id ="dw">
 			   	    	<NavDropdown.Item href="/adminProfile">Profile</NavDropdown.Item>
-			        	<NavDropdown.Item href="/login">Logout</NavDropdown.Item>
+			        	<NavDropdown.Item onClick = {logout} >Logout</NavDropdown.Item>
 			      	</NavDropdown>
-					<h3 className="mt1">Uzma</h3>
+					{/* <h3 className="mt1">Uzma</h3> */}
+					
+					{firebase_integration.getCurrentUsername() ?  <div>{firebase_integration.getDisplayName()}</div> : null }
 			    </Nav>
 			    
 			 	</Navbar.Collapse>
 			</Navbar>
 		</div>
 
-    	);
+		);
+		
+		async function logout() {
+			await firebase_integration.logout();
+			props.history.replace("/login");
+		  }
 			
 	}
 
 
-export default Header;
+export default withRouter(Header);
 

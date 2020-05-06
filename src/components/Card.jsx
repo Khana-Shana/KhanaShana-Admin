@@ -1,10 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import "./Card.css";	
-import {Link} from "react-router-dom";
+import {Link,withRouter} from "react-router-dom";
 	
 import firebase_integration from '../Fire.js'
 
-const Card = () => {
+function Card(props){
+
+	useEffect(() => {
+		if (!firebase_integration.getCurrentUsername()) {
+			alert("Please login first");
+			props.history.push("/login");
+			// return null;
+		  }
+
+	},[])
+	
 
 	// DO NOT REMOVE
 
@@ -53,6 +63,7 @@ const Card = () => {
 	// 		</div>
 	// 	</div>
 
+
 	return (
 		<div>
 			
@@ -75,5 +86,5 @@ const Card = () => {
 }
 	
 
-export default Card;
+export default withRouter(Card);
 

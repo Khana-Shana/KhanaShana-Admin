@@ -103,12 +103,9 @@ function Signup(props){
                       className="btn btn-primary btn-block btn-lg"
                       value="Sign Up"
                       onClick={() => {if (checkInputField){
-                                        onRegister()
-                                      }
-                                      else {
-                                        alert("Incorrect input fields")
-                                      }
-                    }}
+                                        onRegister();
+                                        
+                                      }}}
                     />
                   </div>
                 </form>
@@ -118,17 +115,25 @@ function Signup(props){
         </div>
       </div>
     );
-
+    async function logout() {
+      await firebase_integration.logout();
+      // alert("logged out");
+      props.history.replace("./login")
+  }
     
-    async function onRegister() {       
-        try {
-          await firebase_integration.register(name, email, password, position);
-          props.history.replace("/");
-        } catch (error) {
-          alert("You may have entered an Invalid Email/Password or a network error occured");
-          console.log(error.message)
-        }
+    async function onRegister() {
+      try {
+        await firebase_integration.register(name, email, password);
+        // await firebase.addQuote(quote)
+        // props.history.replace('./')
+        // continuefwd();
+        logout();
+      } catch (error) {
+        alert.show("An error occured while signing up. Please Try Again!", error.message);
       }
+    }
+
+
 }
 
 export default withRouter(Signup);

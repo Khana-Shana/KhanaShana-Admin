@@ -94,16 +94,20 @@ function Login(props){
     );
 
     
-  async function login() {
-    try {
-      await firebase_integration.login(email, password);
-      alert("logged in");
-      props.history.replace("/");
-    } catch (error) {
-      alert("Invalid Email/Password");
-      console.log("loginbackerror", error.message);
+    async function login() {
+      try {
+        await firebase_integration.login(email, password);
+        // alert("logged in");
+        if (firebase_integration.getCurrentUsername()) {
+          // not logged in
+          // alert('hi')
+          props.history.replace("./");
+          // return null
+        }
+      } catch (error) {
+        alert("Invalid Email/Password");
+      }
     }
   }
-}
 
 export default withRouter(Login);
