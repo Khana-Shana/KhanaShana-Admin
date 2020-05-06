@@ -191,7 +191,7 @@ function AdminMenu(){
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Description}</td>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].PortionSize}</td>
 							<td style = {{color: "#576271"}}>{filteredmenu[i].PrepTime}</td>
-							<td><button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID)}/></button></td>
+							<td><button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect imagebutton">Upload Image<input id={filteredmenu[i].DishID+" img"} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID+" img")}/></button></td>
 						</tr>
 					}
 						
