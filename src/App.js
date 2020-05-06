@@ -56,26 +56,17 @@ function App(){
 			          <Route path="/adminMenu"> {/*Routes to the Menu Screen*/}
 			          	<AdminMenu />
 			          </Route>
-<<<<<<< HEAD
-					  
-=======
 
 					<Route path="/createAccount">
 						<createAccount/>
 					</Route>
 
->>>>>>> dnd2
 					  <Route path="/deals"> {/*Routes to the Deals Screen*/}
 			          	<AdminDeals/>
 			          </Route>
 			          
-<<<<<<< HEAD
-			          <Route path="/createAccount"> {/*Routes to the Deals Screen*/}
-			          	<Signup/>
-=======
 			          <Route path="/wheel"> {/* Routes to the Wheel Screen*/}
 			          	<DiscountWheel/>
->>>>>>> dnd2
 			          </Route>
 
 					  <Route path="/resetpassword"> {/*Routes to the Deals Screen*/}
