@@ -90,7 +90,7 @@ function OrderQ() {
 		}
 
 		const returnNameQty = (user)=>{
-			
+			//Renders the column displaying Name of dishes ordered + their quantity			
 			return user.DishName.map((_,i)=>{
 				return(
 				<tr >
@@ -131,7 +131,6 @@ function OrderQ() {
 				      <th>CUST_ID</th> 
 				      <th>ADDRESS</th>
 				      <th>DELIVERY ITEMS,QTY</th> 	
-				   
 				      <th>TOTAL(PKR)</th>
 				      <th>ORDER TYPE</th>
 				      <th>ACTION</th>

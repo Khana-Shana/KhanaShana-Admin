@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './components/Header.jsx';
-import Card from './components/Card.jsx';
+import Card from './components/card2.jsx';
 import OrderMng from './components/OrderMng.jsx';
 import AdminDB from './components/AdminDB.jsx';
 import CustomerDB from './components/CustomerDatabase.jsx';

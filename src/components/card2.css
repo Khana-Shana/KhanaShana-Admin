@@ -4,9 +4,8 @@
   .tile-wrapper {
     display: block;
     position: relative;
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
-    overflow: hidden;
   }
   .tile-container {
     display: flex;
@@ -17,13 +16,24 @@
   .tile {
     display: inline-block;
     margin-right: 30px;
+    /* margin-left: ; */
     margin-bottom: 30px;
     min-height: 200px;
-    line-height: 199px;
+    /* line-height: 199px; */
     text-align: center;
+    border-radius: 1%;
     border: 1px solid black;
+    background-color: #626E60;
   }
  
   .sixth {
-    flex: 0 0 calc(30% - 30px);
+    flex: 0 0 calc(25% - 30px);
+  }
+
+  h1 {
+    padding: 20px;  
+    text-align: center;
+    padding-top: 50px;
+    color: white;
+    cursor: pointer;
   }
