@@ -121,7 +121,7 @@ function AdminMenu(){
 		setfilteredmenu([])
 	}
 	function renderTable() {
-		var categories = ["All", "Desi", "Dessert", "Italian", "Burger", "Chinese", "Sandwich"]
+		var categories = ["All", "Desi", "Dessert", "Italian", "Burger", "Chinese", "Sandwich", "Daily Deal", "Weekly Deal"]
 		return (
 			filteredmenu.map((x,i) => {
 				return (
