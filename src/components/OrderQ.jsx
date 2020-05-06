@@ -89,6 +89,17 @@ function OrderQ() {
 			);
 		}
 
+		const returnNameQty = (user)=>{
+			
+			return user.DishName.map((_,i)=>{
+				return(
+				<tr >
+					<td >{user.DishName[i].toString()+","+user.DishQuantity[i].toString()}</td>
+				</tr>
+				);
+			})
+		}
+
 		const renderTable = () => {
 		    return myData.map(user => {
 		      return (
@@ -97,8 +108,9 @@ function OrderQ() {
 		          <td>{user.OrderID}</td>
 		          <td>{user.CustomerID}</td>
 		          <td>{user.Address}</td>
-		          <td>{user.DishName.toString()}</td>
-		          <td>{user.DishQuantity.toString()}</td>
+				  {returnNameQty(user)}
+		          {/* <td>{user.DishName.toString()}</td>
+		          <td>{user.DishQuantity.toString()}</td> */}
 		          <td>{user.Subtotal}</td>
 		          <td>{user.OrderType}</td>
 		          {returnAction(user)}
@@ -118,8 +130,8 @@ function OrderQ() {
 				      <th>ORDER ID</th>
 				      <th>CUST_ID</th> 
 				      <th>ADDRESS</th>
-				      <th>DELIVERY ITEMS</th> 	
-				      <th>QTY</th>
+				      <th>DELIVERY ITEMS,QTY</th> 	
+				   
 				      <th>TOTAL(PKR)</th>
 				      <th>ORDER TYPE</th>
 				      <th>ACTION</th>
