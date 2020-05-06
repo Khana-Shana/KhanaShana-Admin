@@ -19,6 +19,13 @@ function DiscountWheel() {
         })
     },[])
 
+    function checkLength(val){
+        if(val<100 && val>-1){
+            return true
+        }
+        return false
+    }
+
     function updateDB(){
         
         firebase_integration.database.collection("DiscountWheel").doc("1").set({
@@ -48,19 +55,19 @@ function DiscountWheel() {
                              <div className="form-group row">
                                 <label className="col-lg-2 col-form-label">Discount 1</label>
                                 <div className="col-lg-10">
-                                    <input type="number" className="form-control form-control-sm" placeholder="Enter Discount Percentage" maxLength="2" min="0" max="99" value={mydata1} onChange={(e)=>{setdata1(e.target.value)}}></input>
+                                    <input type="number" className="form-control form-control-sm" placeholder="Enter Discount Percentage" maxLength="2" min="0" max="99" value={mydata1} onChange={(e)=>{checkLength(e.target.value)?setdata1(e.target.value):alert("Please input a value between 0 and 100")}}></input>
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label className="col-lg-2 col-form-label">Discount 2</label>
                                 <div className="col-lg-10">
-                                    <input type="number" className="form-control form-control-sm" placeholder="Enter Discount Percentage" maxLength="2" min="0" max="99" value={mydata2} onChange={(e)=>{setdata2(e.target.value)}}></input>
+                                    <input type="number" className="form-control form-control-sm" placeholder="Enter Discount Percentage" maxLength="2" min="0" max="99" value={mydata2} onChange={(e)=>checkLength(e.target.value)?setdata2(e.target.value):alert("Please input a value between 0 and 100")}></input>
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label className="col-lg-2 col-form-label">Discount 3</label>
                                 <div className="col-lg-10">
-                                    <input type="number" className="form-control form-control-sm" placeholder="Enter Discount Percentage" maxLength="2" min="0" max="99" value={mydata3} onChange={(e)=>{setdata3(e.target.value)}}></input>
+                                    <input type="number" className="form-control form-control-sm" placeholder="Enter Discount Percentage" maxLength="2" min="0" max="99" value={mydata3} onChange={(e)=>checkLength(e.target.value)?setdata3(e.target.value):alert("Please input a value between 0 and 100")}></input>
                                 </div>
                             </div>
                             <div className="row">
