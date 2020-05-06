@@ -206,7 +206,7 @@ function AdminMenu(){
 			<div id="menubox" className="container">
 				{editmode
 					?<div className="row">
-						<button id = "edit" type="button" class="btn btn-sm menubutton" onClick={() => updateDatabase()}>Save</button>
+						<button id = "edit" type="button" class="btn menubutton" onClick={() => updateDatabase()}>Save</button>
 					</div>
 					:<div className="row">
 						<button type="button" class="btn btn-sm menubutton" onClick = {() => AddItem()}>Add</button>
