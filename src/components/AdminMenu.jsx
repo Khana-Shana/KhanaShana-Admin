@@ -216,38 +216,40 @@ function AdminMenu(){
 
 				}
 				<div className="row">
-					<Table responsive>
-						<thead>
-							{editmode === true?
-								<tr>
-									<th style = {{color: "3C3C3C"}} scope="col">ID</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Name</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Description</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Price</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Description</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
-								</tr>:
-								<tr>
-									<th>
-										<div class="custom-control custom-checkbox">
-											<input type="checkbox" className="custom-control-input" id={0} checked = {selectall} onClick = {() => handleselect()}/>
-											<label class="custom-control-label" for={0}/>
-										</div>
-									</th>
-									<th style = {{color: "3C3C3C"}} scope="col">ID</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Name</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Category</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Price</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Description</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
-									<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
-								</tr>
-							}
-						</thead>
-						{renderTable()}
-					</Table>
+					<div className = "table-responsive">
+						<table className = " table table-hover">
+							<thead>
+								{editmode === true?
+									<tr>
+										<th style = {{color: "3C3C3C"}} scope="col">ID</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Name</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Description</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Price</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Description</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
+									</tr>:
+									<tr>
+										<th>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" className="custom-control-input" id={0} checked = {selectall} onClick = {() => handleselect()}/>
+												<label class="custom-control-label" for={0}/>
+											</div>
+										</th>
+										<th style = {{color: "3C3C3C"}} scope="col">ID</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Name</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Category</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Price</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Description</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
+									</tr>
+								}
+							</thead>
+							{renderTable()}
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>

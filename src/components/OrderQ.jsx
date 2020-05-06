@@ -3,7 +3,6 @@ import ReactBootstrap, {Table} from 'react-bootstrap';
 import firebase_integration from '../Fire.js'
 
 function OrderQ() {
-
 		const [myData,setData] = useState([]);
 
 		useEffect(()=>{
