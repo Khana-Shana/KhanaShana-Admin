@@ -125,8 +125,7 @@ function AdminMenu(){
 	function renderTable() {
 		return (
 			filteredmenu.map((x,i) => {
-				var arr = ["All","Burger","Desi","Italian","Sandwich","Chinese","Dessert"]
-				
+				// var arr = ["All","Burger","Desi","Italian","Sandwich","Chinese","Dessert"]
 				return (
 					<tbody>
 					{editmode === true
