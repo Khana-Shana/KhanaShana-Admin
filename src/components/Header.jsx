@@ -29,7 +29,7 @@ function Header(){
 					</svg>	
 			    	<NavDropdown className="mt2 grow" id="basic-nav-dropdown" id ="dw">
 			   	    	<NavDropdown.Item href="/adminProfile">Profile</NavDropdown.Item>
-			        	<NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
+			        	<NavDropdown.Item href="/login">Logout</NavDropdown.Item>
 			      	</NavDropdown>
 					<h3 className="mt1">Uzma</h3>
 			    </Nav>

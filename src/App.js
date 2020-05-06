@@ -57,8 +57,12 @@ function App(){
 			          	<AdminMenu />
 			          </Route>
 
-					<Route path="/createAccount">
-						<createAccount/>
+					<Route path="/createAccount"> {/*Routes to the Create Account Screen*/}
+						<Signup/>
+					</Route>
+
+					<Route path="/login"> {/*Routes to the Login Screen */}
+						<Login/>
 					</Route>
 
 					  <Route path="/deals"> {/*Routes to the Deals Screen*/}
