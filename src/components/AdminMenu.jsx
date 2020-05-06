@@ -125,13 +125,10 @@ function AdminMenu(){
 	function renderTable() {
 		return (
 			filteredmenu.map((x,i) => {
-				// var arr = ["All","Burger","Desi","Italian","Sandwich","Chinese","Dessert"]
 				return (
 					<tbody>
 					{editmode === true
-						
 						?<tr key = {x.ID}>
-							
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].DishID}</td>
 							<td><input class="form-control form-control-sm" type="text" placeholder="Name" value = {filteredmenu[i].Name} onChange = {
 								e => {
@@ -141,9 +138,8 @@ function AdminMenu(){
 								}
 							}/></td>
 							<td>
-								
 								<select className="form-control categorydropdown">
-									<option value="All">{x.Category}</option>
+									<option value="All">All</option>
 									<option value="Desi">Desi</option>
 									<option value="Dessert">Dessert</option>
 									<option value="Italian">Italian</option>
