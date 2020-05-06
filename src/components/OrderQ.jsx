@@ -3,6 +3,7 @@ import ReactBootstrap, {Table} from 'react-bootstrap';
 import firebase_integration from '../Fire.js'
 
 function OrderQ() {
+
 		const [myData,setData] = useState([]);
 
 		useEffect(()=>{
@@ -32,8 +33,8 @@ function OrderQ() {
 			
 			if (user.Action === "Accept/Reject"){
 				return(
-					<td><span onClick={()=>firebase_integration.updateOrderQueueAction(user.OrderID,"Accept")} className="bg-green pointer dim ph2 ba bw1 ma1">Accept</span>
-					<span onClick={()=>rejectingOrder(user)} className="bg-red pointer ph2 dim ba bw1">Reject</span></td>
+					<td><span onClick={()=>firebase_integration.updateOrderQueueAction(user.OrderID,"Accept")} style={{borderRadius:"10%"}} className="bg-green pointer dim pa2 ph2 ba bw2 ma1 b">Accept</span>
+					<span onClick={()=>rejectingOrder(user)} style={{borderRadius:"10%"}} className="bg-red pointer pa2 ph2 dim ba bw2 b">Reject</span></td>
 				);
 			}
 			else if (user.Action==="Accept"){
@@ -70,7 +71,7 @@ function OrderQ() {
 			}
 			else if (user.Action === "Accept" && user.Tracking === "Pending"){
 				return(
-					<td><span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Preparing")} className="bg-gray pointer ph2 dim ba bw1 ma1">Prepare</span>
+					<td><span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Preparing")} className="bg-gray pointer ph2 pa2 dim ba bw2 ma1 b">Prepare</span>
 					</td>
 				);
 			}
@@ -78,7 +79,7 @@ function OrderQ() {
 				return(
 					<td>
 						<span className="orange i mr2 f4">Preparing</span>
-						<span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Done")} className="bg-light-silver pointer dim ph2 ba bw1">Done</span>
+						<span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Done")} className="bg-light-silver pointer dim ph2 pa2 ba bw2 b">Done</span>
 					</td>
 	     		);
 			}
@@ -88,26 +89,37 @@ function OrderQ() {
 			);
 		}
 
-		const returnNameQty = (user)=>{
+		const returnItems = (user)=>{
 			//Renders the column displaying Name of dishes ordered + their quantity			
 			return user.DishName.map((_,i)=>{
 				return(
-				<tr >
-					<td >{user.DishName[i].toString()+","+user.DishQuantity[i].toString()}</td>
-				</tr>
+				<div>
+					{user.DishName[i].toString()}
+					</div>
 				);
 			})
 		}
 
+		const returnQty = (user)=>{
+			return user.DishName.map((_,i)=>{
+				return(
+				<div>
+					{user.DishQuantity[i]}
+				</div>
+				);
+			})
+		}
+		// +","+user.DishQuantity[i].toString()}
 		const renderTable = () => {
 		    return myData.map(user => {
 		      return (
 		        <tr>
 		          <td>{user.Date.toDate().getDate()+"-"+(user.Date.toDate().getMonth()+1)+"-"+user.Date.toDate().getFullYear()}</td>
-		          <td>{user.OrderID}</td>
-		          <td>{user.CustomerID}</td>
+		          <td>{user.Name}</td>
+		          <td>{user.MobileNumber}</td>
 		          <td>{user.Address}</td>
-				  {returnNameQty(user)}
+				  <td>{returnItems(user)}</td>
+				  <td>{returnQty(user)}</td>
 		          {/* <td>{user.DishName.toString()}</td>
 		          <td>{user.DishQuantity.toString()}</td> */}
 		          <td>{user.Subtotal}</td>
@@ -124,20 +136,22 @@ function OrderQ() {
 			<div>
 				<Table responsive>
 				  <thead>
-				    <tr className="bg-light-silver tc ">
+				    <tr className="bg-light-silver">
 				      <th>DATE</th>
-				      <th>ORDER ID</th>
-				      <th>CUST_ID</th> 
+					  <th>NAME</th>
+				      <th>PHONE N.O</th> 
 				      <th>ADDRESS</th>
-				      <th>DELIVERY ITEMS,QTY</th> 	
+				      <th>DELIVERY ITEMS</th> 
+					  <th>QTY</th>	
 				      <th>TOTAL(PKR)</th>
 				      <th>ORDER TYPE</th>
 				      <th>ACTION</th>
 				      <th>ORDER TRACKING</th>
 				    </tr>
 				  </thead>
-			
-				  <tbody>{renderTable()}</tbody>
+					<tbody> 
+							{renderTable()}
+					</tbody>
 				
 				</Table>
 			</div>
