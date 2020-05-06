@@ -38,7 +38,7 @@ function DiscountWheel() {
             <div className="container pa5 inBox">
                 <div className="row">
                     <div className ="col d-flex justify-content-start">
-                        <a href="/deals"><button type="button" className="btn btn-primary dealbutton mb2">{"<<"} Deals </button></a>
+                        <a href="/deals"><button type="button" className="btn dealbutton mb2">{"<<"} Deals </button></a>
                     </div>
                 </div>
                 <div className="row">
@@ -65,7 +65,7 @@ function DiscountWheel() {
                             </div>
                             <div className="row">
                                 <div className = "col d-flex justify-content-center">
-                                    <button type="button" className="btn btn-primary btn-sm updatebutton" onClick={()=>updateDB()}>Update Discount Wheel</button>
+                                    <button type="button" className="btn btn-sm updatebutton" onClick={()=>updateDB()}>Update Discount Wheel</button>
                                 </div>
                             </div>
                         </form>

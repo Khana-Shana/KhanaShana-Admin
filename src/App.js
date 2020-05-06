@@ -8,9 +8,7 @@ import RestaurantDetails from './components/RestaurantDetails.jsx';
 import AdminProfile from './components/AdminProfile.jsx';
 import CustomerSupport from './components/CustomerSupport.jsx';
 import AdminMenu from './components/AdminMenu.jsx';
-import CreateAccount from './components/CreateAccount.jsx';
 import AdminDeals from './components/AdminDeals.jsx';
-import AdminCreateAccount from './components/AdminCreateAccount.jsx'
 import Login from "./components/login";
 import Signup from "./components/signup";
 import ForgotPassword from "./components/forgotpassword";
@@ -24,38 +22,37 @@ function App(){
 	return(
 			<Router>
 				<div>
-
 					<Header />
 
 					<Switch>
 
-						<Route path="/adminDB"> {/* Routes to the Admin Database Screen*/}
-							<AdminDB/>
-						</Route>
+					<Route path="/adminDB"> {/* Routes to the Admin Database Screen*/}
+						<AdminDB/>
+					</Route>
+					
+					<Route path="/order"> {/*Routes to the Order Management Screen*/}
+						<OrderMng/>
+					</Route>		
+					
+					<Route path="/customerDB"> {/*Routes to the Customer Database Screen*/}
+					<CustomerDB/>
+					</Route>		
 			          
-			        	<Route path="/order"> {/*Routes to the Order Management Screen*/}
-			        		<OrderMng/>
-			        	</Route>		
-			          
-			          <Route path="/customerDB"> {/*Routes to the Customer Database Screen*/}
-			            <CustomerDB/>
-			          </Route>		
-			          
-			          <Route path="/restDetails"> {/*Routes to the Restaurant Details Screen*/}
-			          	<RestaurantDetails/>
-			          </Route>     
+					<Route path="/restDetails"> {/*Routes to the Restaurant Details Screen*/}
+						<RestaurantDetails/>
+					</Route>     
 
-			          <Route path="/adminProfile"> {/*Routes to the Profile Screen*/}
-			          	<AdminProfile />
-			          </Route>
-			          
-			          <Route path="/customerSupport"> {/*Routes to the Customer Feedback Screen*/}
-			          	<CustomerSupport/>
-			          </Route>
-			          
-			          <Route path="/adminMenu"> {/*Routes to the Menu Screen*/}
-			          	<AdminMenu />
-			          </Route>
+					<Route path="/adminProfile"> {/*Routes to the Profile Screen*/}
+						<AdminProfile />
+					</Route>
+					
+					<Route path="/customerSupport"> {/*Routes to the Customer Feedback Screen*/}
+						<CustomerSupport/>
+					</Route>
+					
+					<Route path="/adminMenu"> {/*Routes to the Menu Screen*/}
+						<AdminMenu />
+					</Route>
 
 					<Route path="/createAccount"> {/*Routes to the Create Account Screen*/}
 						<Signup/>
@@ -65,21 +62,21 @@ function App(){
 						<Login/>
 					</Route>
 
-					  <Route path="/deals"> {/*Routes to the Deals Screen*/}
-			          	<AdminDeals/>
-			          </Route>
-			          
-			          <Route path="/wheel"> {/* Routes to the Wheel Screen*/}
-			          	<DiscountWheel/>
-			          </Route>
+					<Route path="/deals"> {/*Routes to the Deals Screen*/}
+						<AdminDeals/>
+					</Route>
+					
+					<Route path="/wheel"> {/* Routes to the Wheel Screen*/}
+						<DiscountWheel/>
+					</Route>
 
-					  <Route path="/resetpassword"> {/*Routes to the Deals Screen*/}
-			          	<ForgotPassword/>
-			          </Route>
-			          
-			          <Route path="/"> {/*Homepage*/}
-			            <Card/>
-			          </Route>
+					<Route path="/resetpassword"> {/*Routes to the Deals Screen*/}
+					<ForgotPassword/>
+					</Route>
+					
+					<Route path="/"> {/*Homepage*/}
+					<Card/>
+					</Route>
 			        
 			        </Switch>
 						

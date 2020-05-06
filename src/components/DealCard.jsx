@@ -116,7 +116,7 @@ function DealCard(props) {
                 <div className="form-group row">
                     <label className="col-lg-2 col-form-label"><b>{props.dealtype}</b></label>
                     <div className="col-lg-10">
-                        <button type="button" className="btn btn-primary btn-sm dealbutton" onClick={()=>removeDeal(props.dealtype)}>Remove Deal</button>
+                        <button type="button" className="btn  btn-sm dealbutton" onClick={()=>removeDeal(props.dealtype)}>Remove Deal</button>
                     </div>
                 </div>
                 <div className="form-group row">
@@ -140,12 +140,12 @@ function DealCard(props) {
                 <div className="form-group row">
                     <label className="col-lg-2 col-form-label">Image</label>
                     <div className="col-lg-10">
-                        <button type="button" className="btn btn-primary btn-sm imgbutton">Upload Image<input id={props.dealtype+" image"} type="file" onChange={()=>uploadDealImage(props.dealtype)} accept="image/png, image/jpeg"/></button>
+                        <button type="button" className="btn  btn-sm imgbutton">Upload Image<input id={props.dealtype+" image"} type="file" onChange={()=>uploadDealImage(props.dealtype)} accept="image/png, image/jpeg"/></button>
                     </div>
                 </div>
                 <div className="form-group row">
                     <div className="col-lg-10">
-                        <button type="button" className="btn btn-primary btn-sm dealbutton" onClick = {() => props.dealtype ==="Daily Deal"?addDailyDeal():addWeeklyDeal()}>Add Deal</button>
+                        <button type="button" className="btn  btn-sm dealbutton" onClick = {() => props.dealtype ==="Daily Deal"?addDailyDeal():addWeeklyDeal()}>Add Deal</button>
                     </div>
                 </div>     
             </form>

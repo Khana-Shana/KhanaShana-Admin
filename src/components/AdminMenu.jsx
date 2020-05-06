@@ -167,7 +167,7 @@ function AdminMenu(){
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Description}</td>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].PortionSize}</td>
 							<td style = {{color: "#576271"}}>{filteredmenu[i].PrepTime}</td>
-							<td><button type="button" class="btn btn-primary btn-sm imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID)}/></button></td>
+							<td><button type="button" class="btn btn-sm imagebutton">Upload Image<input id={filteredmenu[i].DishID} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID)}/></button></td>
 						</tr>
 					}
 						
@@ -182,12 +182,12 @@ function AdminMenu(){
 			<div id="menubox" className="container">
 				{editmode
 					?<div className="row">
-						<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick={() => updateDatabase()}>Save</button>
+						<button id = "edit" type="button" class="btn btn-sm menubutton" onClick={() => updateDatabase()}>Save</button>
 					</div>
 					:<div className="row">
-						<button type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => AddItem()}>Add</button>
-						<button type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => removeItems()}>Remove</button>
-						<button id = "edit" type="button" class="btn btn-primary btn-sm menubutton" onClick = {() => handling_editmode()}>Edit</button>
+						<button type="button" class="btn btn-sm menubutton" onClick = {() => AddItem()}>Add</button>
+						<button type="button" class="btn btn-sm menubutton" onClick = {() => removeItems()}>Remove</button>
+						<button id = "edit" type="button" class="btn btn-sm menubutton" onClick = {() => handling_editmode()}>Edit</button>
 					</div>
 
 				}

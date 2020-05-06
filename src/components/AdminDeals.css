@@ -13,7 +13,7 @@ body {
     padding: 5%;
     margin-bottom: 5%;
 }
-.imgbutton, .dealbutton{
+.imgbutton, .dealbutton,.btn{
     color: white;
     background-color: #3C3C3C;
 }
