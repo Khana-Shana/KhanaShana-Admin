@@ -22,7 +22,6 @@ function AdminDeals() {
                         />
                     </div>
                 </div>
-             
             </div>
         </div>
     );
