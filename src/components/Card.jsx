@@ -9,7 +9,6 @@ function Card(props){
 
 	useEffect(() => {
 		if (!firebase_integration.getCurrentUsername()) {
-			alert("Please login first");
 			props.history.push("/login");
 		  }
 		else {
