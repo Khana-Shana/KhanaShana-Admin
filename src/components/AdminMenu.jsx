@@ -7,14 +7,18 @@ function AdminMenu(){
 	const [editmode, seteditmode] = useState(false)
 	const [filteredmenu, setfilteredmenu] = useState([])
 	const [selectall, setselectall] = useState(false)
+	const [progressbar, setprogressbar] = useState([])
 	useEffect(() => {
 		firebase_integration.database.collection('Menu').orderBy("DishID").onSnapshot((snapshot) => {
 			var menu_items = []
+			var bar = []
 					snapshot.docs.forEach(doc => {
 					menu_items.push(doc.data())
+					bar.push(0)
 				});
 					setmenu(menu_items)
 					setfilteredmenu(menu_items)
+					setprogressbar(bar)
 				})
 	},filteredmenu)
 	
@@ -41,14 +45,14 @@ function AdminMenu(){
 			menu.map((_,i) => document.getElementsByClassName("itemcheckbox")[i].checked = false)
 		}
 	}
-	function uploadMenuImage(id){
+	function uploadMenuImage(id, index){
 		var image = document.getElementById(id).files[0]
 		var imageName = image.name
 		var uploadTask = firebase_integration.storage.ref().child('Menu/'+imageName).put(image);
 		uploadTask.on('state_changed', 
 		function(snapshot) {
 			var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-			// console.log('Upload is ' + progress + '% done');
+			setprogressbar([...progressbar.slice(0,index),progress,...progressbar.slice(index+1)])
 		}, function(error) {
 			alert(error.message)
 		}, function() {
@@ -224,7 +228,12 @@ function AdminMenu(){
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Description}</td>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].PortionSize}</td>
 							<td style = {{color: "#576271"}}>{filteredmenu[i].PrepTime}</td>
-							<td><button type="button" className="btn btn-outline-primary btn-sm m-0 waves-effect imagebutton">Upload Image<input id={filteredmenu[i].DishID+" img"} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID+" img")}/></button></td>
+							<td><button type="button" className="btn btn-outline-primary btn-sm m-0 waves-effect imagebutton">Upload Image<input id={filteredmenu[i].DishID+" img"} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID+" img",i)}/></button></td>
+							<td>
+								<div className="progress uploaderbar" style = {{marginTop: "7%"}}>
+                                	<div id={i.toString() +" uploader"} className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuenow="0" aria-valuemax="100" style={{width: progressbar[i]+"%"}}></div>
+                            	</div>
+							</td>
 						</tr>
 					}
 						
@@ -249,8 +258,8 @@ function AdminMenu(){
 
 				}
 				<div className="row">
-					<div className = "table-responsive" style={{overflowY: "scroll", height:"60vh"}}>
-						<table className = " table table-hover table-fixed">
+					<div className = "table-responsive">
+						<table className = " table table-hover">
 							<thead>
 								{editmode === true?
 									<tr>
@@ -277,6 +286,7 @@ function AdminMenu(){
 										<th style = {{color: "3C3C3C"}} scope="col">Portion Size</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Picture</th>
+										<th style = {{color: "3C3C3C"}} scope="col">Progress Bar</th>
 									</tr>
 								}
 							</thead>
