@@ -146,6 +146,7 @@ function AdminMenu(){
 			?setfilteredmenu(menu)
 			:setfilteredmenu([])
 		setselectall(false)
+		setprogressbar([])
 	}
 
 	//adds an item to the menu and updates the database
@@ -169,6 +170,7 @@ function AdminMenu(){
 			PrepTime: "0 mins",
 			SalePrice: 1
 		})
+		setprogressbar([])
 		setfilteredmenu([])
 	}
 
