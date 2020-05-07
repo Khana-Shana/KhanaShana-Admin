@@ -132,7 +132,7 @@ function OrderQ() {
 	
 	//returns the Table headings and calls the renderTable function to fill in the table body
 		return(
-			<div>
+			<div style={{padding:"6px"}}>
 				<Table responsive>
 				  <thead>
 				    <tr className="bg-light-silver">

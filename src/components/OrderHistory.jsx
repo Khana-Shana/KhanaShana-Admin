@@ -61,6 +61,7 @@ function OrderHistory() {
 	  }
 	return(
 			//React table code picked from https://react-bootstrap.github.io/components/table/
+			<div style={{padding:"5px"}}>
 			<Table responsive>
 				<thead>
 			    	<tr className="bg-light-silver">
@@ -77,7 +78,7 @@ function OrderHistory() {
 			  	</thead>
 				<tbody>{renderTable()}</tbody>
 			</Table>
-				
+			</div>				
 		);
 
 }

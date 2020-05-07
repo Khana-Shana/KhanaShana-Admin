@@ -63,7 +63,8 @@ function CompletedOrders() {
 	  }
 	return(
 			//React table code picked from https://react-bootstrap.github.io/components/table/
-			<Table responsive>
+			<div style={{padding:"5px"}}>
+			<Table responsive  >
 				<thead>
 			    	<tr className="bg-light-silver">
 						<th>DATE</th>
@@ -78,7 +79,7 @@ function CompletedOrders() {
 			  	</thead>
 				<tbody>{renderTable()}</tbody>
 			</Table>
-				
+				</div>
 		);
 
 }
