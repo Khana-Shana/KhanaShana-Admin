@@ -37,21 +37,24 @@ function App(){
 	return firebaseInitialized !== false ? (
 			<Router>
 				<div>
-					<Header />
+					
 
 					<Switch>
 
 											
 					<Route exact path="/"> {/*Homepage*/}
+						<Header />
 						<Card/>
 					</Route>
 			        
 
 					<Route path="/adminDB"> {/* Routes to the Admin Database Screen*/}
+						<Header />
 						<AdminDB/>
 					</Route>
 					
 					<Route path="/order"> {/*Routes to the Order Queue Screen*/}
+						<Header />
 						<div className="tc">
 							
 							<OrderMngNav colr="0"/> {/*Order Navbar is called with colr props for conditionally rendering the buttons*/}
@@ -61,6 +64,7 @@ function App(){
 					</Route>
 
 					<Route path="/completedOrders"> {/*Routes to the Completed Order Screen*/}
+						<Header />
 						<div className="tc">
 							
 							<OrderMngNav colr="1"/>
@@ -70,7 +74,7 @@ function App(){
 					</Route>	
 					
 					<Route path="/history"> {/*Routes to the Order History Screen*/}
-						
+						<Header />
 						<div className="tc">
 							
 							<OrderMngNav colr="2"/>
@@ -80,26 +84,37 @@ function App(){
 					</Route>
 
 					<Route path="/customerDB"> {/*Routes to the Customer Database Screen*/}
+						<Header />
 						<CustomerDB/>
 					</Route>		
 			          
 					<Route path="/restDetails"> {/*Routes to the Restaurant Details Screen*/}
+						<Header />
 						<RestaurantDetails/>
 					</Route>     
 
 					<Route path="/adminProfile"> {/*Routes to the Profile Screen*/}
+						<Header />
 						<AdminProfile />
 					</Route>
 					
 					<Route path="/customerSupport"> {/*Routes to the Customer Feedback Screen*/}
+						<Header />
+						<CustomerSupport/>
+					</Route>
+
+					<Route path="/customerSupport"> {/*Routes to the Customer Feedback Screen*/}
+						<Header />
 						<CustomerSupport/>
 					</Route>
 					
 					<Route path="/adminMenu"> {/*Routes to the Menu Screen*/}
+						<Header />
 						<AdminMenu />
 					</Route>
 
 					<Route path="/createAccount"> {/*Routes to the Create Account Screen*/}
+						<Header />
 						<Signup/>
 					</Route>
 
@@ -108,14 +123,16 @@ function App(){
 					</Route>
 
 					<Route path="/deals"> {/*Routes to the Deals Screen*/}
+						<Header />
 						<AdminDeals/>
 					</Route>
 					
 					<Route path="/wheel"> {/* Routes to the Wheel Screen*/}
+						<Header />
 						<DiscountWheel/>
 					</Route>
 
-					<Route path="/resetpassword"> {/*Routes to the Deals Screen*/}
+					<Route path="/resetpassword"> 
 						<ForgotPassword/>
 					</Route>
 
@@ -125,8 +142,8 @@ function App(){
 			</Router>
 			
 		) : (
-			<div id="loader">
-			  <CircularProgress />
+			<div>
+			  
 			</div>
 			
 		  );
