@@ -76,6 +76,7 @@ function DealCard(props) {
             ImageName: "",
             URL: ""
         })
+        setmenuid(highestmenuid)
         alert("Daily Deal successfully added!")
     }
 
@@ -99,9 +100,11 @@ function DealCard(props) {
             ImageName: "",
             URL: ""
         })
+        setmenuid(highestmenuid)
         alert("Weekly Deal successfully added!")
     }
     function uploadDealImage(dealtype){
+        var uploader = document.getElementById(dealtype+" uploader");
         var image = document.getElementById(dealtype+" image").files[0]
         var imageName = image.name
         console.log(imageName)
@@ -110,6 +113,7 @@ function DealCard(props) {
         function(snapshot) {
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             console.log('Upload is ' + progress + '% done');
+            uploader.value = progress
         }, function(error) {
             alert(error.message)
         }, function() {
@@ -173,12 +177,18 @@ function DealCard(props) {
                         <input type="text" className="form-control form-control-sm" placeholder="Menu ID" value = {menuid} onChange = {(e) => setmenuid(e.target.value)}></input>
                     </div>
                 </div> */}
-                <div className="form-group row">
-                    <label className="col-lg-2 col-form-label">Image</label>
-                    <div className="col-lg-10">
-                        <button type="button" className="btn  btn-sm imgbutton">Upload Image<input id={props.dealtype+" image"} type="file" onChange={()=>uploadDealImage(props.dealtype)} accept="image/png, image/jpeg"/></button>
+                {
+                menuid==="" 
+                ? <div></div>
+                :   <div className="form-group row">
+                        <label className="col-lg-2 col-form-label">Image</label>
+                        <div className="col-lg-10">
+                            <button type="button" className="btn  btn-sm imgbutton">Upload Image<input id={props.dealtype+" image"} type="file" onChange={()=>uploadDealImage(props.dealtype)} accept="image/png, image/jpeg"/></button>
+                            <progress value="0" max="100" id={props.dealtype+" uploader"}>0%</progress>
+                        </div>
                     </div>
-                </div>
+                }
+                
                 <div className="form-group row">
                     <div className="col-lg-10">
                         <button type="button" className="btn  btn-sm dealbutton" onClick = {() => props.dealtype ==="Daily Deal"?addDailyDeal():addWeeklyDeal()}>Add Deal</button>
