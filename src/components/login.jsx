@@ -50,7 +50,7 @@ function Login(props){
                       onChange={(p) => setPassword(p.target.value)}
                     />
                   </div>
-                  <div className="form-group">
+                  <div className="form-group mt5">
                     <input
                       type="submit"
                       className="btn btn-primary btn-block btn-lg"
@@ -64,17 +64,7 @@ function Login(props){
                     <a>Forgot Your Password?</a>
                   </Link>
                 </p>
-                <div className="hint-text medium">
-                  Don't have an account?{" "}
-                  <a
-                    type="button"
-                    // onClick={}
-                    href="#"
-                    className="text-col"
-                  >
-                    Sign Up!
-                  </a>
-                </div>
+                
               </div>
             </div>
           </div>
