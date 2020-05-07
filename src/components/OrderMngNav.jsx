@@ -9,9 +9,9 @@ function OrderMngNav(props) {
 		return(
 			<div>
 				<div className="btn-group pa3 w-50">
-					<Link to="/order" type="button" className="btn w-50" style={{backgroundColor: props.colr==0?"#955F61":"#5c5a5a"}}>Queue</Link>
-					<Link to="/completedOrders" type="button" className="btn w-50" style={{backgroundColor: props.colr==1?"#955F61":"#5c5a5a"}}>Completed Orders</Link>
-					<Link to="/history" type="button" className="btn w-50" style={{backgroundColor: props.colr==2?"#955F61":"#5c5a5a"}}>History</Link>
+					<Link to="/order" type="button" className="btn w-50" style={{backgroundColor: props.colr==0?"#955F61":"#dad7d8",color: props.colr==0?"white":"black"}}>Queue</Link>
+					<Link to="/completedOrders" type="button" className="btn w-50" style={{backgroundColor: props.colr==1?"#955F61":"#dad7d8",color: props.colr==1?"white":"black"}}>Completed Orders</Link>
+					<Link to="/history" type="button" className="btn w-50" style={{backgroundColor: props.colr==2?"#955F61":"#dad7d8",color: props.colr==2?"white":"black"}}>History</Link>
 				</div>   
 			</div>
 		);		

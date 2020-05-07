@@ -21,19 +21,42 @@ function CompletedOrders() {
 			setData(order_arr)
         })
 	},myData);
+
+	const returnItems = (user)=>{
+			//Renders the column displaying Name of dishes ordered + their quantity			
+			return user.DishName.map((_,i)=>{
+				return(
+				<div>
+					{user.DishName[i].toString()}
+					</div>
+				);
+			})
+		}
+
+		const returnQty = (user)=>{
+			return user.DishName.map((_,i)=>{
+				return(
+				<div>
+					{user.DishQuantity[i]}
+				</div>
+				);
+			})
+		}
 		
 	const renderTable = () => {
 	    return myData.map(user => {
 	      return (
 	        <tr>
-	          <td>{user.Date.toDate().getDate()+"-"+(user.Date.toDate().getMonth()+1)+"-"+user.Date.toDate().getFullYear()}</td>
-	          <td>{user.OrderID}</td>
-	          <td>{user.CustomerID}</td>	
-	          <td>{user.Address}</td>
-	          <td>{user.DishName.toString()}</td>
-	          <td>{user.DishQuantity.toString()}</td>
-	          <td>{user.Subtotal}</td>
-	          <td>{user.OrderType}</td>
+	          	<td>{user.Date.toDate().getDate()+"-"+(user.Date.toDate().getMonth()+1)+"-"+user.Date.toDate().getFullYear()}</td>
+				<td>{user.Name}</td>
+				<td>{user.MobileNumber}</td>
+				<td>{user.Address}</td>
+				<td>{returnItems(user)}</td>
+				<td>{returnQty(user)}</td>
+				{/* <td>{user.DishName.toString()}</td>
+				<td>{user.DishQuantity.toString()}</td> */}
+				<td>{user.Subtotal}</td>
+				<td>{user.OrderType}</td>
 	        </tr>
 	      )
 	    })
@@ -43,14 +66,14 @@ function CompletedOrders() {
 			<Table responsive>
 				<thead>
 			    	<tr className="bg-light-silver">
-			      		<th>DATE</th>
-			      		<th>ORDER ID</th>
-			      		<th>CUST_ID</th>
-			      		<th>ADDRESS</th>
-					    <th>DELIVERY ITEMS</th> 	
-					    <th>QTY</th>
-					    <th>TOTAL(PKR)</th>
-					    <th>ORDER TYPE</th>
+						<th>DATE</th>
+						<th>NAME</th>
+						<th>PHONE N.O</th> 
+						<th>ADDRESS</th>
+						<th>DELIVERY ITEMS</th> 
+						<th>QTY</th>	
+						<th>TOTAL(PKR)</th>
+						<th>ORDER TYPE</th>
 			    	</tr>
 			  	</thead>
 				<tbody>{renderTable()}</tbody>
