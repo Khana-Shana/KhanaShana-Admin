@@ -35,7 +35,7 @@ function Header(props){
 			      	</NavDropdown>
 					{/* <h3 className="mt1">Uzma</h3> */}
 					
-					{firebase_integration.getCurrentUsername() ?  <div>{firebase_integration.getDisplayName()}</div> : null }
+					{firebase_integration.getCurrentUsername() ?  <div className="mt2" style={{fontSize:"20px"}}>{firebase_integration.getDisplayName()}</div> : null }
 			    </Nav>
 			    
 			 	</Navbar.Collapse>

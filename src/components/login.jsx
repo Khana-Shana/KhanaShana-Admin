@@ -14,20 +14,9 @@ function Login(props){
     const [error, setError] = useState("");
 
     return(
+      <div className="mt3 d-flex justify-content-center">
         <div className="logcardback1">
-        <div className="button-position">
-          <label className="login-button">
-            <input type="checkbox" />
-            <span className="back">
-              <div className="butt"></div>
-              <span className="toggle"></span>
-              <span className="label on">LOGIN</span>
-              <span className="label off">
-                SIGN UP
-              </span>
-            </span>
-          </label>
-        </div>
+        
         <div className="login-text">WELCOME BACK!</div>
         <div className="form-div">
           <div className="modal-dialog modal-login">
@@ -61,7 +50,7 @@ function Login(props){
                       onChange={(p) => setPassword(p.target.value)}
                     />
                   </div>
-                  <div className="form-group">
+                  <div className="form-group mt5">
                     <input
                       type="submit"
                       className="btn btn-primary btn-block btn-lg"
@@ -75,21 +64,12 @@ function Login(props){
                     <a>Forgot Your Password?</a>
                   </Link>
                 </p>
-                <div className="hint-text medium">
-                  Don't have an account?{" "}
-                  <a
-                    type="button"
-                    // onClick={}
-                    href="#"
-                    className="text-col"
-                  >
-                    Sign Up!
-                  </a>
-                </div>
+                
               </div>
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
 
