@@ -90,8 +90,18 @@ function AdminProfile() {
   return(
     <div className="profileback">
       <div class="hehe container-fluid">
+        <div className = "row">
+          <div className = "col d-flex justify-content-center">
+             <img
+               id="profilepic"
+               className="mx-auto img-fluid img-circle d-block"
+               alt="ProfilePicture"
+               src="https://firebasestorage.googleapis.com/v0/b/khana-shana-2020.appspot.com/o/CustomerProfile%2Fprofilepic.svg?alt=media&token=ee543aa0-18be-4d30-a73c-1c53d838ac7c"
+             />
+          </div>
+        </div>
         <div class="row my-2">
-          <div style = {{paddingTop: "15%"}} class="col-lg-7 order-lg-2">
+          <div class="col order-lg-2 d-flex justify-content-center">
             <div class="tab-content py-8">
               <div id="edit">
                 <form role="form">
@@ -101,7 +111,7 @@ function AdminProfile() {
                     </label>
                     {/* if edit state is true, render an editable input field, else render a read only field*/}
                     {editname === false ? (
-                      <div class="col-lg-8">
+                      <div class="col-lg-9">
                         <input
                           class="form-control"
                           type="text"
@@ -110,7 +120,7 @@ function AdminProfile() {
                         />
                       </div>
                     ) : (
-                      <div class="col-lg-8">
+                      <div class="col-lg-9">
                         <input
                           class="form-control"
                           aria-label="Recipient's username"
@@ -155,7 +165,7 @@ function AdminProfile() {
                     </label>
                     {/* if edit state is true, render an editable input field, else render a read only field*/}
                     {editemail === false ? (
-                      <div class="col-lg-8">
+                      <div class="col-lg-9">
                         <input
                           class="form-control"
                           type="text"
@@ -164,7 +174,7 @@ function AdminProfile() {
                         />
                       </div>
                     ) : (
-                      <div class="col-lg-8">
+                      <div class="col-lg-9">
                         <input
                           class="form-control"
                           aria-label="Recipient's email"
@@ -208,7 +218,7 @@ function AdminProfile() {
                       Password
                     </label>
                     {editpassword === false ? (
-                      <div class="col-lg-8">
+                      <div class="col-lg-9">
                         <input
                           class="form-control"
                           type="password"
@@ -220,7 +230,7 @@ function AdminProfile() {
                         />
                       </div>
                     ) : (
-                      <div class="col-lg-8">
+                      <div class="col-lg-9">
                         <input
                           class="form-control"
                           type="password"
@@ -264,7 +274,7 @@ function AdminProfile() {
                       Position
                     </label>
                     {editposition === false ? (
-                      <div class="col-lg-8">
+                      <div class="col-lg-9">
                         <input
                           class="form-control"
                           type="text"
@@ -276,7 +286,7 @@ function AdminProfile() {
                         />
                       </div>
                     ) : (
-                      <div class="col-lg-8">
+                      <div class="col-lg-9">
                         <input
                           class="form-control"
                           type="text"
@@ -318,14 +328,6 @@ function AdminProfile() {
                 </form>
               </div>
             </div>
-          </div>
-          <div class="col-lg-5 order-lg-1 text-center">
-             <img
-               id="profilepic"
-               className="mx-auto img-fluid img-circle d-block"
-               alt="ProfilePicture"
-               src="https://firebasestorage.googleapis.com/v0/b/khana-shana-2020.appspot.com/o/CustomerProfile%2Fprofilepic.svg?alt=media&token=ee543aa0-18be-4d30-a73c-1c53d838ac7c"
-             />
           </div>
         </div>
       </div>

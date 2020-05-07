@@ -46,7 +46,8 @@
     height: auto;
 }
 #profilepic {
-    padding: 10%;
+    padding-top: 7%;
+    padding-bottom: 3%;
 }
 .infotitle {
     color: #B0463D;
