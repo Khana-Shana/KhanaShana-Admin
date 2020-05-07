@@ -10,7 +10,7 @@
     "bootstrap-table": "^1.16.0",
     "es6-promise": "^4.2.8",
     "firebase": "^7.14.2",
-    "firebase-tools": "^8.1.1",
+    "firebase-tools": "^8.2.0",
     "isomorphic-fetch": "^2.2.1",
     "mdbreact": "^4.25.6",
     "react": "^16.13.1",
