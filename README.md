@@ -42,7 +42,7 @@ These instructions will get you a copy of the project up and running on your loc
 * Menu management screen which allows admin to set menu items and their features to be displayed on client side
 * Implementation of Order Management Queue where all orders placed by users are displayed and admin can update their tracking status
 * Implementation of Order Completed screen that displays all orders completed by the chef
-* Implemntation of Order History of all clients
+* Implementation of Order History of all clients
 * Admin can set deals and discounts for the client side
 * Admin can update restaurant details for the client side 
 
