@@ -1,7 +1,9 @@
 import React from 'react';
 import Header from './components/Header.jsx';
 import Card from './components/Card.jsx';
-import OrderMng from './components/OrderMng.jsx';
+import OrderQ from './components/OrderQ.jsx';
+import CompletedOrders from './components/CompletedOrders.jsx';
+import OrderHistory from './components/OrderHistory.jsx';
 import AdminDB from './components/AdminDB.jsx';
 import CustomerDB from './components/CustomerDatabase.jsx';
 import RestaurantDetails from './components/RestaurantDetails.jsx';
@@ -11,6 +13,7 @@ import AdminMenu from './components/AdminMenu.jsx';
 import AdminDeals from './components/AdminDeals.jsx';
 import Login from "./components/login";
 import Signup from "./components/signup";
+import OrderMngNav from "./components/OrderMngNav.jsx";
 import ForgotPassword from "./components/forgotpassword";
 import DiscountWheel from './components/DiscountWheel.jsx'
 import { CircularProgress } from "@material-ui/core";
@@ -48,12 +51,36 @@ function App(){
 						<AdminDB/>
 					</Route>
 					
-					<Route path="/order"> {/*Routes to the Order Management Screen*/}
-						<OrderMng/>
-					</Route>		
+					<Route path="/order"> {/*Routes to the Order Queue Screen*/}
+						<div className="tc">
+							
+							<OrderMngNav colr="0"/> {/*Order Navbar is called with colr props for conditionally rendering the buttons*/}
+							<OrderQ/>	
+						
+						</div>
+					</Route>
+
+					<Route path="/completedOrders"> {/*Routes to the Completed Order Screen*/}
+						<div className="tc">
+							
+							<OrderMngNav colr="1"/>
+							<CompletedOrders/>	
+						
+						</div>
+					</Route>	
 					
+					<Route path="/history"> {/*Routes to the Order History Screen*/}
+						
+						<div className="tc">
+							
+							<OrderMngNav colr="2"/>
+							<OrderHistory/>	
+						
+						</div>
+					</Route>
+
 					<Route path="/customerDB"> {/*Routes to the Customer Database Screen*/}
-					<CustomerDB/>
+						<CustomerDB/>
 					</Route>		
 			          
 					<Route path="/restDetails"> {/*Routes to the Restaurant Details Screen*/}
@@ -89,7 +116,7 @@ function App(){
 					</Route>
 
 					<Route path="/resetpassword"> {/*Routes to the Deals Screen*/}
-					<ForgotPassword/>
+						<ForgotPassword/>
 					</Route>
 
 			        </Switch>

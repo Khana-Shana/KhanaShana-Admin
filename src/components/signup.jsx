@@ -17,7 +17,7 @@ function Signup(props){
     const checkInputField = () => {
         // return true;
         if (name === "" || email === "" || password === "" || position === "") {
-          alert.show("Please fill in all the fields.");
+          alert("Please fill in all the fields.");
           return false;
         } else {
           // if(values.password === values.confirmpswd)
@@ -129,7 +129,7 @@ function Signup(props){
         // continuefwd();
         logout();
       } catch (error) {
-        alert.show("An error occured while signing up. Please Try Again!", error.message);
+        alert("An error occured while signing up. Please Try Again!", error.message);
       }
     }
 
