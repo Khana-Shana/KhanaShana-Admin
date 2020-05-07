@@ -14,20 +14,9 @@ function Login(props){
     const [error, setError] = useState("");
 
     return(
+      <div className="mt3 d-flex justify-content-center">
         <div className="logcardback1">
-        <div className="button-position">
-          <label className="login-button">
-            <input type="checkbox" />
-            <span className="back">
-              <div className="butt"></div>
-              <span className="toggle"></span>
-              <span className="label on">LOGIN</span>
-              <span className="label off">
-                SIGN UP
-              </span>
-            </span>
-          </label>
-        </div>
+        
         <div className="login-text">WELCOME BACK!</div>
         <div className="form-div">
           <div className="modal-dialog modal-login">
@@ -90,6 +79,7 @@ function Login(props){
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
 

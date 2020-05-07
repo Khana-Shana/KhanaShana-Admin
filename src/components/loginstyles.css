@@ -218,7 +218,8 @@ span {
 .logcardback1 {
   width: 500px;
   height: 800px;
-
+  justify-content: center;
+  text-align: center;
   background-image: url("https://firebasestorage.googleapis.com/v0/b/khana-shana-2020.appspot.com/o/Mehreen%2FGroup%2011846.svg?alt=media&token=7fe852bb-3505-4967-b21d-5afc22d6d407");
 
   background-size: contain;

@@ -30,26 +30,15 @@ function Signup(props){
       
 
     return(
-        <div className="logcardback1">
-        <div className="button-position">
-          <label className="login-button">
-            <input type="checkbox" />
-            <span className="back">
-              <div className="butt"></div>
-              <span className="toggle"></span>
-              <span className="label on">LOGIN</span>
-              <span className="label off">
-                SIGN UP
-              </span>
-            </span>
-          </label>
-        </div>
+        <div className="mt3 d-flex justify-content-center">
+        <div className="logcardback1 justify-content-center">
+        
         <div className="login-text">GET ON BOARD!</div>
         <div className="form-div">
           <div className="modal-dialog modal-login">
             <div className="modal-content">
               <div className="modal-header">
-                <h4 className="modal-title">SIGN UP</h4>
+                <h4 className="modal-title">CREATE ACCOUNT</h4>
               </div>
               <div className="modal-body">
                 <form
@@ -113,6 +102,7 @@ function Signup(props){
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
     async function logout() {

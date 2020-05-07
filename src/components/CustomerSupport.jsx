@@ -42,7 +42,7 @@ function CustomerSupport(){
 	        <tr>
 	        	<td>{feedback.CustomerID}</td>
 				<td>{feedback.Date.toDate().getDate()+"-"+(feedback.Date.toDate().getMonth()+1)+"-"+feedback.Date.toDate().getFullYear()}</td>
-	        	<td>{printingStar(feedback.Rating)}</td>
+	        	<td>{!Number.isNaN(feedback.Rating)?printingStar(feedback.Rating):<div></div>}</td>
 	        	<td>{feedback.Subject}</td>
                         
 	          {
