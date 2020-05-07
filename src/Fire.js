@@ -83,7 +83,7 @@ logout() {
 async register(name, email, password, position) {
     await this.auth.createUserWithEmailAndPassword(email, password)
     this.auth.currentUser.sendEmailVerification();
-    return this.auth.currentUser.updateProfile({
+    this.auth.currentUser.updateProfile({
       displayName: name
     })
 }

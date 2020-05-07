@@ -53,6 +53,8 @@ function AdminMenu(){
 			alert(error.message)
 		}, function() {
 			firebase_integration.storage.ref().child('Menu/'+imageName).getDownloadURL().then(function(downloadURL) {
+			console.log("CHALJAO YAR", id)
+			id = id.split(" ")[0]
 			firebase_integration.database.collection('Menu').doc(id.toString()).update({
 					ImageName: imageName,
 					URL: downloadURL

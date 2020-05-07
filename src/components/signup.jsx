@@ -13,6 +13,7 @@ function Signup(props){
     const [password, setPassword] = useState("");
     const [position, setPosition] = useState("");
     const [error, setError] = useState("");
+    let counter = 0
 
     const checkInputField = () => {
         // return true;
@@ -102,9 +103,9 @@ function Signup(props){
                       type="submit"
                       className="btn btn-primary btn-block btn-lg"
                       value="Sign Up"
-                      onClick={() => {if (checkInputField){
-                                        onRegister();
-                                        
+                      onClick={() => {if (checkInputField && counter === 0){
+                                        counter+=1
+                                        onRegister();                                      
                                       }}}
                     />
                   </div>
@@ -123,11 +124,19 @@ function Signup(props){
     
     async function onRegister() {
       try {
-        await firebase_integration.register(name, email, password);
+        firebase_integration.register(name, email, password).then(()=>
+          firebase_integration.database.collection("AdminDatabase").doc(firebase_integration.auth.currentUser.uid.toString()).set({
+            AdminID: firebase_integration.auth.currentUser.uid,
+            EmailID: email,
+            Name: name,
+            Position: position
+          })
+        );
+        logout();
         // await firebase.addQuote(quote)
         // props.history.replace('./')
-        // continuefwd();
-        logout();
+        // // continuefwd();
+        
       } catch (error) {
         alert("An error occured while signing up. Please Try Again!", error.message);
       }
