@@ -20,7 +20,7 @@ function AdminMenu(){
 				});
 					setmenu(menu_items)
 					setfilteredmenu(menu_items)
-					setprogressbar(bar)
+					setprogressbar(x => x.length === 0 ?bar:x)
 				})
 	},filteredmenu)
 	
@@ -90,6 +90,7 @@ function AdminMenu(){
 		})
 		seteditmode(false)
 		setselectall(false)
+		setprogressbar([])
 		setfilteredmenu(menu)
 	}
 	
