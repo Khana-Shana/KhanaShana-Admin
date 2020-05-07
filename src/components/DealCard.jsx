@@ -3,12 +3,14 @@ import './AdminDeals.css';
 import firebase_integration from '../Fire.js'
 
 function DealCard(props) {
+    //useState hook declared to render the screen when they are updated
     const [name, setname] = React.useState("")
     const [price, setprice] = React.useState(1)
     const [menuid, setmenuid] = React.useState(0)
     const [highestmenuid, sethighestmenuid] = React.useState(0)
     const [progressb, setprogresb] = React.useState(0)
 
+    //Deal fetched from firestore
     React.useEffect(() => {
         var deals = []
         firebase_integration.database.collection("Deals").orderBy("DealType", "asc").onSnapshot((snapshot) => {
@@ -16,6 +18,7 @@ function DealCard(props) {
                 console.log("DEALS UPDATED")
                 deals.push(doc.data())
             })
+            //These conditions differentiate between daily and weekly deal
             if(deals.length === 2){
                 if(props.dealtype === "Daily Deal") {
                     setname(deals[0].Name)
@@ -45,6 +48,7 @@ function DealCard(props) {
                 }
             }
         })
+        //Assigns dish id to the deal. Formula: (highestid + 1)
         firebase_integration.database.collection("Menu").orderBy("DishID", "desc").limit(1).onSnapshot((snapshot) => {
             var highest_id = 0
             snapshot.forEach((doc) => {
@@ -56,7 +60,7 @@ function DealCard(props) {
         })
     }, [])
 
-
+    //Called when the add button is clicked. Updates the daily deal
     function addDailyDeal() {
         firebase_integration.database.collection("Deals").doc("Daily").set({
             DealType: "Daily",
@@ -80,7 +84,7 @@ function DealCard(props) {
         setmenuid(highestmenuid)
         alert("Daily Deal successfully added!")
     }
-
+    //Called when the add button is clicked. Updates weekly deal
     function addWeeklyDeal() {
         firebase_integration.database.collection("Deals").doc("Weekly").set({
             DealType: "Weekly",
@@ -104,6 +108,7 @@ function DealCard(props) {
         setmenuid(highestmenuid)
         alert("Weekly Deal successfully added!")
     }
+    //called when image is uploaded by the user
     function uploadDealImage(dealtype){
         var image = document.getElementById(dealtype+" image").files[0]
         var imageName = image.name
@@ -129,7 +134,7 @@ function DealCard(props) {
         });
         });
     }
-    
+    //deal is removed and updated from the database
     function removeDeal(dealtype){
         dealtype = dealtype.split(" ")[0]
         firebase_integration.database.collection('Menu').doc(menuid.toString()).delete()
@@ -151,6 +156,7 @@ function DealCard(props) {
 
     return (
         <div className = "dealcard">
+            {/* Returns the card and displays it on screen */}
             <form>
                 <div className="form-group row">
                     <label className="col-lg-2 col-form-label"><b>{props.dealtype}</b></label>
@@ -170,9 +176,11 @@ function DealCard(props) {
                         <input type="text" className="form-control form-control-sm" placeholder="Price" value = {price} onChange = {(e) => setprice(e.target.value)}></input>
                     </div>
                 </div>
+                {/* Image can only be uploaded if the deal exists on the database */}
                 {
                 menuid==="" 
                 ? <div></div>
+                    // Image and its progress bar
                 :   <div className="form-group row">
                         <label className="col-lg-2 col-form-label">Image</label>
                         <div className="col-lg-10">
@@ -183,7 +191,7 @@ function DealCard(props) {
                         </div>
                     </div>
                 }
-                
+                {/* Add deal butto */}
                 <div className="form-group row">
                     <div className="col-lg-10">
                         <button type="button" className="btn  btn-sm dealbutton" onClick = {() => props.dealtype ==="Daily Deal"?addDailyDeal():addWeeklyDeal()}>Add Deal</button>

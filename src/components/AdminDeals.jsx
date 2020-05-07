@@ -5,6 +5,7 @@ import DealCard from './DealCard';
 function AdminDeals() {
     return (
         <div>
+            {/* This component returns daily and weekly cards */}
             <div className = "container mainbox">
                 <div className = "col d-flex justify-content-end" style = {{marginBottom: "1%"}}>
                     <a href="/wheel"><button type="button" className="btn btn-sm dealbutton">Discount Wheel >></button></a>

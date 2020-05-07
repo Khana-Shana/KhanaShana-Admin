@@ -3,10 +3,12 @@ import './DiscountWheel.css';
 import firebase_integration from '../Fire.js'
 
 function DiscountWheel() {
+    // Deal values stored as hooks to render the screen
     const [mydata1, setdata1] = React.useState(0)
     const [mydata2, setdata2] = React.useState(0)
     const [mydata3, setdata3] = React.useState(0)
 
+    //Data fetched from firestore
     React.useEffect(() => {
         firebase_integration.database.collection("DiscountWheel").onSnapshot((snapshot) => {
             var data = []
@@ -26,6 +28,7 @@ function DiscountWheel() {
         return false
     }
 
+    //Updates the database with new discount values
     function updateDB(){
         
         firebase_integration.database.collection("DiscountWheel").doc("1").set({
@@ -40,8 +43,8 @@ function DiscountWheel() {
     }
 
     return (
+        //Return the discount wheel card
         <div>
-            
             <div className="container pa5 inBox">
                 <div className="row">
                     <div className ="col d-flex justify-content-start">
@@ -82,36 +85,4 @@ function DiscountWheel() {
         </div>
     );
 }
-export default DiscountWheel; 
-
-
-// <div>
-//             <div className = "row">
-//                 <div className = "col d-flex justify-content-start" style = {{marginTop: "1%"}}>
-//                     <a href="/wheel"><button type="button" className="btn btn-primary btn-sm dealbutton">{"<<"} Deals </button></a>
-//                 </div>
-        
-//                 <div className = "container dealcard">
-//                         <div className ="col">
-//                             <img src ="https://firebasestorage.googleapis.com/v0/b/khana-shana-2020.appspot.com/o/Deals%2Fadminwheel.png?alt=media&token=a90f8144-1809-4b9e-ab67-49e94019f54f"/>
-//                         </div>
-//                     </div>
-//                     <div className = "row">
-//                         <div className = "col">
-//                             <form>
-//                                 <div className="form-group row">
-//                                     <div className="col-sm-4">
-//                                         <input type="text" className="form-control form-control-sm" placeholder="Discount"></input>
-//                                     </div>
-//                                     <div className="col-sm-4">
-//                                         <input type="text" className="form-control form-control-sm" placeholder="Discount"></input>
-//                                     </div>
-//                                     <div className="col-sm-4">
-//                                         <input type="text" className="form-control form-control-sm" placeholder="Discount"></input>
-//                                     </div>
-//                                 </div>
-//                             </form>
-//                         </div>
-//                     </div>
-//             </div>
-//         </div>
+export default DiscountWheel;
