@@ -170,12 +170,6 @@ function DealCard(props) {
                         <input type="text" className="form-control form-control-sm" placeholder="Price" value = {price} onChange = {(e) => setprice(e.target.value)}></input>
                     </div>
                 </div>
-                {/* <div className="form-group row">
-                    <label className="col-lg-2 col-form-label">Menu ID</label>
-                    <div className="col-lg-10">
-                        <input type="text" className="form-control form-control-sm" placeholder="Menu ID" value = {menuid} onChange = {(e) => setmenuid(e.target.value)}></input>
-                    </div>
-                </div> */}
                 {
                 menuid==="" 
                 ? <div></div>
@@ -183,7 +177,7 @@ function DealCard(props) {
                         <label className="col-lg-2 col-form-label">Image</label>
                         <div className="col-lg-10">
                             <button type="button" className="btn  btn-sm imgbutton">Upload Image<input id={props.dealtype+" image"} type="file" onChange={()=>uploadDealImage(props.dealtype)} accept="image/png, image/jpeg"/></button>
-                            <div className="progress">
+                            <div className="progress" style={{marginTop: "2%"}}>
                                 <div id={props.dealtype+" uploader"} className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuenow="0" aria-valuemax="100" style={{width: progressb.toString()+"%"}}></div>
                             </div>
                         </div>
