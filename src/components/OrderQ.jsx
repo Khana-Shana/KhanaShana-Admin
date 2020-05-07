@@ -90,7 +90,7 @@ function OrderQ() {
 		}
 
 		const returnItems = (user)=>{
-			//Renders the column displaying Name of dishes ordered + their quantity			
+			//Renders the column displaying Name of dishes ordered			
 			return user.DishName.map((_,i)=>{
 				return(
 				<div>
@@ -101,6 +101,7 @@ function OrderQ() {
 		}
 
 		const returnQty = (user)=>{
+			//Renders the column displaying quantities 
 			return user.DishName.map((_,i)=>{
 				return(
 				<div>
@@ -109,7 +110,7 @@ function OrderQ() {
 				);
 			})
 		}
-		// +","+user.DishQuantity[i].toString()}
+
 		const renderTable = () => {
 		    return myData.map(user => {
 		      return (
@@ -119,8 +120,6 @@ function OrderQ() {
 		          <td>{user.Address}</td>
 				  <td>{returnItems(user)}</td>
 				  <td>{returnQty(user)}</td>
-		          {/* <td>{user.DishName.toString()}</td>
-		          <td>{user.DishQuantity.toString()}</td> */}
 		          <td>{user.Subtotal}</td>
 		          <td>{user.OrderType}</td>
 		          {returnAction(user)}
