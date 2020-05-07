@@ -33,13 +33,13 @@ function OrderQ() {
 			
 			if (user.Action === "Accept/Reject"){
 				return(
-					<td><span onClick={()=>firebase_integration.updateOrderQueueAction(user.OrderID,"Accept")} style={{borderRadius:"10%"}} className="bg-green pointer dim pa2 ph2 ba bw2 ma1 b">Accept</span>
-					<span onClick={()=>rejectingOrder(user)} style={{borderRadius:"10%"}} className="bg-red pointer pa2 ph2 dim ba bw2 b">Reject</span></td>
+					<td><span onClick={()=>firebase_integration.updateOrderQueueAction(user.OrderID,"Accept")} style={{borderRadius:"10%"}} className="bg-green pointer dim pa2 ph2 ba bw2 ma1 b f5">Accept</span>
+					<span onClick={()=>rejectingOrder(user)} style={{borderRadius:"10%"}} className="bg-red pointer pa2 ph2 dim ba bw2 b f5">Reject</span></td>
 				);
 			}
 			else if (user.Action==="Accept"){
 				return (
-					<td><span className="bg-green b">Accepted</span></td>
+					<td><span className="bg-green b f4">Accepted</span></td>
 				);
 			}
 			else if (user.Action === "Cancelled"){
@@ -49,7 +49,7 @@ function OrderQ() {
 			}
 			else{
 				return(
-					<td><span className="bg-red b">Rejected</span></td>
+					<td><span className="bg-red b f4">Rejected</span></td>
 				);
 			}
 		}
@@ -71,7 +71,7 @@ function OrderQ() {
 			}
 			else if (user.Action === "Accept" && user.Tracking === "Pending"){
 				return(
-					<td><span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Preparing")} className="bg-gray pointer ph2 pa2 dim ba bw2 ma1 b">Prepare</span>
+					<td><span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Preparing")} className="bg-gray pointer ph2 pa2 dim ba bw2 ma1 b f5">Prepare</span>
 					</td>
 				);
 			}
@@ -79,13 +79,13 @@ function OrderQ() {
 				return(
 					<td>
 						<span className="orange i mr2 f4">Preparing</span>
-						<span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Done")} className="bg-light-silver pointer dim ph2 pa2 ba bw2 b">Done</span>
+						<span onClick={()=>firebase_integration.updateOrderQueueTracking(user.OrderID,"Done")} className="bg-light-silver pointer dim ph2 pa2 ba bw2 b f5">Done</span>
 					</td>
 	     		);
 			}
 			else //Order has been Rejected
 				return(
-					<td><span>Rejected</span></td> 
+					<td><span className="f4">Rejected</span></td> 
 			);
 		}
 
@@ -132,7 +132,7 @@ function OrderQ() {
 	
 	//returns the Table headings and calls the renderTable function to fill in the table body
 		return(
-			<div>
+			<div style={{padding:"6px"}}>
 				<Table responsive>
 				  <thead>
 				    <tr className="bg-light-silver">

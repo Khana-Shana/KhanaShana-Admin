@@ -45,7 +45,6 @@ function OrderHistory() {
 	      return (
 	        <tr>
 	          	<td>{user.Date.toDate().getDate()+"-"+(user.Date.toDate().getMonth()+1)+"-"+user.Date.toDate().getFullYear()}</td>
-				<td>{user.Name}</td>
 				<td>{user.MobileNumber}</td>
 				<td>{user.Address}</td>
 				<td>{returnItems(user)}</td>
@@ -61,11 +60,11 @@ function OrderHistory() {
 	  }
 	return(
 			//React table code picked from https://react-bootstrap.github.io/components/table/
+			<div style={{padding:"5px"}}>
 			<Table responsive>
 				<thead>
 			    	<tr className="bg-light-silver">
-						<th>DATE</th>
-						<th>NAME</th>
+						<th>DATE</th>	
 						<th>PHONE N.O</th> 
 						<th>ADDRESS</th>
 						<th>DELIVERY ITEMS</th> 
@@ -77,7 +76,7 @@ function OrderHistory() {
 			  	</thead>
 				<tbody>{renderTable()}</tbody>
 			</Table>
-				
+			</div>				
 		);
 
 }
