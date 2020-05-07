@@ -176,7 +176,7 @@ function AdminMenu(){
 
 	//displays the body of the table
 	function renderTable() {
-		var categories = ["All", "Desi", "Italian", "Chinese", "Burger", "Sandwich", "Pizza", "Daily Deal", "Weekly Deal"]
+		var categories = ["All", "Desi", "Italian", "Chinese", "Dessert", "Burger", "Sandwich", "Pizza", "Daily Deal", "Weekly Deal"].sort()
 		return (
 			// Loop over all the required items to be displayed
 			filteredmenu.map((x,i) => {
