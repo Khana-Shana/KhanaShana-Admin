@@ -2,7 +2,7 @@
 
 An elegant backend management web application running on top of reactjs, and firebase for order management.
 
-![image](./landingpage.jpg)
+![image](./Admin Homepage.jpeg)
 
 ## Getting Started
 
