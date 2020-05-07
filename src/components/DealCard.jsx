@@ -6,7 +6,8 @@ function DealCard(props) {
     const [name, setname] = React.useState("")
     const [price, setprice] = React.useState(1)
     const [menuid, setmenuid] = React.useState(0)
-    const [highestmenuid, setid] = React.useState(0)
+    const [highestmenuid, sethighestmenuid] = React.useState(0)
+    const [progressb, setprogresb] = React.useState(0)
 
     React.useEffect(() => {
         var deals = []
@@ -50,7 +51,7 @@ function DealCard(props) {
                 highest_id = doc.data().DishID
             })
             if(highest_id != 0){
-                setid(() => highest_id +1)
+                sethighestmenuid(() => highest_id +1)
             }
         })
     }, [])
@@ -76,6 +77,7 @@ function DealCard(props) {
             ImageName: "",
             URL: ""
         })
+        setmenuid(highestmenuid)
         alert("Daily Deal successfully added!")
     }
 
@@ -99,6 +101,7 @@ function DealCard(props) {
             ImageName: "",
             URL: ""
         })
+        setmenuid(highestmenuid)
         alert("Weekly Deal successfully added!")
     }
     function uploadDealImage(dealtype){
@@ -109,7 +112,7 @@ function DealCard(props) {
         uploadTask.on('state_changed', 
         function(snapshot) {
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
+            setprogresb(progress)
         }, function(error) {
             alert(error.message)
         }, function() {
@@ -173,12 +176,20 @@ function DealCard(props) {
                         <input type="text" className="form-control form-control-sm" placeholder="Menu ID" value = {menuid} onChange = {(e) => setmenuid(e.target.value)}></input>
                     </div>
                 </div> */}
-                <div className="form-group row">
-                    <label className="col-lg-2 col-form-label">Image</label>
-                    <div className="col-lg-10">
-                        <button type="button" className="btn  btn-sm imgbutton">Upload Image<input id={props.dealtype+" image"} type="file" onChange={()=>uploadDealImage(props.dealtype)} accept="image/png, image/jpeg"/></button>
+                {
+                menuid==="" 
+                ? <div></div>
+                :   <div className="form-group row">
+                        <label className="col-lg-2 col-form-label">Image</label>
+                        <div className="col-lg-10">
+                            <button type="button" className="btn  btn-sm imgbutton">Upload Image<input id={props.dealtype+" image"} type="file" onChange={()=>uploadDealImage(props.dealtype)} accept="image/png, image/jpeg"/></button>
+                            <div className="progress">
+                                <div id={props.dealtype+" uploader"} className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuenow="0" aria-valuemax="100" style={{width: progressb.toString()+"%"}}></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                }
+                
                 <div className="form-group row">
                     <div className="col-lg-10">
                         <button type="button" className="btn  btn-sm dealbutton" onClick = {() => props.dealtype ==="Daily Deal"?addDailyDeal():addWeeklyDeal()}>Add Deal</button>
