@@ -8,7 +8,7 @@ function AdminMenu(){
 	const [filteredmenu, setfilteredmenu] = useState([])
 	const [selectall, setselectall] = useState(false)
 	useEffect(() => {
-		firebase_integration.database.collection('Menu').onSnapshot((snapshot) => {
+		firebase_integration.database.collection('Menu').orderBy("DishID").onSnapshot((snapshot) => {
 			var menu_items = []
 					snapshot.docs.forEach(doc => {
 					menu_items.push(doc.data())
@@ -53,6 +53,7 @@ function AdminMenu(){
 			alert(error.message)
 		}, function() {
 			firebase_integration.storage.ref().child('Menu/'+imageName).getDownloadURL().then(function(downloadURL) {
+			id = id.split(" ")[0] 
 			firebase_integration.database.collection('Menu').doc(id.toString()).update({
 					ImageName: imageName,
 					URL: downloadURL
@@ -145,7 +146,7 @@ function AdminMenu(){
 			DishID: newDishID,
 			Category: "All", 
 			Name: "Food Item",
-			Description: "I am a very amazing food item.",
+			Description: "I am a very amazing food item",
 			PortionSize: "All you can eat",
 			PrepTime: "0 mins",
 			SalePrice: 1
@@ -153,7 +154,7 @@ function AdminMenu(){
 		setfilteredmenu([])
 	}
 	function renderTable() {
-		var categories = ["All", "Desi", "Dessert", "Italian", "Burger", "Chinese", "Sandwich", "Daily Deal", "Weekly Deal"]
+		var categories = ["All", "Desi", "Italian", "Chinese", "Burger", "Sandwich", "Pizza", "Daily Deal", "Weekly Deal"]
 		return (
 			filteredmenu.map((x,i) => {
 				return (
@@ -248,8 +249,8 @@ function AdminMenu(){
 
 				}
 				<div className="row">
-					<div className = "table-responsive">
-						<table className = " table table-hover">
+					<div className = "table-responsive" style={{overflowY: "scroll", height:"60vh"}}>
+						<table className = " table table-hover table-fixed">
 							<thead>
 								{editmode === true?
 									<tr>

@@ -1,6 +1,9 @@
 body {
     background-color: "#FBF4F3";
 }
+/* .table-responsive {
+    max-height: 500px;
+} */
 #menubox{
     width: 80%;
     margin-top: 5%;
@@ -33,3 +36,4 @@ body {
     cursor: inherit;
     display: block;
 }
+
