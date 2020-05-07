@@ -14,12 +14,12 @@ function Card(props){
 		  }
 		else {
 			var custID = firebase_integration.auth.currentUser.uid
-			firebase_integration.database.collection("AdminDatabase").doc(custID.toString()).get().then((snapshot) => {
+			firebase_integration.database.collection("AdminDatabase").doc(custID.toString()).onSnapshot((snapshot) => {
 				setdata(snapshot.data())
 			})
 		}
 	}, userdata)
-
+  
 	return userdata.Root === true ? (
 
 		<div>
