@@ -119,7 +119,8 @@ function Signup(props){
             AdminID: firebase_integration.auth.currentUser.uid,
             EmailID: email,
             Name: name,
-            Position: position
+            Position: position,
+            Root: false
           })
         );
         logout();        
