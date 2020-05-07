@@ -71,6 +71,8 @@ function AdminMenu(){
 				PortionSize: item.PortionSize,
 				PrepTime: item.PrepTime,
 				SalePrice: parseInt(item.SalePrice),
+				ImageName: "",
+				URL: ""
 			  });
 		})
 		seteditmode(false)
@@ -112,11 +114,11 @@ function AdminMenu(){
 		firebase_integration.database.collection("Menu").doc(newDishID.toString()).set({
 			DishID: newDishID,
 			Category: "All", 
-			Name: "Lorem Ipsum",
-			Description: "Lorem Ipsum",
-			PortionSize: "Lorem Ipsum",
-			PrepTime: "Lorem Ipsum",
-			SalePrice: 0
+			Name: "Food Item",
+			Description: "I am a very amazing food item.",
+			PortionSize: "All you can eat",
+			PrepTime: "0 mins",
+			SalePrice: 1
 		})
 		setfilteredmenu([])
 	}

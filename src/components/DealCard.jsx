@@ -4,8 +4,9 @@ import firebase_integration from '../Fire.js'
 
 function DealCard(props) {
     const [name, setname] = React.useState("")
-    const [price, setprice] = React.useState(0)
-    const [menuid, setmenuid] = React.useState("")
+    const [price, setprice] = React.useState(1)
+    const [menuid, setmenuid] = React.useState(0)
+    const [highestmenuid, setid] = React.useState(0)
 
     React.useEffect(() => {
         var deals = []
@@ -19,7 +20,6 @@ function DealCard(props) {
                     setname(deals[0].Name)
                     setprice(deals[0].Price)
                     setmenuid(deals[0].MenuID)
-                    console.log(deals)
                 }
                 else {
                     setname(deals[1].Name)
@@ -44,6 +44,15 @@ function DealCard(props) {
                 }
             }
         })
+        firebase_integration.database.collection("Menu").orderBy("DishID", "desc").limit(1).onSnapshot((snapshot) => {
+            var highest_id = 0
+            snapshot.forEach((doc) => {
+                highest_id = doc.data().DishID
+            })
+            if(highest_id != 0){
+                setid(() => highest_id +1)
+            }
+        })
     }, [])
 
 
@@ -52,9 +61,20 @@ function DealCard(props) {
             DealType: "Daily",
             Name: name,
             Price: parseInt(price),
-            MenuID: menuid,
+            MenuID: highestmenuid,
             ImageName: "",
-            ImageURL: ""
+            URL: ""
+        })
+        firebase_integration.database.collection("Menu").doc(highestmenuid.toString()).set({
+            DishID: highestmenuid,
+            Category: "Daily Deal", 
+            Name: name,
+            Description: "",
+            PortionSize: "",
+            PrepTime: "30 mins",
+            SalePrice: parseInt(price),
+            ImageName: "",
+            URL: ""
         })
         alert("Daily Deal successfully added!")
     }
@@ -64,9 +84,20 @@ function DealCard(props) {
             DealType: "Weekly",
             Name: name,
             Price: parseInt(price),
-            MenuID: menuid,
+            MenuID: highestmenuid,
             ImageName: "",
-            ImageURL: ""
+            URL: ""
+        })
+        firebase_integration.database.collection("Menu").doc(highestmenuid.toString()).set({
+            DishID: highestmenuid,
+            Category: "Weekly Deal", 
+            Name: name,
+            Description: "",
+            PortionSize: "",
+            PrepTime: "30 mins",
+            SalePrice: parseInt(price),
+            ImageName: "",
+            URL: ""
         })
         alert("Weekly Deal successfully added!")
     }
@@ -86,27 +117,32 @@ function DealCard(props) {
             dealtype = dealtype.split(" ")[0]
             firebase_integration.database.collection('Deals').doc(dealtype).update({
                     ImageName: imageName,
-                    ImageURL: downloadURL
+                    URL: downloadURL
                 })
-            });
+            firebase_integration.database.collection("Menu").doc(menuid.toString()).update({
+                ImageName: imageName,
+                URL: downloadURL
+            })
+        });
         });
     }
     
     function removeDeal(dealtype){
         dealtype = dealtype.split(" ")[0]
+        firebase_integration.database.collection('Menu').doc(menuid.toString()).delete()
         firebase_integration.database.collection('Deals').doc(dealtype).get().then((docs) => {
             firebase_integration.storage.ref().child('Deals/'+docs.data().ImageName).delete()
             firebase_integration.database.collection('Deals').doc(dealtype).set({
                 DealType: dealtype,
                 Name: "",
-                Price: "",
+                Price: 1,
                 MenuID: "",
                 ImageName: "",
-                ImageURL: ""
+                URL: ""
               })
         })
         setname("")
-        setprice(0)
+        setprice(1)
         setmenuid("")
     }
 
@@ -131,12 +167,12 @@ function DealCard(props) {
                         <input type="text" className="form-control form-control-sm" placeholder="Price" value = {price} onChange = {(e) => setprice(e.target.value)}></input>
                     </div>
                 </div>
-                <div className="form-group row">
+                {/* <div className="form-group row">
                     <label className="col-lg-2 col-form-label">Menu ID</label>
                     <div className="col-lg-10">
                         <input type="text" className="form-control form-control-sm" placeholder="Menu ID" value = {menuid} onChange = {(e) => setmenuid(e.target.value)}></input>
                     </div>
-                </div>
+                </div> */}
                 <div className="form-group row">
                     <label className="col-lg-2 col-form-label">Image</label>
                     <div className="col-lg-10">
