@@ -84,8 +84,6 @@ function AdminMenu(){
 				PortionSize: item.PortionSize,
 				PrepTime: item.PrepTime,
 				SalePrice: parseInt(item.SalePrice),
-				ImageName: "",
-				URL: ""
 			  });
 		})
 		seteditmode(false)
