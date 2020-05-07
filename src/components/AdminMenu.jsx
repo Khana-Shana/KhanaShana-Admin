@@ -90,10 +90,40 @@ function AdminMenu(){
 		})
 		console.log(items_removed)
 		items_removed.map((item) => {
-			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().then((docs) => {
-				firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete()
+			if(item.Category === "Daily Deal"){
 				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
-			})
+				firebase_integration.database.collection('Deals').doc("Daily").get().then((docs) => {
+					firebase_integration.storage.ref().child('Deals/'+docs.data().ImageName).delete()
+					firebase_integration.database.collection('Deals').doc("Daily").set({
+						DealType: "Daily",
+						Name: "",
+						Price: 1,
+						MenuID: "",
+						ImageName: "",
+						URL: ""
+						})
+				})
+			}
+			else if (item.Category === "Weekly Deal"){
+				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
+				firebase_integration.database.collection('Deals').doc("Weekly").get().then((docs) => {
+					firebase_integration.storage.ref().child('Deals/'+docs.data().ImageName).delete()
+					firebase_integration.database.collection('Deals').doc("Weekly").set({
+						DealType: "Weekly",
+						Name: "",
+						Price: 1,
+						MenuID: "",
+						ImageName: "",
+						URL: ""
+						})
+				})
+			}
+			else{
+				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().then((docs) => {
+					firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete()
+					firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
+				})
+			}
 		})
 		items_removed.length === 0
 			?setfilteredmenu(menu)
