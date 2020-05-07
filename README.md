@@ -1,68 +1,73 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Khana Shana
 
-## Available Scripts
+An elegant backend management web application running on top of reactjs, and firebase for order management.
 
-In the project directory, you can run:
+![image](./landingpage.jpg)
 
-### `npm start`
+## Demo
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Find the detailed instructions below:
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Install latest version of node: [Node](https://nodejs.org/en/) 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* Install latest version of npm: [NPM](https://www.npmjs.com/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Set up [Create React App](https://github.com/facebook/create-react-app)
 
-### `npm run eject`
+* Set up your project on [Firebase](https://firebase.google.com/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* Clone the repository from here: 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+`https://github.com/shehryaarsharif/KhanaShana-Admin.git`
 
-## Learn More
+* Then go to the local directory and run below commands:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`npm install`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`npm start`
 
-### Code Splitting
+* After following above steps, your browser should automatically launched. If not, open your browser and run:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+`http://localhost:3000`
 
-### Analyzing the Bundle Size
+### Features
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+* Admin Login and Signup authentication with Firebase 
+* Root admin has authority to sign up new users only for restaurant management
+* Menu management screen which allows admin to set menu items and their features to be displayed on client side
+* Implementation of Order Management Queue where all orders placed by users are displayed and admin can update their tracking status
+* Implementation of Order Completed screen that displays all orders completed by the chef
+* Implemntation of Order History of all clients
+* Admin can set deals and discounts for the client side
+* Admin can update restaurant details for the client side 
 
-### Making a Progressive Web App
+### Technology Stack
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+* React 
+* Bootstrap
+* React Material
+* CSS/SCSS
+* HTML5
+* Firebase
 
-### Advanced Configuration
+### Backend Management
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+For backend management of the web application, clone the [client side repository.](https://github.com/shehryaarsharif/KhanaShana-Client)
 
-### Deployment
+### Authors
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+ * Mehreen Masood
 
-### `npm run build` fails to minify
+You can also find the list of all [contributors](https://github.com/shehryaarsharif/KhanaShana-Admin/graphs/contributors) who participated in this project.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+This project was built as part of the course Software Engineering - CS 360 at Lahore University of Management Sciences.
