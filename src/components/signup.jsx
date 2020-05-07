@@ -132,11 +132,7 @@ function Signup(props){
             Position: position
           })
         );
-        logout();
-        // await firebase.addQuote(quote)
-        // props.history.replace('./')
-        // // continuefwd();
-        
+        logout();        
       } catch (error) {
         alert("An error occured while signing up. Please Try Again!", error.message);
       }
