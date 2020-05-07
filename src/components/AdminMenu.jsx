@@ -3,11 +3,13 @@ import './AdminMenu.css';
 import firebase_integration from '../Fire.js'
 
 function AdminMenu(){
-	const [menu, setmenu] = useState([])
-	const [editmode, seteditmode] = useState(false)
-	const [filteredmenu, setfilteredmenu] = useState([])
-	const [selectall, setselectall] = useState(false)
-	const [progressbar, setprogressbar] = useState([])
+	const [menu, setmenu] = useState([]) //Original menu
+	const [editmode, seteditmode] = useState(false) //determines whether to display edit mode interface or the original one
+	const [filteredmenu, setfilteredmenu] = useState([]) //used to display items selected for editing
+	const [selectall, setselectall] = useState(false) //determines the state of select all checkbox
+	const [progressbar, setprogressbar] = useState([]) //state of all image progress bars
+	
+	// menu is fetched from the database and states are initialized 
 	useEffect(() => {
 		firebase_integration.database.collection('Menu').orderBy("DishID").onSnapshot((snapshot) => {
 			var menu_items = []
@@ -22,7 +24,8 @@ function AdminMenu(){
 				})
 	},filteredmenu)
 	
-	function handling_editmode() {
+	//called when edit button is clicked
+	function handling_editmode() { 
 		var newmenu = []
 		menu.map((_,i) => {
 			if(document.getElementsByClassName("itemcheckbox")[i].checked)
@@ -33,6 +36,8 @@ function AdminMenu(){
 		setfilteredmenu(newmenu)
 		seteditmode(true)
 	}
+	
+	//called when a checkbox is selected
 	function handleselect() {
 		if(selectall === false)
 		{
@@ -45,6 +50,8 @@ function AdminMenu(){
 			menu.map((_,i) => document.getElementsByClassName("itemcheckbox")[i].checked = false)
 		}
 	}
+	
+	//called when an image is uploaded
 	function uploadMenuImage(id, index){
 		var image = document.getElementById(id).files[0]
 		var imageName = image.name
@@ -65,7 +72,8 @@ function AdminMenu(){
 			});
 		});
 	}
-
+	
+	//called when save button is clicked in order to update the database
 	function updateDatabase() {
 		filteredmenu.map((item,i) => {
 			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).update({
@@ -85,6 +93,7 @@ function AdminMenu(){
 		setfilteredmenu(menu)
 	}
 	
+	//called when an item is removed in order to update the database
 	async function removeItems(){
 		var items_removed = []
 		menu.map((_,i) => {
@@ -93,7 +102,7 @@ function AdminMenu(){
 				items_removed.push(menu[i])
 			}
 		})
-		console.log(items_removed)
+		//resets the daily deal
 		items_removed.map((item) => {
 			if(item.Category === "Daily Deal"){
 				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
@@ -109,6 +118,7 @@ function AdminMenu(){
 						})
 				})
 			}
+			//resets the weekly deal
 			else if (item.Category === "Weekly Deal"){
 				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
 				firebase_integration.database.collection('Deals').doc("Weekly").get().then((docs) => {
@@ -123,6 +133,7 @@ function AdminMenu(){
 						})
 				})
 			}
+			//resets other categories
 			else{
 				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().then((docs) => {
 					firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete()
@@ -135,6 +146,8 @@ function AdminMenu(){
 			:setfilteredmenu([])
 		setselectall(false)
 	}
+
+	//adds an item to the menu and updates the database
 	function AddItem() {
 		var newDishID = 0
 		menu.map((x) => {
@@ -157,14 +170,19 @@ function AdminMenu(){
 		})
 		setfilteredmenu([])
 	}
+
+	//displays the body of the table
 	function renderTable() {
 		var categories = ["All", "Desi", "Italian", "Chinese", "Burger", "Sandwich", "Pizza", "Daily Deal", "Weekly Deal"]
 		return (
+			// Loop over all the required items to be displayed
 			filteredmenu.map((x,i) => {
 				return (
 					<tbody>
+					{/* If edit mode is true then it will allow the user to edit dish details */}
 					{editmode === true
 						?<tr key = {x.ID}>
+							{/* dishid column */}
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].DishID}</td>
 							<td><input className="form-control form-control-sm" type="text" placeholder="Name" value = {filteredmenu[i].Name} onChange = {
 								e => {
@@ -174,6 +192,7 @@ function AdminMenu(){
 								}
 							}/></td>
 							<td>
+								{/* category dropdown column */}
 								<select className="form-control categorydropdown">
 									<option value ={categories.filter(y => y === x.Category)}>{categories.filter(y => y === x.Category)}</option>
 									{categories.filter(y => y != x.Category).map(z => {
@@ -185,6 +204,7 @@ function AdminMenu(){
 									})}
 								</select>
 							</td>
+							{/* price column */}
 							<td><input className="form-control form-control-sm" type="text" placeholder="Price" value = {filteredmenu[i].SalePrice} onChange = {
 								e => {
 									var changeditem = filteredmenu[i]
@@ -192,6 +212,7 @@ function AdminMenu(){
 									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
 								}
 							}/></td>
+							{/* description column */}
 							<td><input className="form-control form-control-sm" type="text" placeholder="Description" value = {filteredmenu[i].Description} onChange = {
 								e => {
 									var changeditem = filteredmenu[i]
@@ -199,6 +220,7 @@ function AdminMenu(){
 									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
 								}
 							}/></td>
+							{/* portion size column */}
 							<td><input className="form-control form-control-sm" type="text" placeholder="Portion Size"value = {filteredmenu[i].PortionSize} onChange = {
 								e => {
 									var changeditem = filteredmenu[i]
@@ -206,6 +228,7 @@ function AdminMenu(){
 									setfilteredmenu([...filteredmenu.slice(0,i),changeditem,...filteredmenu.slice(i+1)])
 								}
 							}/></td>
+							{/* Preparation time column */}
 							<td><input className="form-control form-control-sm" type="text" placeholder="Prep Time"value = {filteredmenu[i].PrepTime} onChange = {
 								e => {
 									var changeditem = filteredmenu[i]
@@ -214,6 +237,7 @@ function AdminMenu(){
 								}
 							}/></td>
 						</tr>
+						// Displays these rows if user is not in edit mode
 						:<tr>
 							<th scope="row">
 								<div className="custom-control custom-checkbox">
@@ -228,7 +252,10 @@ function AdminMenu(){
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].Description}</td>
 							<td style = {{color: "3C3C3C"}}>{filteredmenu[i].PortionSize}</td>
 							<td style = {{color: "#576271"}}>{filteredmenu[i].PrepTime}</td>
+							
+							{/* Upload image button */}
 							<td><button type="button" className="btn btn-outline-primary btn-sm m-0 waves-effect imagebutton">Upload Image<input id={filteredmenu[i].DishID+" img"} type="file" accept="image/png, image/jpeg" onChange = {() => uploadMenuImage(filteredmenu[i].DishID+" img",i)}/></button></td>
+							{/* Progress bar displayed when the image is being uploaded */}
 							<td>
 								<div className="progress uploaderbar" style = {{marginTop: "7%"}}>
                                 	<div id={i.toString() +" uploader"} className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuenow="0" aria-valuemax="100" style={{width: progressbar[i]+"%"}}></div>
@@ -247,9 +274,11 @@ function AdminMenu(){
 		<div>
 			<div id="menubox" className="container">
 				{editmode
+				// Buttons dislayed in editmode
 					?<div className="row">
 						<button id = "edit" type="button" className="btn menubutton" onClick={() => updateDatabase()}>Save</button>
 					</div>
+				// Original buttons displayed
 					:<div className="row">
 						<button type="button" className="btn btn-sm menubutton" onClick = {() => AddItem()}>Add</button>
 						<button type="button" className="btn btn-sm menubutton" onClick = {() => removeItems()}>Remove</button>
@@ -263,6 +292,7 @@ function AdminMenu(){
 							<thead>
 								{editmode === true?
 									<tr>
+										{/* Headings displayed if the user is in editmode */}
 										<th style = {{color: "3C3C3C"}} scope="col">ID</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Name</th>
 										<th style = {{color: "3C3C3C"}} scope="col">Description</th>
@@ -272,6 +302,7 @@ function AdminMenu(){
 										<th style = {{color: "3C3C3C"}} scope="col">Prep Time</th>
 									</tr>:
 									<tr>
+										{/* Original headings displayed */}
 										<th>
 											<div className="custom-control custom-checkbox">
 												<input type="checkbox" className="custom-control-input" id={0} checked = {selectall} onClick = {() => handleselect()}/>
@@ -290,6 +321,7 @@ function AdminMenu(){
 									</tr>
 								}
 							</thead>
+							{/* Function called to loop over the items to be displayed */}
 							{renderTable()}
 						</table>
 					</div>
