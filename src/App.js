@@ -102,7 +102,7 @@ function App(){
 						<Header />
 						<DiscountWheel/>
 					</Route>
-					<Route path="/resetpassword"> 
+					<Route path="/resetpassword"> {/* Routes to the Reset Password Screen*/}
 						<ForgotPassword/>
 					</Route>
 			        </Switch>
