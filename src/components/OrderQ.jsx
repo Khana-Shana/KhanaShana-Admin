@@ -61,7 +61,7 @@ function OrderQ() {
 				firebase_integration.updateOrderQueueAction(user.OrderID,"Cancelled")
 				return(
 					
-					<td><span className="bg-yellow">Cancelled</span></td>
+					<td><span className="bg-yellow f5">Cancelled</span></td>
 				);
 			}
 			if (user.Action === "Accept/Reject"){
