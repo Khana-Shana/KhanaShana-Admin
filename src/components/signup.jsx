@@ -110,7 +110,7 @@ function Signup(props) {
     try {
       firebase_integration
         .register(name, email, password)
-        .then(() =>
+        .then(() => {
           firebase_integration.database
             .collection("AdminDatabase")
             .doc(firebase_integration.auth.currentUser.uid.toString())
@@ -120,13 +120,13 @@ function Signup(props) {
               Name: name,
               Position: position,
               Root: false,
-            })
-        )
+            });
+          alert("Verification Email Sent! You will be logged out!");
+          logout();
+        })
         .catch(function (error) {
           alert("An error occured. Please try again");
         });
-      alert("Verification Email Sent! You will be logged out!")
-      logout();
     } catch (error) {
       alert("An error occured while signing up. Please Try Again!");
     }
