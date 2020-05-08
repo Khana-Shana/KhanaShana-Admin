@@ -4,17 +4,17 @@ import firebase_integration from "../Fire";
 import "./AdminProfile.css";
 
 function AdminProfile() {
-    /* states for form input values */
-    const [editname, seteditname] = React.useState(false);
-    const [editemail, seteditemail] = React.useState(false);
-    const [editpassword, seteditpassword] = React.useState(false);
-    const [editposition, seteditposition] = React.useState(false);
+  /* states for form input values */
+  const [editname, seteditname] = React.useState(false);
+  const [editemail, seteditemail] = React.useState(false);
+  const [editpassword, seteditpassword] = React.useState(false);
+  const [editposition, seteditposition] = React.useState(false);
 
-    /* states for reading data from database and making changes in the database */
-    const [name, setname] = React.useState();
-    const [email, setemail] = React.useState();
-    const [password, setpassword] = React.useState("");
-    const [position, setposition] = React.useState();
+  /* states for reading data from database and making changes in the database */
+  const [name, setname] = React.useState();
+  const [email, setemail] = React.useState();
+  const [password, setpassword] = React.useState("");
+  const [position, setposition] = React.useState();
 
   /* reading customer profile data from database */
   React.useEffect(() => {
@@ -33,96 +33,91 @@ function AdminProfile() {
           });
           setname(admindata.Name);
           setemail(admindata.EmailID);
-          setposition(admindata.Position)
+          setposition(admindata.Position);
         });
+    } catch (error) {
+      alert("An error occured. Please try again!");
     }
-    catch(error) {
-			alert("An error occured. Please try again!");
-		};
   }, []);
 
-//   /* functions for updating the database */
+  //   /* functions for updating the database */
   async function updatename(value) {
     try {
-    firebase_integration.auth.currentUser
-      .updateProfile({
-        displayName: value,
-      })
-      .then(function () {
-        firebase_integration.database
-          .collection("AdminDatabase")
-          .doc(firebase_integration.auth.currentUser.uid.toString())
-          .update({
-            Name: value,
-          });
-      })
-      .catch(function (error) {
-        alert("An error occured. Please try again");
-      });
+      firebase_integration.auth.currentUser
+        .updateProfile({
+          displayName: value,
+        })
+        .then(function () {
+          firebase_integration.database
+            .collection("AdminDatabase")
+            .doc(firebase_integration.auth.currentUser.uid.toString())
+            .update({
+              Name: value,
+            });
+        })
+        .catch(function (error) {
+          alert("An error occured. Please try again");
+        });
+    } catch (error) {
+      alert("An error occured. Please try again!");
     }
-    catch(error) {
-			alert("An error occured. Please try again!");
-		};
   }
   async function updateemail(value) {
     try {
-    firebase_integration.auth.currentUser
-      .updateEmail(value)
-      .then(function () {
-        firebase_integration.database
-          .collection("AdminDatabase")
-          .doc(firebase_integration.auth.currentUser.uid.toString())
-          .update({
-            Email: value,
-          });
-      })
-      .catch(function (error) {
-        alert("An error occured. Please try again");
-      });
+      firebase_integration.auth.currentUser
+        .updateEmail(value)
+        .then(function () {
+          firebase_integration.database
+            .collection("AdminDatabase")
+            .doc(firebase_integration.auth.currentUser.uid.toString())
+            .update({
+              Email: value,
+            });
+        })
+        .catch(function (error) {
+          alert("An error occured. Please try again");
+        });
+    } catch (error) {
+      alert("An error occured. Please try again!");
     }
-    catch(error) {
-			alert("An error occured. Please try again!");
-		};
   }
   async function updateposition(value) {
-    try{
-        firebase_integration.database
-          .collection("AdminDatabase")
-          .doc(firebase_integration.auth.currentUser.uid.toString())
-          .update({
-            Position: value,
-          });
+    try {
+      firebase_integration.database
+        .collection("AdminDatabase")
+        .doc(firebase_integration.auth.currentUser.uid.toString())
+        .update({
+          Position: value,
+        });
+    } catch (error) {
+      alert("An error occured. Please try again!");
     }
-    catch(error) {
-			alert("An error occured. Please try again!");
-		};
-        }
-  async function updatepassword(value) {
-    try{
-    firebase_integration.auth.currentUser
-      .updatePassword(value)
-      .then(function () {
-        alert("Your password has been updated");
-      })
-      .catch(function (error) {
-        alert("An error occured. Please try again");
-      });
-    }
-    catch(error) {
-			alert("An error occured. Please try again!");
-		};
   }
-  return(
+  async function updatepassword(value) {
+    try {
+      firebase_integration.auth.currentUser
+        .updatePassword(value)
+        .then(function () {
+          alert("Your password has been updated");
+        })
+        .catch(function (error) {
+          alert("An error occured. Please try again");
+        });
+    } catch (error) {
+      alert("An error occured. Please try again!");
+    }
+  }
+  return (
     <div className="profileback">
       <div class="hehe container-fluid">
-        <div className = "row">
-          <div className = "col d-flex justify-content-center">
-             <img
-               id="profilepic"
-               className="mx-auto img-fluid img-circle d-block"
-               alt="ProfilePicture"
-               src="https://firebasestorage.googleapis.com/v0/b/khana-shana-2020.appspot.com/o/CustomerProfile%2Fprofilepic.svg?alt=media&token=ee543aa0-18be-4d30-a73c-1c53d838ac7c"
-             />
+        <div className="row">
+          <div className="col d-flex justify-content-center">
+            <img
+              id="profilepic"
+              className="mx-auto img-fluid img-circle d-block"
+              alt="ProfilePicture"
+              src="https://firebasestorage.googleapis.com/v0/b/khana-shana-2020.appspot.com/o/CustomerProfile%2Fprofilepic.svg?alt=media&token=ee543aa0-18be-4d30-a73c-1c53d838ac7c"
+            />
           </div>
         </div>
         <div class="row my-2">
@@ -176,7 +171,7 @@ function AdminProfile() {
                           onClick={() => {
                             seteditname(false);
                             setname(name);
-                            updatename(name)
+                            updatename(name);
                           }}
                         >
                           Save
@@ -213,7 +208,10 @@ function AdminProfile() {
                     {/* if edit state is true, render a save button, else render edit pencil */}
                     {editemail === false ? (
                       <div className="col-lg-1">
-                        <a className="pencil" onClick={() => seteditemail(true)}>
+                        <a
+                          className="pencil"
+                          onClick={() => seteditemail(true)}
+                        >
                           <ion-icon
                             style={{ color: "#955F61" }}
                             size="large"
@@ -230,7 +228,7 @@ function AdminProfile() {
                           onClick={() => {
                             seteditemail(false);
                             setemail(email);
-                            updateemail(email)
+                            updateemail(email);
                           }}
                         >
                           Save
@@ -342,7 +340,7 @@ function AdminProfile() {
                           onClick={() => {
                             seteditposition(false);
                             setposition(position);
-                            updateposition(position)
+                            updateposition(position);
                           }}
                         >
                           Save

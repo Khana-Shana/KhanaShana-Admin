@@ -228,7 +228,6 @@ span {
   background-repeat: no-repeat;
 }
 
-
 .logcardfront1 {
   width: 500px;
   height: 800px;
@@ -350,7 +349,6 @@ span {
   height: 300px;
 }
 
-
 .modal-content {
   -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0) !important;
   -moz-box-shadow: 0 5px 15px rgba(0, 0, 0, 0) !important;
@@ -429,21 +427,21 @@ span {
   background-color: #b74852 !important;
   border-color: #b74852 !important;
 }
-.prog{
+.prog {
   margin-left: 20%;
 }
 
-.prog1{
+.prog1 {
   margin-left: 25%;
   margin-top: 5%;
 }
 
-.back{
+.back {
   margin-top: 19%;
-  margin-left:1%
+  margin-left: 1%;
 }
 
-.main-back{
+.main-back {
   padding-top: 1%;
-  padding-left:2%;
+  padding-left: 2%;
 }

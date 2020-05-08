@@ -1,37 +1,39 @@
 .mainbox {
-    margin-top: 5%;
+  margin-top: 5%;
 }
 .dealcard {
-    background-color: #99AA93;
-    border-radius: 1rem;
-    padding: 5%;
-    margin-bottom: 5%;
+  background-color: #99aa93;
+  border-radius: 1rem;
+  padding: 5%;
+  margin-bottom: 5%;
 }
-.imgbutton, .dealbutton,.btn{
-    color: white;
-    background-color: #3C3C3C;
+.imgbutton,
+.dealbutton,
+.btn {
+  color: white;
+  background-color: #3c3c3c;
 }
 .dealbutton {
-    border-color: white;
-    border-width: thin;
-    border-radius: 1rem;
+  border-color: white;
+  border-width: thin;
+  border-radius: 1rem;
 }
 .imgbutton {
-    border: none;
-    position: relative;
-    overflow: hidden;
+  border: none;
+  position: relative;
+  overflow: hidden;
 }
-.imgbutton input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;   
-    cursor: inherit;
-    display: block;
+.imgbutton input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  cursor: inherit;
+  display: block;
 }

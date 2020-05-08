@@ -1,22 +1,18 @@
-import React from 'react';
+import React from "react";
 import { useState, useEffect } from "react";
 // import { useAlert } from 'react-alert'
 import firebase_integration from "../Fire";
 import { Link, withRouter } from "react-router-dom";
 import "./loginstyles.css";
 
+function Login(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-
-function Login(props){
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-
-    return(
-      <div className="mt3 d-flex justify-content-center">
-        <div className="logcardback1">
-        
+  return (
+    <div className="mt3 d-flex justify-content-center">
+      <div className="logcardback1">
         <div className="login-text">WELCOME BACK!</div>
         <div className="form-div">
           <div className="modal-dialog modal-login">
@@ -64,30 +60,24 @@ function Login(props){
                     <a>Forgot Your Password?</a>
                   </Link>
                 </p>
-                
               </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
-    );
+    </div>
+  );
 
-    
-    async function login() {
-      try {
-        await firebase_integration.login(email, password);
-        // alert("logged in");
-        if (firebase_integration.getCurrentUsername()) {
-          // not logged in
-          // alert('hi')
-          props.history.replace("./");
-          // return null
-        }
-      } catch (error) {
-        alert("Invalid Email/Password");
+  async function login() {
+    try {
+      await firebase_integration.login(email, password);
+      if (firebase_integration.getCurrentUsername()) {
+        props.history.replace("./");
       }
+    } catch (error) {
+      alert("Invalid Email/Password");
     }
   }
+}
 
 export default withRouter(Login);
