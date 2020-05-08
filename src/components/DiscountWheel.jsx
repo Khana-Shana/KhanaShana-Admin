@@ -1,6 +1,7 @@
 import React from "react";
 import "./DiscountWheel.css";
 import firebase_integration from "../Fire.js";
+import {Link} from 'react-router-dom'
 
 function DiscountWheel() {
   // Deal values stored as hooks to render the screen
@@ -71,11 +72,11 @@ function DiscountWheel() {
       <div className="container pa5 inBox">
         <div className="row">
           <div className="col d-flex justify-content-start">
-            <a href="/deals">
+            <Link to="/deals">
               <button type="button" className="btn dealbutton mb2">
                 {"<<"} Deals{" "}
               </button>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="row">

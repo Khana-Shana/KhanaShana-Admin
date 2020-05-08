@@ -1,6 +1,7 @@
 import React from "react";
 import "./AdminDeals.css";
 import DealCard from "./DealCard";
+import {Link} from 'react-router-dom';
 
 function AdminDeals() {
   return (
@@ -11,11 +12,11 @@ function AdminDeals() {
           className="col d-flex justify-content-end"
           style={{ marginBottom: "1%" }}
         >
-          <a href="/wheel">
+          <Link to="/wheel">
             <button type="button" className="btn btn-sm dealbutton">
               Discount Wheel >>
             </button>
-          </a>
+          </Link>
         </div>
         <div className="row">
           <div className="col">

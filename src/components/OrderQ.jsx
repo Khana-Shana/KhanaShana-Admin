@@ -102,7 +102,7 @@ function OrderQ() {
       firebase_integration.updateOrderQueueAction(user.OrderID, "Cancelled");
       return (
         <td>
-          <span className="bg-yellow">Cancelled</span>
+          <span className="bg-yellow f5">Cancelled</span>
         </td>
       );
     }
