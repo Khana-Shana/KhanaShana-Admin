@@ -1,39 +1,38 @@
 body {
-    background-color: "#FBF4F3";
+  background-color: "#FBF4F3";
 }
 /* .table-responsive {
     max-height: 500px;
 } */
-#menubox{
-    width: 80%;
-    margin-top: 5%;
+#menubox {
+  width: 80%;
+  margin-top: 5%;
 }
 .menubutton {
-    margin: 0% 1% 1% 0%;
-    background-color: #626E60;
-    border: None;
+  margin: 0% 1% 1% 0%;
+  background-color: #626e60;
+  border: None;
 }
 .imagebutton {
-    margin: 0% 1% 1% 0%;
-    background-color: #3C3C3C;
-    color: white;
-    border: None;
-    border-radius: 1rem;
-    position: relative;
-    overflow: hidden;
+  margin: 0% 1% 1% 0%;
+  background-color: #3c3c3c;
+  color: white;
+  border: None;
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
 }
-.imagebutton input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;   
-    cursor: inherit;
-    display: block;
+.imagebutton input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  cursor: inherit;
+  display: block;
 }
-
