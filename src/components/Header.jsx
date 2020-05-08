@@ -33,7 +33,7 @@ function Header(props){
 			   	    	<NavDropdown.Item href="/adminProfile">Profile</NavDropdown.Item>
 			        	<NavDropdown.Item onClick = {logout} >Logout</NavDropdown.Item>
 			      	</NavDropdown>
-					{/* <h3 className="mt1">Uzma</h3> */}
+				
 					
 					{firebase_integration.getCurrentUsername() ?  <div className="mt2" style={{fontSize:"20px"}}>{firebase_integration.getDisplayName()}</div> : null }
 			    </Nav>
