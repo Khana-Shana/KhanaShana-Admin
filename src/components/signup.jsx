@@ -122,10 +122,12 @@ function Signup(props){
             Position: position,
             Root: false
           })
-        );
+        ).catch(function(error) {
+          alert("An error occured. Please try again");
+        });
         logout();        
       } catch (error) {
-        alert("An error occured while signing up. Please Try Again!", error.message);
+        alert("An error occured while signing up. Please Try Again!");
       }
     }
 

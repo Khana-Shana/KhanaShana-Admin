@@ -10,6 +10,7 @@ function DiscountWheel() {
 
     //Data fetched from firestore
     React.useEffect(() => {
+        try{
         firebase_integration.database.collection("DiscountWheel").onSnapshot((snapshot) => {
             var data = []
             snapshot.forEach((doc) => {
@@ -19,6 +20,10 @@ function DiscountWheel() {
             setdata2(data[1])
             setdata3(data[2])
         })
+        }
+        catch(error) {
+			alert("An error occured. Please try again!");
+		};
     },[])
 
     function checkLength(val){
@@ -33,13 +38,19 @@ function DiscountWheel() {
         
         firebase_integration.database.collection("DiscountWheel").doc("1").set({
             value: mydata1+"%"
-        })
+        }).catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
         firebase_integration.database.collection("DiscountWheel").doc("2").set({
             value: mydata2+"%"
-        })
+        }).catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
         firebase_integration.database.collection("DiscountWheel").doc("3").set({
             value: mydata3+"%"
-        })
+        }).catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
     }
 
     return (

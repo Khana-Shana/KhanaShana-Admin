@@ -7,6 +7,7 @@ function OrderHistory() {
 	const [myData,setData] = useState([]);
 
 	useEffect(()=>{
+		try{
  		//Retireves all Order History
 		firebase_integration.database.collection("RegularOrder").orderBy("Date", "desc").onSnapshot((snapshot) => {
             var order_arr = []
@@ -16,7 +17,11 @@ function OrderHistory() {
 				}
             });
 			setData(order_arr)
-        })
+		})
+		}
+		catch(error) {
+			alert("An error occured. Please try again!");
+		};
 	},myData);
 	
 	const returnItems = (user)=>{

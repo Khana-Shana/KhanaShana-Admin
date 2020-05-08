@@ -7,6 +7,7 @@ function OrderQ() {
 		const [myData,setData] = useState([]);
 
 		useEffect(()=>{
+			try{
 			var todaysDate = new Date().setHours(0,0,0,0)
 			firebase_integration.database.collection("RegularOrder").orderBy("Date", "desc").onSnapshot((snapshot) => {
 				var order_arr = []
@@ -20,6 +21,10 @@ function OrderQ() {
 			});
 				setData(order_arr)
 			})
+			}
+			catch(error) {
+				alert("An error occured. Please try again!");
+			};
 		},myData);
 
 		const rejectingOrder = (user) => {

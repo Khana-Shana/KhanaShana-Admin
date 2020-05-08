@@ -7,6 +7,7 @@ import firebase_integration from '../Fire.js';
 function CustomerSupport(){
 	const [myData,setData] = useState([]);
 
+	try{
 	useEffect(()=>{
 		firebase_integration.database.collection('CustomerSupport').onSnapshot((snapshot) => {
 			var order_arr = []
@@ -14,9 +15,12 @@ function CustomerSupport(){
 				order_arr.push(doc.data())
 			});
 			setData(order_arr)
-			console.log(order_arr)
 		})
 	}, myData);
+	}
+	catch(error) {
+		alert("An error occured. Please try again!");
+	};
 
 	const printingStar =(n)=>{
 		//takes as parameter the rating, and prints the respective number of stars

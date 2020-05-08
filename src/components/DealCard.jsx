@@ -11,11 +11,11 @@ function DealCard(props) {
     const [progressb, setprogresb] = React.useState(0)
 
     //Deal fetched from firestore
+    try{
     React.useEffect(() => {
         var deals = []
         firebase_integration.database.collection("Deals").orderBy("DealType", "asc").onSnapshot((snapshot) => {
             snapshot.forEach((doc) => {
-                console.log("DEALS UPDATED")
                 deals.push(doc.data())
             })
             //These conditions differentiate between daily and weekly deal
@@ -59,6 +59,10 @@ function DealCard(props) {
             }
         })
     }, [])
+    }
+    catch(error) {
+        alert("An error occured. Please try again!");
+    };
 
     //Called when the add button is clicked. Updates the daily deal
     function addDailyDeal() {
@@ -69,7 +73,9 @@ function DealCard(props) {
             MenuID: highestmenuid,
             ImageName: "",
             URL: ""
-        })
+        }).catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
         firebase_integration.database.collection("Menu").doc(highestmenuid.toString()).set({
             DishID: highestmenuid,
             Category: "Daily Deal", 
@@ -80,7 +86,9 @@ function DealCard(props) {
             SalePrice: parseInt(price),
             ImageName: "",
             URL: ""
-        })
+        }).catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
         setmenuid(highestmenuid)
         alert("Daily Deal successfully added!")
     }
@@ -93,7 +101,9 @@ function DealCard(props) {
             MenuID: highestmenuid,
             ImageName: "",
             URL: ""
-        })
+        }).catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
         firebase_integration.database.collection("Menu").doc(highestmenuid.toString()).set({
             DishID: highestmenuid,
             Category: "Weekly Deal", 
@@ -104,42 +114,60 @@ function DealCard(props) {
             SalePrice: parseInt(price),
             ImageName: "",
             URL: ""
-        })
+        }).catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
         setmenuid(highestmenuid)
         alert("Weekly Deal successfully added!")
     }
     //called when image is uploaded by the user
     function uploadDealImage(dealtype){
+        try{
         var image = document.getElementById(dealtype+" image").files[0]
         var imageName = image.name
-        console.log(imageName)
         var uploadTask = firebase_integration.storage.ref().child('Deals/'+imageName).put(image);
         uploadTask.on('state_changed', 
         function(snapshot) {
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             setprogresb(progress)
         }, function(error) {
-            alert(error.message)
+            alert("An error occured. Please try again")
         }, function() {
             firebase_integration.storage.ref().child('Deals/'+imageName).getDownloadURL().then(function(downloadURL) {
             dealtype = dealtype.split(" ")[0]
             firebase_integration.database.collection('Deals').doc(dealtype).update({
                     ImageName: imageName,
                     URL: downloadURL
-                })
+                }).catch(function(error) {
+                    alert("An error occured. Please try again!");
+                });
             firebase_integration.database.collection("Menu").doc(menuid.toString()).update({
                 ImageName: imageName,
                 URL: downloadURL
-            })
+            }).catch(function(error) {
+                alert("An error occured. Please try again!");
+            });
+        }).catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
         });
-        });
+        }
+        catch(error) {
+			alert("An error occured. Please try again!");
+		};
     }
     //deal is removed and updated from the database
     function removeDeal(dealtype){
         dealtype = dealtype.split(" ")[0]
         firebase_integration.database.collection('Menu').doc(menuid.toString()).delete()
+        .catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
         firebase_integration.database.collection('Deals').doc(dealtype).get().then((docs) => {
             firebase_integration.storage.ref().child('Deals/'+docs.data().ImageName).delete()
+            .catch(function(error) {
+                alert("An error occured. Please try again!");
+            });
             firebase_integration.database.collection('Deals').doc(dealtype).set({
                 DealType: dealtype,
                 Name: "",
@@ -147,8 +175,12 @@ function DealCard(props) {
                 MenuID: "",
                 ImageName: "",
                 URL: ""
-              })
-        })
+              }).catch(function(error) {
+                alert("An error occured. Please try again!");
+            });
+        }).catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
         setname("")
         setprice(1)
         setmenuid("")

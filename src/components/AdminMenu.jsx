@@ -53,6 +53,7 @@ function AdminMenu(){
 	
 	//called when an image is uploaded
 	function uploadMenuImage(id, index){
+	try{
 		var image = document.getElementById(id).files[0]
 		var imageName = image.name
 		var uploadTask = firebase_integration.storage.ref().child('Menu/'+imageName).put(image);
@@ -61,35 +62,50 @@ function AdminMenu(){
 			var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 			setprogressbar([...progressbar.slice(0,index),progress,...progressbar.slice(index+1)])
 		}, function(error) {
-			alert(error.message)
+			alert("An error occured. Please try again")
 		}, function() {
 			firebase_integration.storage.ref().child('Menu/'+imageName).getDownloadURL().then(function(downloadURL) {
 			id = id.split(" ")[0] 
 			firebase_integration.database.collection('Menu').doc(id.toString()).update({
 					ImageName: imageName,
 					URL: downloadURL
-				})
+				}).catch(function(error) {
+					alert("An error occured. Please try again!");
+				});
+			}).catch(function(error) {
+				alert("An error occured. Please try again!");
 			});
 		});
+	}
+	catch(error) {
+		alert("An error occured. Please try again!");
+	};
 	}
 	
 	//called when save button is clicked in order to update the database
 	function updateDatabase() {
-		filteredmenu.map((item,i) => {
-			firebase_integration.database.collection('Menu').doc(item.DishID.toString()).update({
-				DishID: item.DishID,
-				Category: document.getElementsByClassName("categorydropdown")[i].value,
-				Description: item.Description,
-				Name: item.Name,
-				PortionSize: item.PortionSize,
-				PrepTime: item.PrepTime,
-				SalePrice: parseInt(item.SalePrice),
-			  });
-		})
-		seteditmode(false)
-		setselectall(false)
-		setprogressbar([])
-		setfilteredmenu(menu)
+		try{
+			filteredmenu.map((item,i) => {
+				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).update({
+					DishID: item.DishID,
+					Category: document.getElementsByClassName("categorydropdown")[i].value,
+					Description: item.Description,
+					Name: item.Name,
+					PortionSize: item.PortionSize,
+					PrepTime: item.PrepTime,
+					SalePrice: parseInt(item.SalePrice),
+				}).catch(function(error) {
+					alert("An error occured. Please try again!");
+				});
+			})
+			seteditmode(false)
+			setselectall(false)
+			setprogressbar([])
+			setfilteredmenu(menu)
+		}
+		catch(error) {
+			alert("An error occured. Please try again!");
+		};
 	}
 	
 	//called when an item is removed in order to update the database
@@ -102,11 +118,18 @@ function AdminMenu(){
 			}
 		})
 		//resets the daily deal
+		try{
 		items_removed.map((item) => {
 			if(item.Category === "Daily Deal"){
 				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
+				.catch(function(error) {
+					alert("An error occured. Please try again!");
+				});
 				firebase_integration.database.collection('Deals').doc("Daily").get().then((docs) => {
 					firebase_integration.storage.ref().child('Deals/'+docs.data().ImageName).delete()
+					.catch(function(error) {
+						alert("An error occured. Please try again!");
+					});
 					firebase_integration.database.collection('Deals').doc("Daily").set({
 						DealType: "Daily",
 						Name: "",
@@ -114,14 +137,22 @@ function AdminMenu(){
 						MenuID: "",
 						ImageName: "",
 						URL: ""
-						})
+						}).catch(function(error) {
+							alert("An error occured. Please try again!");
+						});
 				})
 			}
 			//resets the weekly deal
 			else if (item.Category === "Weekly Deal"){
 				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
+				.catch(function(error) {
+					alert("An error occured. Please try again!");
+				});
 				firebase_integration.database.collection('Deals').doc("Weekly").get().then((docs) => {
 					firebase_integration.storage.ref().child('Deals/'+docs.data().ImageName).delete()
+					.catch(function(error) {
+						alert("An error occured. Please try again!");
+					});
 					firebase_integration.database.collection('Deals').doc("Weekly").set({
 						DealType: "Weekly",
 						Name: "",
@@ -129,14 +160,22 @@ function AdminMenu(){
 						MenuID: "",
 						ImageName: "",
 						URL: ""
-						})
+						}).catch(function(error) {
+							alert("An error occured. Please try again!");
+						});
 				})
 			}
 			//resets other categories
 			else{
 				firebase_integration.database.collection('Menu').doc(item.DishID.toString()).get().then((docs) => {
 					firebase_integration.storage.ref().child('Menu/'+docs.data().ImageName).delete()
+					.catch(function(error) {
+						alert("An error occured. Please try again!");
+					});
 					firebase_integration.database.collection('Menu').doc(item.DishID.toString()).delete()
+					.catch(function(error) {
+						alert("An error occured. Please try again!");
+					});
 				})
 			}
 		})
@@ -145,6 +184,10 @@ function AdminMenu(){
 			:setfilteredmenu([])
 		setselectall(false)
 		setprogressbar([])
+		}
+		catch(error) {
+			alert("An error occured. Please try again!");
+		};
 	}
 
 	//adds an item to the menu and updates the database
@@ -159,6 +202,7 @@ function AdminMenu(){
 		menu.length === 0
 		? newDishID = 0
 		: newDishID += 1
+		try{
 		firebase_integration.database.collection("Menu").doc(newDishID.toString()).set({
 			DishID: newDishID,
 			Category: "All", 
@@ -167,9 +211,15 @@ function AdminMenu(){
 			PortionSize: "All you can eat",
 			PrepTime: "0 mins",
 			SalePrice: 1
-		})
+		}).catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
 		setprogressbar([])
 		setfilteredmenu([])
+		}
+		catch(error) {
+			alert("An error occured. Please try again!");
+		};
 	}
 
 	//displays the body of the table

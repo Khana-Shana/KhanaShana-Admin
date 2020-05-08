@@ -6,18 +6,21 @@ function CustomerDatabase() {
 
 	const [myData,setData] = useState([]);
 
+	try{
 	useEffect(()=>{
  		//Retireves all Order History
 		firebase_integration.database.collection("CustomerDatabase").onSnapshot((snapshot) => {
             var order_arr = []
             snapshot.docs.forEach(doc => {
-            	console.log("DOCC",doc.data())
                 order_arr.push(doc.data())
             });
 			setData(order_arr)
-			console.log(order_arr)
         })
 	},myData);
+	}
+	catch(error) {
+		alert("An error occured. Please try again!");
+	};
 	
 	const renderTable = () => {
 	    return myData.map(user => {

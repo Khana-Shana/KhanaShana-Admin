@@ -19,6 +19,9 @@ function AdminDBTable(){
 	const deletingRow = (user) => {
 		//Deletes the selected entry from Firebase
 		firebase_integration.database.collection("AdminDatabase").doc(user.AdminID.toString()).delete()
+		.catch(function(error) {
+			alert("An error occured. Please try again!");
+		});
 	}
 	const renderTable = () => {
 	    return myData.map(user => {

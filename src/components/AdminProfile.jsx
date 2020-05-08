@@ -18,26 +18,32 @@ function AdminProfile() {
 
   /* reading customer profile data from database */
   React.useEffect(() => {
-    firebase_integration.database
-      .collection("AdminDatabase")
-      .where(
-        "AdminID",
-        "==",
-        firebase_integration.auth.currentUser.uid.toString()
-      )
-      .onSnapshot((snapshot) => {
-        var admindata = {};
-        snapshot.docs.forEach((doc) => {
-          admindata = doc.data();
+    try {
+      firebase_integration.database
+        .collection("AdminDatabase")
+        .where(
+          "AdminID",
+          "==",
+          firebase_integration.auth.currentUser.uid.toString()
+        )
+        .onSnapshot((snapshot) => {
+          var admindata = {};
+          snapshot.docs.forEach((doc) => {
+            admindata = doc.data();
+          });
+          setname(admindata.Name);
+          setemail(admindata.EmailID);
+          setposition(admindata.Position)
         });
-        setname(admindata.Name);
-        setemail(admindata.EmailID);
-        setposition(admindata.Position)
-      });
+    }
+    catch(error) {
+			alert("An error occured. Please try again!");
+		};
   }, []);
 
 //   /* functions for updating the database */
   async function updatename(value) {
+    try {
     firebase_integration.auth.currentUser
       .updateProfile({
         displayName: value,
@@ -51,10 +57,15 @@ function AdminProfile() {
           });
       })
       .catch(function (error) {
-        alert(error.message);
+        alert("An error occured. Please try again");
       });
+    }
+    catch(error) {
+			alert("An error occured. Please try again!");
+		};
   }
   async function updateemail(value) {
+    try {
     firebase_integration.auth.currentUser
       .updateEmail(value)
       .then(function () {
@@ -66,26 +77,40 @@ function AdminProfile() {
           });
       })
       .catch(function (error) {
-        alert(error.message);
+        alert("An error occured. Please try again");
       });
+    }
+    catch(error) {
+			alert("An error occured. Please try again!");
+		};
   }
   async function updateposition(value) {
+    try{
         firebase_integration.database
           .collection("AdminDatabase")
           .doc(firebase_integration.auth.currentUser.uid.toString())
           .update({
             Position: value,
           });
-  }
+    }
+    catch(error) {
+			alert("An error occured. Please try again!");
+		};
+        }
   async function updatepassword(value) {
+    try{
     firebase_integration.auth.currentUser
       .updatePassword(value)
       .then(function () {
         alert("Your password has been updated");
       })
       .catch(function (error) {
-        alert(error.message);
+        alert("An error occured. Please try again");
       });
+    }
+    catch(error) {
+			alert("An error occured. Please try again!");
+		};
   }
   return(
     <div className="profileback">

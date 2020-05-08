@@ -7,6 +7,7 @@ import firebase_integration from '../Fire.js'
 function Card(props){
 	const [userdata, setdata] = React.useState({})
 
+	try{
 	useEffect(() => {
 		if (!firebase_integration.getCurrentUsername()) {
 			props.history.push("/login");
@@ -18,7 +19,12 @@ function Card(props){
 			})
 		}
 	}, userdata)
-  
+	}
+	catch(error) {
+		alert("An error occured. Please try again!");
+	};
+	
+	try{
 	return userdata.Root === true ? (
 
 		<div>
@@ -56,6 +62,10 @@ function Card(props){
 	</div>
 
 	)
+	}
+	catch(error) {
+		alert("An error occured. Please try again!");
+	};
 
 
 }

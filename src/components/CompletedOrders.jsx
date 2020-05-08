@@ -5,6 +5,7 @@ import firebase_integration from '../Fire.js'
 function CompletedOrders() {
 
 	const [myData,setData] = useState([]);
+	try{
 	useEffect(()=>{
 		//Retrieves only Accepted/Completed orders from the Database
 		var todaysDate = new Date().setHours(0,0,0,0)
@@ -21,7 +22,10 @@ function CompletedOrders() {
 			setData(order_arr)
         })
 	},myData);
-
+	}
+	catch(error) {
+		alert("An error occured. Please try again!");
+	};
 	const returnItems = (user)=>{
 			//Renders the column displaying Name of dishes ordered + their quantity			
 			return user.DishName.map((_,i)=>{

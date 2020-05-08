@@ -43,18 +43,24 @@ class firebase_integration extends Component {
   getImageURL(divID, mainreferencefolder, path, imagename) {
     this.storage.ref(mainreferencefolder).child(path+'/'+imagename).getDownloadURL().then(function(url) {
       document.getElementById(divID).src = url;
-    });
+    }).catch(function(error) {
+			alert("An error occured. Please try again");
+		});
   }
 
   updateOrderQueueTracking(orderid, to){
     this.database.collection('RegularOrder').doc(orderid.toString()).update({
       Tracking : to
-    });
+    }).catch(function(error) {
+			alert("An error occured. Please try again");
+		});
   }
   updateOrderQueueAction(orderid, to){
     this.database.collection('RegularOrder').doc(orderid.toString()).update({
       Action : to
-    });
+    }).catch(function(error) {
+			alert("An error occured. Please try again");
+		});
   }
   updateRestaurantDetails(arr,myData){
      this.database.collection('RestaurantDetails').doc("jOzlK1WWsNPdRrjcYLGv").update({
@@ -64,7 +70,9 @@ class firebase_integration extends Component {
        Email : arr.Email,
        Name : arr.Name,
        Root: false
-     });
+     }).catch(function(error) {
+			alert("An error occured. Please try again");
+		});
   }
 
   login(email, password) {
@@ -92,7 +100,7 @@ passwordreset(email) {
   return this.auth.sendPasswordResetEmail(email).then(function () {
       alert("Email Sent!")
   }).catch(function(error) {
-      alert(error.message)
+      alert("An error occured. Please try again")
   });
 }
 

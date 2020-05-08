@@ -8,6 +8,7 @@ function RestaurantDetails(){
 	const [myData,setData] = useState({});
 	let arr={} //This array will be used to store field manipulations before the Submit Button is clicked and contents of arr copied to State
 	useEffect(()=>{
+		try{
 		firebase_integration.database.collection("RestaurantDetails").onSnapshot((snapshot) => {
             snapshot.docs.forEach(doc => {
                 arr["Name"]=doc.data()["Name"]
@@ -17,7 +18,11 @@ function RestaurantDetails(){
                 arr["AboutUs"]=doc.data()["AboutUs"]
                 setData(doc.data()) 	
             });
-        })
+		})
+		}
+		catch(error) {
+			alert("An error occured. Please try again");
+		};
 	},myData);
 
 	const changeName = (event) => {

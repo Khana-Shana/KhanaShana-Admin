@@ -98,7 +98,7 @@ function ForgotPassword(props) {
       alert("Email Sent");
       props.history.replace("/");
     } catch (error) {
-      alert(error.message);
+      alert("An error occured. Please try again");
     }
   }
 }
