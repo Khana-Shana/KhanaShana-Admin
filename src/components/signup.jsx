@@ -121,11 +121,11 @@ function Signup(props) {
               Position: position,
               Root: false,
             })
-            alert("Verification Email Sent! You will be logged out!")
         )
         .catch(function (error) {
           alert("An error occured. Please try again");
         });
+      alert("Verification Email Sent! You will be logged out!")
       logout();
     } catch (error) {
       alert("An error occured while signing up. Please Try Again!");
