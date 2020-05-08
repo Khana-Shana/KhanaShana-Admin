@@ -121,6 +121,7 @@ function Signup(props) {
               Position: position,
               Root: false,
             })
+            alert("Verification Email Sent! You will be logged out!")
         )
         .catch(function (error) {
           alert("An error occured. Please try again");
