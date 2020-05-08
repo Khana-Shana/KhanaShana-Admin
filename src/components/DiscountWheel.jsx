@@ -64,6 +64,7 @@ function DiscountWheel() {
       .catch(function (error) {
         alert("An error occured. Please try again!");
       });
+      alert("Discount Wheel successfully updated!");
   }
 
   return (
